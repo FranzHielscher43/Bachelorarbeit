@@ -1,0 +1,24 @@
+# Godot 4 core
+.godot/
+
+# Import cache
+.import/
+
+# Export builds
+export/
+exports/
+
+# Mono / C# (falls nicht genutzt, trotzdem sicher drin)
+.mono/
+data_*/
+
+# Android (nur falls Export genutzt wird)
+android/
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+
+# Logs / temp
+*.log
+*.tmp
