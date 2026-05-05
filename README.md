@@ -7,6 +7,7 @@ Dieses Projekt entsteht im Rahmen meiner Bachelorarbeit im Studiengang Medieninf
 Ziel ist die Entwicklung einer **interaktiven Anwendung zur Vermittlung des objektorientierten Paradigmas (OOP)**. Der Schwerpunkt liegt auf der **didaktischen Aufbereitung und interaktiven Vermittlung zentraler OOP-Konzepte**.
 
 Link zu Overleaf: https://de.overleaf.com/project/69df70deb01344326624fe1a
+Link zu Figma: https://www.figma.com/files/team/
 
 ---
 
