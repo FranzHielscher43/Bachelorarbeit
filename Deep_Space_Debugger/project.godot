@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="serious-game-OOP"
+run/main_scene="uid://dpto5toyx3qwi"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[dotnet]
+
+project/assembly_name="serious-game-OOP"
 
 [physics]
 
@@ -20,6 +25,7 @@ config/icon="res://icon.svg"
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
