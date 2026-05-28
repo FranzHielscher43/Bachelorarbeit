@@ -1,25 +1,58 @@
 [gd_scene format=3 uid="uid://bvhfgo4ebpewe"]
 
-[ext_resource type="Script" uid="uid://wqst7lolnwur" path="res://Scripts/Player.gd" id="1_kyqiw"]
-[ext_resource type="Texture2D" uid="uid://c4qqsoq32g24c" path="res://Assets/sprites/knight.png" id="1_rpqav"]
+[ext_resource type="Script" uid="uid://bmwo36ie587vc" path="res://Scripts/Player.tscn.gd" id="1_kyqiw"]
+[ext_resource type="Texture2D" uid="uid://cw726cl2w7y01" path="res://Assets/sprites/ASTRONAUT BANNET/Astronaut.png" id="1_rpqav"]
+[ext_resource type="AudioStream" uid="uid://cnc81oh2gdff" path="res://Assets/sounds/footsteps.mp3" id="3_gntrk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kyqiw"]
 atlas = ExtResource("1_rpqav")
-region = Rect2(0, 0, 32, 32)
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gntrk"]
 atlas = ExtResource("1_rpqav")
-region = Rect2(32, 0, 32, 32)
+region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dewec"]
 atlas = ExtResource("1_rpqav")
-region = Rect2(64, 0, 32, 32)
+region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ixxa"]
 atlas = ExtResource("1_rpqav")
-region = Rect2(96, 0, 32, 32)
+region = Rect2(192, 0, 64, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_nn08x"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_nn08x"]
+atlas = ExtResource("1_rpqav")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52ee3"]
+atlas = ExtResource("1_rpqav")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhhdu"]
+atlas = ExtResource("1_rpqav")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_megsn"]
+atlas = ExtResource("1_rpqav")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yoq75"]
+atlas = ExtResource("1_rpqav")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksbbd"]
+atlas = ExtResource("1_rpqav")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glx4g"]
+atlas = ExtResource("1_rpqav")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_miouo"]
+atlas = ExtResource("1_rpqav")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o3h8g"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -35,21 +68,62 @@ animations = [{
 "texture": SubResource("AtlasTexture_5ixxa")
 }],
 "loop": true,
-"name": &"default",
-"speed": 5.0
+"name": &"walk_down",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nn08x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52ee3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhhdu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_megsn")
+}],
+"loop": true,
+"name": &"walk_side",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yoq75")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ksbbd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glx4g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_miouo")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_52ee3"]
-radius = 7.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1e7my"]
+radius = 9.0
+height = 28.0
 
-[node name="Player" type="CharacterBody2D" unique_id=542321456]
+[node name="Player" type="CharacterBody2D" unique_id=1729184082]
 script = ExtResource("1_kyqiw")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=801680511]
-sprite_frames = SubResource("SpriteFrames_nn08x")
-autoplay = "default"
-frame_progress = 0.1426961
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1730305811]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_o3h8g")
+animation = &"walk_side"
+frame_progress = 0.69806397
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1432078125]
-position = Vector2(0, 5)
-shape = SubResource("CircleShape2D_52ee3")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128645113]
+shape = SubResource("CapsuleShape2D_1e7my")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1562912994]
+stream = ExtResource("3_gntrk")
+volume_db = -5.0
+pitch_scale = 2.0
+parameters/looping = true
