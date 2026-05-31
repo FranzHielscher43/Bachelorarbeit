@@ -1,7 +1,6 @@
 Assets:
 
 https://itch.io/c/2452473/spacegame
-https://kenney.nl/assets/category:2D?search=space
 https://opengameart.org/art-search-advanced?keys=&field_art_type_tid%5B%5D=9&sort_by=count&sort_order=DESC
 https://craftpix.net/page/3/?s=2d+space
 
@@ -12,3 +11,11 @@ gezielt nach bestimmten Creatorn, z. B.:
 * „Cainos“
 
 Sound: https://www.freesound.org
+
+
+
+Game-Assets:
+
+Character:
+Sprite: https://saraspiegelberg.itch.io/free-pixel-art-character-asset-astronaut
+Sound: https://pixabay.com/sound-effects/household-metal-footsteps-14727/

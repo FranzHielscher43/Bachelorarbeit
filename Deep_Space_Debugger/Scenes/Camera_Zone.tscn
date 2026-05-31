@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cq6qp0sv5loj6"]
+
+[ext_resource type="Script" uid="uid://b1oeskk1bj5ne" path="res://Scripts/Camera_zone.gd" id="1_uljny"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p151e"]
+size = Vector2(40.25, 36.75)
+
+[node name="CameraZone" type="Area2D" unique_id=876321968]
+script = ExtResource("1_uljny")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=921342854]
+position = Vector2(-2, 1)
+shape = SubResource("RectangleShape2D_p151e")

@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://c2myae6ncylbb"]
+
+[ext_resource type="Script" uid="uid://q3tw2c41ksr3" path="res://Scripts/Door_button.gd" id="1_0j85d"]
+[ext_resource type="Texture2D" uid="uid://bsksffxh8e32b" path="res://icon.svg" id="1_xf4h5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0j85d"]
+radius = 15.033297
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hw4yw"]
+radius = 22.022715
+
+[node name="DoorButton" type="StaticBody2D" unique_id=100979660]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=305144670]
+position = Vector2(-1.2500019, 2.7499993)
+scale = Vector2(0.23828128, 0.24609375)
+texture = ExtResource("1_xf4h5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1940488355]
+position = Vector2(-1, 2)
+shape = SubResource("CircleShape2D_0j85d")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=904289165]
+position = Vector2(-1, 2)
+script = ExtResource("1_0j85d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=886858924]
+shape = SubResource("CircleShape2D_hw4yw")

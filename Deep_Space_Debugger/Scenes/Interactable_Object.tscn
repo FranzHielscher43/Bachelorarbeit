@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://djv1jrgifgw3i"]
+
+[ext_resource type="Script" uid="uid://dgn5idcqftw1a" path="res://Scripts/Interactable_object.gd" id="1_45dk5"]
+[ext_resource type="Texture2D" uid="uid://bsksffxh8e32b" path="res://icon.svg" id="2_i1egy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_45dk5"]
+radius = 83.548485
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_clnfq"]
+radius = 15.524175
+
+[node name="InteractableObject" type="Area2D" unique_id=1985324908]
+script = ExtResource("1_45dk5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=894563553]
+position = Vector2(1.5, -2.2499979)
+scale = Vector2(0.25781247, 0.2460938)
+shape = SubResource("CircleShape2D_45dk5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1506021223]
+position = Vector2(1.5, -2.2499979)
+scale = Vector2(0.2578125, 0.2460938)
+texture = ExtResource("2_i1egy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D" unique_id=1074381412]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D" unique_id=84532814]
+position = Vector2(1.939394, -3.0476265)
+scale = Vector2(3.8787878, 4.0634913)
+shape = SubResource("CircleShape2D_clnfq")
+
+[node name="Label" type="Label" parent="." unique_id=456931514]
+visible = false
+offset_left = -69.0
+offset_top = -43.0
+offset_right = 72.0
+offset_bottom = -19.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Leertaste drücken"
+horizontal_alignment = 1
+vertical_alignment = 1

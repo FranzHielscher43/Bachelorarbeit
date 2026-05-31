@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bvhfgo4ebpewe"]
 
-[ext_resource type="Script" uid="uid://bmwo36ie587vc" path="res://Scripts/Player.tscn.gd" id="1_kyqiw"]
+[ext_resource type="Script" uid="uid://bmwo36ie587vc" path="res://Scripts/Player.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://cw726cl2w7y01" path="res://Assets/sprites/ASTRONAUT BANNET/Astronaut.png" id="1_rpqav"]
 [ext_resource type="AudioStream" uid="uid://cnc81oh2gdff" path="res://Assets/sounds/footsteps.mp3" id="3_gntrk"]
 
@@ -111,6 +111,7 @@ radius = 9.0
 height = 28.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1729184082]
+z_index = 1
 script = ExtResource("1_kyqiw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1730305811]
@@ -127,3 +128,11 @@ stream = ExtResource("3_gntrk")
 volume_db = -5.0
 pitch_scale = 2.0
 parameters/looping = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2096044562]
+zoom = Vector2(4, 4)
+limit_left = 0
+limit_top = 0
+limit_right = 0
+limit_bottom = 0
+position_smoothing_enabled = true
