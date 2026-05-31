@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c2myae6ncylbb" path="res://Scenes/Door_button.tscn" id="7_fgofq"]
 [ext_resource type="PackedScene" uid="uid://cq6qp0sv5loj6" path="res://Scenes/Camera_Zone.tscn" id="8_2irst"]
 [ext_resource type="PackedScene" uid="uid://ba25c6odbjc7" path="res://Scenes/Carry_object.tscn" id="9_bf53h"]
+[ext_resource type="AudioStream" uid="uid://cdjfr2v7scn4c" path="res://Assets/sounds/ambient.mp3" id="10_71axn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j5yw3"]
 texture = ExtResource("1_gl6un")
@@ -172,48 +173,12 @@ texture = ExtResource("1_gl6un")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_j5yw3")
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_iukft"]
-distance = -10.0
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gl6un"]
-normal = Vector2(0, 1)
-
 [node name="Game" type="Node2D" unique_id=1704826898]
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1346581687]
 tile_set = SubResource("TileSet_kldst")
 format = 2
 layer_0/tile_data = PackedInt32Array(262152, 524288, 0, 196616, 524288, 0, 131080, 524288, 0, 65544, 524288, 0, 8, 524288, 0, -65528, 524288, 0, -131064, 524288, 0, -196600, 524288, 0, -262136, 524288, 0, -327672, 524288, 0, -327673, 524288, 0, -327674, 524288, 0, -327675, 524288, 0, -327676, 524288, 0, -327677, 524288, 0, -327678, 524288, 0, -327679, 524288, 0, -262146, 524288, 0, -262147, 524288, 0, -262148, 524288, 0, -262149, 524288, 0, -262150, 524288, 0, -262151, 524288, 0, -262152, 524288, 0, -262153, 524288, 0, -196617, 524288, 0, -131081, 524288, 0, -65545, 524288, 0, -9, 524288, 0, 65527, 524288, 0, 131063, 524288, 0, 196599, 524288, 0, 262135, 524288, 0, 327671, 524288, 0, 327672, 524288, 0, 327673, 524288, 0, 327674, 524288, 0, 327675, 524288, 0, 327677, 524288, 0, 262151, 524288, 0, 262150, 524288, 0, 262149, 524288, 0, 262148, 524288, 0, 262147, 524288, 0, 262146, 524288, 0, 262145, 524288, 0, 262144, 524288, 0, 327679, 524288, 0, 327678, 524288, 0, 327676, 524288, 0, -393208, 327680, 0, -458744, 327680, 0, -524280, 327680, 0, -589816, 327680, 0, -655352, 327680, 0, -655353, 327680, 0, -655354, 327680, 0, -655355, 327680, 0, -655356, 327680, 0, -655357, 327680, 0, -655358, 327680, 0, -655359, 327680, 0, -655360, 327680, 0, -589825, 327680, 0, -589826, 327680, 0, -589827, 327680, 0, -589828, 327680, 0, -589829, 327680, 0, -589830, 327680, 0, -589831, 327680, 0, -589832, 327680, 0, -589833, 327680, 0, -524297, 327680, 0, -458761, 327680, 0, -393225, 327680, 0, -327689, 327680, 0)
-
-[node name="BoundaryBottom" type="StaticBody2D" parent="." unique_id=1433350866]
-position = Vector2(0, -2)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BoundaryBottom" unique_id=1276842276]
-position = Vector2(0, 71)
-shape = SubResource("WorldBoundaryShape2D_iukft")
-
-[node name="BoundaryTop" type="StaticBody2D" parent="." unique_id=530187513]
-position = Vector2(1, -66)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BoundaryTop" unique_id=1595911034]
-position = Vector2(0, -81)
-shape = SubResource("WorldBoundaryShape2D_gl6un")
-
-[node name="BoundaryLeft" type="StaticBody2D" parent="." unique_id=1277345719]
-position = Vector2(-61.999996, 1)
-rotation = -1.5673459
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BoundaryLeft" unique_id=1332767709]
-position = Vector2(0, -81)
-shape = SubResource("WorldBoundaryShape2D_gl6un")
-
-[node name="BoundaryRight" type="StaticBody2D" parent="." unique_id=1097524012]
-position = Vector2(61, 2)
-rotation = 1.5685849
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BoundaryRight" unique_id=1513820543]
-position = Vector2(0, -81)
-shape = SubResource("WorldBoundaryShape2D_gl6un")
 
 [node name="Player" parent="." unique_id=1729184082 instance=ExtResource("1_iukft")]
 position = Vector2(-63, -3)
@@ -224,15 +189,12 @@ dialog_text = "Huhu"
 
 [node name="Dialogbox" parent="." unique_id=1529403298 instance=ExtResource("5_7lihs")]
 
-[node name="Trigger2" parent="." unique_id=717960669 instance=ExtResource("4_b2bpf")]
-position = Vector2(108, -44)
-dialog_text = "hey"
-
 [node name="InteractableObject" parent="." unique_id=1985324908 instance=ExtResource("6_7lihs")]
 position = Vector2(-3, 49)
 
 [node name="Door" parent="." unique_id=1792774625 instance=ExtResource("6_fgofq")]
 position = Vector2(15, -86)
+open_speed = 1.25
 
 [node name="DoorButton" parent="." unique_id=100979660 instance=ExtResource("7_fgofq")]
 position = Vector2(-52, -43)
@@ -251,6 +213,10 @@ position = Vector2(-7, 93)
 
 [node name="CarryObject" parent="." unique_id=1255186265 instance=ExtResource("9_bf53h")]
 position = Vector2(92, -113)
+
+[node name="AmbientMusic" type="AudioStreamPlayer2D" parent="." unique_id=908707863]
+stream = ExtResource("10_71axn")
+autoplay = true
 
 [editable path="DoorButton"]
 [editable path="CameraZone"]

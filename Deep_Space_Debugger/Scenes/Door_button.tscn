@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://q3tw2c41ksr3" path="res://Scripts/Door_button.gd" id="1_0j85d"]
 [ext_resource type="Texture2D" uid="uid://bsksffxh8e32b" path="res://icon.svg" id="1_xf4h5"]
+[ext_resource type="AudioStream" uid="uid://b6s8etf5vymx0" path="res://Assets/sounds/door.mp3" id="3_hw4yw"]
+[ext_resource type="AudioStream" uid="uid://cwb7a3d34dwug" path="res://Assets/sounds/button.mp3" id="4_daoao"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0j85d"]
 radius = 15.033297
@@ -26,3 +28,9 @@ script = ExtResource("1_0j85d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=886858924]
 shape = SubResource("CircleShape2D_hw4yw")
+
+[node name="DoorSound" type="AudioStreamPlayer2D" parent="Area2D" unique_id=1836366454]
+stream = ExtResource("3_hw4yw")
+
+[node name="ButtonSound" type="AudioStreamPlayer2D" parent="Area2D" unique_id=1334293071]
+stream = ExtResource("4_daoao")

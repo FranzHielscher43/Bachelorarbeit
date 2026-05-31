@@ -2,6 +2,8 @@ extends Area2D
 
 @export var item_id := "object_1"
 @onready var sprite = $Sprite2D
+@onready var pick_up_sound = $PickUpSound
+@onready var drop_down_sound = $DropDownSound
 
 var original_scale : Vector2
 
@@ -37,10 +39,11 @@ func pick_up():
 	world = get_parent()
 	get_parent().remove_child(self)
 	current_player.add_child(self)
+	pick_up_sound.play()
 	position = Vector2(0, -24)
 
 func drop():
-	var drop_distance := 32
+	var drop_distance := 24
 	var directions = [
 		current_player.last_direction,
 		Vector2.DOWN,
@@ -59,6 +62,7 @@ func drop():
 	is_carried = false
 	current_player.remove_child(self)
 	world.add_child(self)
+	drop_down_sound.play()
 	global_position = final_position
 	
 func is_position_blocked(test_position: Vector2) -> bool:

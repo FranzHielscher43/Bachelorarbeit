@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bsksffxh8e32b" path="res://icon.svg" id="1_38ogf"]
 [ext_resource type="Script" uid="uid://dr4je3xchuyxs" path="res://Scripts/Door.gd" id="1_mw28t"]
+[ext_resource type="AudioStream" uid="uid://b6s8etf5vymx0" path="res://Assets/sounds/door.mp3" id="3_7mbvs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mw28t"]
 size = Vector2(30, 31)
@@ -18,3 +19,6 @@ texture = ExtResource("1_38ogf")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1994051236]
 position = Vector2(-15, 15.5)
 shape = SubResource("RectangleShape2D_mw28t")
+
+[node name="DoorSound" type="AudioStreamPlayer2D" parent="." unique_id=277344276]
+stream = ExtResource("3_7mbvs")

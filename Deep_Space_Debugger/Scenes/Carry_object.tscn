@@ -2,6 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://bsksffxh8e32b" path="res://icon.svg" id="1_8wecm"]
 [ext_resource type="Script" uid="uid://bw5qa1cil58q3" path="res://Scripts/Carry_object.gd" id="1_jla5h"]
+[ext_resource type="AudioStream" uid="uid://dj3gtgs4180f" path="res://Assets/sounds/pickup.mp3" id="3_xskkp"]
+[ext_resource type="AudioStream" uid="uid://cn6pjtgbasdvp" path="res://Assets/sounds/dropdown.mp3" id="4_jur7j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jla5h"]
 radius = 38.052597
@@ -16,3 +18,9 @@ texture = ExtResource("1_8wecm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1221512607]
 scale = Vector2(0.4, 0.4)
 shape = SubResource("CircleShape2D_jla5h")
+
+[node name="PickUpSound" type="AudioStreamPlayer2D" parent="." unique_id=588191615]
+stream = ExtResource("3_xskkp")
+
+[node name="DropDownSound" type="AudioStreamPlayer2D" parent="." unique_id=405821650]
+stream = ExtResource("4_jur7j")

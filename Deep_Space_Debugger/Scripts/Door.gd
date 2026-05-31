@@ -2,6 +2,7 @@ extends StaticBody2D
 
 @export var open_offset := Vector2(0, -64)
 @export var open_speed := 0.4
+@onready var door_sound = $DoorSound
 
 var closed_position : Vector2
 var open_position : Vector2
@@ -16,5 +17,7 @@ func open_door():
 		return
 	
 	is_open = true
+	door_sound.play()
+	
 	var tween = create_tween()
 	tween.tween_property(self, "position", open_position, open_speed)

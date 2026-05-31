@@ -12,6 +12,8 @@ gezielt nach bestimmten Creatorn, z. B.:
 
 Sound: https://www.freesound.org
 
+MP3-Bearbeitung: 
+https://clideo.com/
 
 
 Game-Assets:
@@ -19,3 +21,12 @@ Game-Assets:
 Character:
 Sprite: https://saraspiegelberg.itch.io/free-pixel-art-character-asset-astronaut
 Sound: https://pixabay.com/sound-effects/household-metal-footsteps-14727/
+
+Button:
+Sound: https://pixabay.com/sound-effects/film-special-effects-pickupplasticobject-91036/
+
+Door:
+Sound: https://pixabay.com/sound-effects/film-special-effects-sci-fi-door-6451/
+
+Ambient:
+Sound: https://pixabay.com/sound-effects/film-special-effects-spaceship-ambient-27988/
