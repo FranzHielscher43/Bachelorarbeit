@@ -1,0 +1,149 @@
+[gd_scene format=3 uid="uid://82ukwd2j17dj"]
+
+[ext_resource type="Script" uid="uid://gruod1dtpgqp" path="res://Scripts/Navigation/Main_menu.gd" id="1_46h1c"]
+[ext_resource type="Texture2D" uid="uid://cxco17mja15po" path="res://Assets/sprites/title_image.png" id="2_m3dwn"]
+[ext_resource type="AudioStream" uid="uid://cwb7a3d34dwug" path="res://Assets/sounds/button.mp3" id="3_gps84"]
+[ext_resource type="AudioStream" uid="uid://bdbhdbx7dvlnm" path="res://Assets/music/main_menu.mp3" id="3_nt0od"]
+[ext_resource type="AudioStream" uid="uid://b2d1di1u5qwmu" path="res://Assets/sounds/hover_sound.mp3" id="5_5qe8b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m3dwn"]
+bg_color = Color(0.43137255, 0.64705884, 0.6431373, 0.40392157)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nt0od"]
+bg_color = Color(0.39607844, 0.6392157, 0.7294118, 0.5568628)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gps84"]
+bg_color = Color(0.39607844, 0.6392157, 0.7294118, 0.72156864)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5qe8b"]
+bg_color = Color(0.39607844, 0.6392157, 0.7294118, 0.8980392)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[node name="MainMenu" type="Control" unique_id=1257121950]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_46h1c")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=582161631]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_m3dwn")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="CreatorContainer" type="BoxContainer" parent="." unique_id=538579879]
+visible = false
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.1
+anchor_right = 0.575
+anchor_bottom = 0.731
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+vertical = true
+
+[node name="CreatorLabel" type="Label" parent="CreatorContainer" unique_id=1279822134]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Erstellt von...
+Franz Hielscher 
+
+Im Rahmen der Bachelorarbeit im Studiengang Medieninformatik "
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+justification_flags = 160
+uppercase = true
+
+[node name="BackButton" type="Button" parent="CreatorContainer" unique_id=1267023412]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+theme_override_styles/normal = SubResource("StyleBoxFlat_m3dwn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nt0od")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gps84")
+theme_override_styles/focus = SubResource("StyleBoxFlat_5qe8b")
+text = "Zurück"
+
+[node name="MainContainer" type="VBoxContainer" parent="." unique_id=2010991501]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.175
+anchor_right = 0.51
+anchor_bottom = 0.8
+offset_right = 77.0
+grow_vertical = 2
+theme_override_constants/separation = 32
+
+[node name="StartButton" type="Button" parent="MainContainer" unique_id=1576582913]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+theme_override_styles/normal = SubResource("StyleBoxFlat_m3dwn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nt0od")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gps84")
+theme_override_styles/focus = SubResource("StyleBoxFlat_5qe8b")
+text = "Start"
+
+[node name="CreatorButton" type="Button" parent="MainContainer" unique_id=338811034]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+theme_override_styles/normal = SubResource("StyleBoxFlat_m3dwn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nt0od")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gps84")
+theme_override_styles/focus = SubResource("StyleBoxFlat_5qe8b")
+text = "Ersteller"
+
+[node name="QuitButton" type="Button" parent="MainContainer" unique_id=1200863082]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+theme_override_styles/normal = SubResource("StyleBoxFlat_m3dwn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nt0od")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gps84")
+theme_override_styles/focus = SubResource("StyleBoxFlat_5qe8b")
+text = "Beenden"
+
+[node name="MenuAmbient" type="AudioStreamPlayer2D" parent="." unique_id=1865703941]
+stream = ExtResource("3_nt0od")
+autoplay = true
+
+[node name="ClickSound" type="AudioStreamPlayer2D" parent="." unique_id=1055580198]
+stream = ExtResource("3_gps84")
+
+[node name="HoverSound" type="AudioStreamPlayer2D" parent="." unique_id=1139808224]
+stream = ExtResource("5_5qe8b")
+
+[connection signal="pressed" from="CreatorContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="MainContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MainContainer/CreatorButton" to="." method="_on_creator_button_pressed"]
+[connection signal="pressed" from="MainContainer/QuitButton" to="." method="_on_quit_button_pressed"]

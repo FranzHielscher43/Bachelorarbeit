@@ -130,7 +130,7 @@ pitch_scale = 2.0
 parameters/looping = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2096044562]
-zoom = Vector2(4, 4)
+zoom = Vector2(4.5, 4.5)
 limit_left = 0
 limit_top = 0
 limit_right = 0
