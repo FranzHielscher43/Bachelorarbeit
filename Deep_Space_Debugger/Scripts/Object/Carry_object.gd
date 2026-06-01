@@ -86,3 +86,6 @@ func _on_body_exited(body):
 	if body.name == "Player" and !is_carried:
 		player_nearby = false
 		current_player = null
+		
+func get_item_id():
+	return item_id

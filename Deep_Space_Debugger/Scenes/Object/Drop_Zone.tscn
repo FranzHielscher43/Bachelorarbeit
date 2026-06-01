@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://ddvdrh3dyvjya"]
+
+[ext_resource type="Script" uid="uid://dfe02chpxurj7" path="res://Scripts/Object/Drop_zone.gd" id="1_p5dp6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iwnui"]
+radius = 15.033297
+
+[node name="DropZone" type="Area2D" unique_id=850932415]
+script = ExtResource("1_p5dp6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=173739762]
+shape = SubResource("CircleShape2D_iwnui")
+
+[node name="SnapPoint" type="Marker2D" parent="." unique_id=2041338773]
