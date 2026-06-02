@@ -21,6 +21,7 @@ func _on_area_entered(area):
 	if area.get_item_id() == required_item_id and !area.is_carried:
 		placed_object = area
 		area.global_position = snap_point.global_position
+		area.set_placed()
 		area.set_process(false)
 		dialog_box.show_dialog(dialog_text)
 		await get_tree().create_timer(2.0).timeout

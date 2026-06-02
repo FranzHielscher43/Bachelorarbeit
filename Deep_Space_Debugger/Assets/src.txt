@@ -30,3 +30,7 @@ Sound: https://pixabay.com/sound-effects/film-special-effects-sci-fi-door-6451/
 
 Ambient:
 Sound: https://pixabay.com/sound-effects/film-special-effects-spaceship-ambient-27988/
+
+Menü:
+Sound: https://pixabay.com/sound-effects/film-special-effects-ui-sounds-pack-5-19-359747/
+	   https://pixabay.com/sound-effects/musical-deep-space-loop-401165/

@@ -1,5 +1,11 @@
 extends Area2D
 
+# Dialogfeld - Inhalt
+@export var object_name := ""
+@export var class_name_display := ""
+@export_multiline var custom_attributes := ""
+@onready var dialog_box = $"../Dialogbox" 
+
 @export var item_id := "object_1"
 @onready var sprite = $Sprite2D
 @onready var pick_up_sound = $PickUpSound
@@ -12,6 +18,8 @@ var is_carried := false
 var current_player = null
 var world = null
 
+var is_placed := false
+
 func _ready():
 	original_scale = sprite.scale
 	world = get_parent()
@@ -19,6 +27,9 @@ func _ready():
 	body_exited.connect(_on_body_exited)
 
 func _process(delta):
+	if is_placed:
+		return
+		
 	if player_nearby and !is_carried and Input.is_action_just_pressed("ui_accept"):
 		pick_up()
 	elif is_carried and Input.is_action_just_pressed("ui_accept"):
@@ -81,11 +92,31 @@ func _on_body_entered(body):
 	if body.name == "Player":
 		player_nearby = true
 		current_player = body
+		if !is_placed:
+			show_attributes()
 
 func _on_body_exited(body):
 	if body.name == "Player" and !is_carried:
 		player_nearby = false
 		current_player = null
+		dialog_box.hide_dialog()
 		
 func get_item_id():
 	return item_id
+	
+func set_placed():
+	is_placed = true
+	player_nearby = false
+	is_carried = false
+	sprite.scale = original_scale
+	dialog_box.hide_dialog()
+	set_process(false)
+	
+func show_attributes():
+	var info_text = "Objekt.: " + object_name + "\n"
+	info_text += "Klasse: " + class_name_display + "\n"
+	
+	if custom_attributes != "":
+		info_text += custom_attributes
+	
+	dialog_box.show_dialog(info_text)
