@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cq6qp0sv5loj6" path="res://Scenes/Camera_Zone.tscn" id="11_0uiiy"]
 [ext_resource type="AudioStream" uid="uid://cdjfr2v7scn4c" path="res://Assets/sounds/ambient.mp3" id="12_rt650"]
 [ext_resource type="PackedScene" uid="uid://b3e76oulrbay2" path="res://Scenes/Inventory.tscn" id="13_4h07n"]
+[ext_resource type="PackedScene" uid="uid://cmbd6v3uc22nm" path="res://Scenes/Robot.tscn" id="14_2is65"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3so38"]
 texture = ExtResource("2_4h07n")
@@ -395,7 +396,7 @@ open_offset = Vector2(28, 0)
 open_speed = 1.25
 
 [node name="DoorButton" parent="." unique_id=100979660 instance=ExtResource("8_lyq5x")]
-position = Vector2(-52, -43)
+position = Vector2(-44, -50)
 
 [node name="Area2D" parent="DoorButton" index="2" unique_id=904289165]
 door_path = NodePath("../../Door_01")
@@ -445,6 +446,9 @@ custom_attributes = "Zustand: gut"
 item_id = "object_2"
 
 [node name="Inventory" parent="." unique_id=1566470225 instance=ExtResource("13_4h07n")]
+
+[node name="Robot" parent="." unique_id=1794440707 instance=ExtResource("14_2is65")]
+position = Vector2(26, -22)
 
 [editable path="DoorButton"]
 [editable path="CarryObject_01"]

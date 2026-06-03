@@ -49,12 +49,39 @@ func use_item():
 
 func drop_item(item_data):
 	var item = item_data["object"]
+	var drop_distance := 24
+	
+	var directions = [
+		player.last_direction,
+		Vector2.UP,
+		Vector2.DOWN,
+		Vector2.LEFT,
+		Vector2.RIGHT
+	]
+	
+	var final_position = player.global_position
+	
+	for dir in directions:
+		var test_position = player.global_position + dir.normalized() * drop_distance
+	
+		if !is_position_blocked(test_position):
+			final_position = test_position
+			break
 	
 	item.visible = true
 	item.set_process(true)
-	
-	item.global_position = player.global_position + player.last_direction.normalized() * 32
+	item.global_position = final_position
 	item.get_node("CollisionShape2D").disabled = false
+	
+func is_position_blocked(test_position: Vector2) -> bool:
+	var space_state = get_tree().current_scene.get_world_2d().direct_space_state
+
+	var query = PhysicsPointQueryParameters2D.new()
+	query.position = test_position
+	query.collide_with_bodies = true
+	query.collide_with_areas = false
+	var result = space_state.intersect_point(query)
+	return result.size() > 0
 	
 func update_slots():
 	for i in range(slots.size()):
@@ -80,7 +107,7 @@ func show_selected_item_info():
 		dialog_box.hide_dialog()
 		return
 	
-	if selected_index > items.size():
+	if selected_index >= items.size():
 		return
 		
 	var item = items[selected_index]

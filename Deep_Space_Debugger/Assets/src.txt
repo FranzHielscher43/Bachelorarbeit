@@ -41,3 +41,8 @@ Sound: https://pixabay.com/de/sound-effects/film-spezialeffekte-typing-sound-01-
 Inventory:
 Sound: https://pixabay.com/sound-effects/film-special-effects-take-item-sound-effect-163073/
 	   https://pixabay.com/sound-effects/film-special-effects-pickupplasticobject-91036/
+	
+Robot:
+Sound: https://pixabay.com/sound-effects/film-special-effects-robot-noises-70217/
+	   https://pixabay.com/sound-effects/film-special-effects-082569-robot-voice-let39s-get-it-on-82780/
+	   https://pixabay.com/sound-effects/film-special-effects-wake-up-the-robot-84894/
