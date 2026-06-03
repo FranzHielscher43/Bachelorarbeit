@@ -59,7 +59,6 @@ expand_mode = 1
 stretch_mode = 6
 
 [node name="CreatorContainer" type="BoxContainer" parent="." unique_id=538579879]
-visible = false
 z_index = 1
 layout_mode = 1
 anchors_preset = -1
@@ -75,16 +74,20 @@ vertical = true
 [node name="CreatorLabel" type="Label" parent="CreatorContainer" unique_id=1279822134]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+theme_override_constants/line_spacing = -10
 theme_override_font_sizes/font_size = 32
-text = "Erstellt von...
-Franz Hielscher 
+text = "Entwickelt von Franz Hielscher
 
-Im Rahmen der Bachelorarbeit im Studiengang Medieninformatik "
+Bachelorarbeit im Studiengang Medieninformatik
+
+Hochschule für Technik, Wirtschaft und Kultur Leipzig
+
+2026"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 justification_flags = 160
-uppercase = true
+max_lines_visible = 10
 
 [node name="BackButton" type="Button" parent="CreatorContainer" unique_id=1267023412]
 layout_mode = 2

@@ -5,6 +5,7 @@ extends CharacterBody2D
 
 var was_moving := false
 var last_direction := Vector2.DOWN
+var stun := false
 
 func _physics_process(delta):
 
@@ -14,6 +15,14 @@ func _physics_process(delta):
 		"ui_up",
 		"ui_down"
 	)
+	
+	if stun:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		update_animation(Vector2.ZERO)
+		footstep.stream_paused = true
+		was_moving = false
+		return
 	
 	if direction != Vector2.ZERO:
 		last_direction = direction

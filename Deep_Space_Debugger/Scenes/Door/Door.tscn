@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bim55ny43falj"]
 
 [ext_resource type="Texture2D" uid="uid://bsksffxh8e32b" path="res://icon.svg" id="1_38ogf"]
-[ext_resource type="Script" uid="uid://dr4je3xchuyxs" path="res://Scripts/Door.gd" id="1_mw28t"]
+[ext_resource type="Script" uid="uid://dr4je3xchuyxs" path="res://Scripts/Door/Door.gd" id="1_mw28t"]
 [ext_resource type="AudioStream" uid="uid://b6s8etf5vymx0" path="res://Assets/sounds/door.mp3" id="3_7mbvs"]
 [ext_resource type="Texture2D" uid="uid://b2dhab4xceahr" path="res://Assets/sprites/TileSet v1.0.png" id="4_1fk65"]
 

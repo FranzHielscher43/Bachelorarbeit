@@ -29,6 +29,8 @@ func toggle_pause():
 	if visible:
 		menu_sound.play()
 		continue_button.grab_focus()
+	else:
+		menu_sound.stop()
 
 func continue_pressed():
 	click_sound.play()
@@ -51,5 +53,4 @@ func _on_button_hover():
 	if first_click:
 		first_click = false
 		return
-		
 	hover_sound.play()

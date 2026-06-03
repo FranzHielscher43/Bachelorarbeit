@@ -34,3 +34,10 @@ Sound: https://pixabay.com/sound-effects/film-special-effects-spaceship-ambient-
 Menü:
 Sound: https://pixabay.com/sound-effects/film-special-effects-ui-sounds-pack-5-19-359747/
 	   https://pixabay.com/sound-effects/musical-deep-space-loop-401165/
+	
+Dialog:
+Sound: https://pixabay.com/de/sound-effects/film-spezialeffekte-typing-sound-01-229863/
+
+Inventory:
+Sound: https://pixabay.com/sound-effects/film-special-effects-take-item-sound-effect-163073/
+	   https://pixabay.com/sound-effects/film-special-effects-pickupplasticobject-91036/

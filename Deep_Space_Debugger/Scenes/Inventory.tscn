@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://b3e76oulrbay2"]
+
+[ext_resource type="Script" uid="uid://kuro2r8wmrev" path="res://Scripts/Inventory.gd" id="1_ersrd"]
+[ext_resource type="AudioStream" uid="uid://dxumuvoellw2a" path="res://Assets/sounds/inventory.mp3" id="2_4v8qb"]
+[ext_resource type="AudioStream" uid="uid://cn6pjtgbasdvp" path="res://Assets/sounds/dropdown.mp3" id="2_jbd0o"]
+[ext_resource type="AudioStream" uid="uid://b2d1di1u5qwmu" path="res://Assets/sounds/hover_sound.mp3" id="3_1pi3o"]
+
+[node name="Inventory" type="CanvasLayer" unique_id=1566470225]
+script = ExtResource("1_ersrd")
+
+[node name="Items" type="Panel" parent="." unique_id=2075099523]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.3
+anchor_right = 1.0
+anchor_bottom = 0.7
+offset_left = -100.0
+offset_top = -100.0
+offset_bottom = 100.0
+grow_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Items" unique_id=1858681800]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Slot_01" type="Button" parent="Items/VBoxContainer" unique_id=1844920007]
+custom_minimum_size = Vector2(0, 92)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Items/VBoxContainer/Slot_01" unique_id=1128336776]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot_02" type="Button" parent="Items/VBoxContainer" unique_id=1983465095]
+custom_minimum_size = Vector2(0, 92)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Items/VBoxContainer/Slot_02" unique_id=433245463]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot_03" type="Button" parent="Items/VBoxContainer" unique_id=1889363076]
+custom_minimum_size = Vector2(0, 92)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Items/VBoxContainer/Slot_03" unique_id=1485301097]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot_04" type="Button" parent="Items/VBoxContainer" unique_id=153807558]
+custom_minimum_size = Vector2(0, 92)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Items/VBoxContainer/Slot_04" unique_id=2011105662]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot_05" type="Button" parent="Items/VBoxContainer" unique_id=1209177624]
+custom_minimum_size = Vector2(0, 92)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Items/VBoxContainer/Slot_05" unique_id=93724521]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="InventorySound" type="AudioStreamPlayer2D" parent="." unique_id=585694695]
+stream = ExtResource("2_4v8qb")
+
+[node name="HoverSound" type="AudioStreamPlayer2D" parent="." unique_id=794034278]
+stream = ExtResource("3_1pi3o")
+
+[node name="UseSound" type="AudioStreamPlayer2D" parent="." unique_id=1528111913]
+stream = ExtResource("2_jbd0o")
+
+[node name="InventorySoundPitched" type="AudioStreamPlayer2D" parent="." unique_id=296266528]
+stream = ExtResource("2_4v8qb")
+volume_db = -3.0
+pitch_scale = 1.2

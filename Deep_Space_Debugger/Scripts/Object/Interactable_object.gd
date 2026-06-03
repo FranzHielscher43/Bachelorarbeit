@@ -35,11 +35,12 @@ func _on_body_exited(body):
 		
 func _process(delta):
 	if player_nearby and !interacted:
-		var pulse = 1.0 + sin(Time.get_ticks_msec() * 0.005) * 0.1
-		sprite.scale = original_scale * pulse
+		var pulse = 0.7 + sin(Time.get_ticks_msec() * 0.005) * 0.3
+		sprite.modulate = Color.WHITE.lerp(Color(1.5, 1.5, 1.5, 1.0), pulse)
 		if Input.is_action_just_pressed("ui_accept"):
 			interacted = true
 			sprite.scale = original_scale
 			dialog_box.show_dialog(dialog_text)
 	else:
 		sprite.scale = original_scale
+		sprite.modulate = Color.WHITE

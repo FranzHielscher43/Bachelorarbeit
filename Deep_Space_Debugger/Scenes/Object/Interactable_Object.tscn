@@ -7,7 +7,7 @@
 radius = 83.548485
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_clnfq"]
-radius = 15.524175
+radius = 18.000002
 
 [node name="InteractableObject" type="Area2D" unique_id=1985324908]
 script = ExtResource("1_45dk5")
@@ -22,9 +22,11 @@ position = Vector2(1.5, -2.2499979)
 scale = Vector2(0.2578125, 0.2460938)
 texture = ExtResource("2_i1egy")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D" unique_id=1074381412]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1074381412]
+position = Vector2(1.5, -2.2499979)
+scale = Vector2(0.2578125, 0.2460938)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D" unique_id=84532814]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=84532814]
 position = Vector2(1.939394, -3.0476265)
 scale = Vector2(3.8787878, 4.0634913)
 shape = SubResource("CircleShape2D_clnfq")
