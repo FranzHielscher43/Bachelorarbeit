@@ -25,6 +25,11 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="serious-game-OOP"
 
+[global_group]
+
+Player=""
+TileMap=""
+
 [input]
 
 inventory={

@@ -110,7 +110,7 @@ animations = [{
 radius = 9.0
 height = 28.0
 
-[node name="Player" type="CharacterBody2D" unique_id=1729184082]
+[node name="Player" type="CharacterBody2D" unique_id=1729184082 groups=["Player"]]
 z_index = 1
 script = ExtResource("1_kyqiw")
 
