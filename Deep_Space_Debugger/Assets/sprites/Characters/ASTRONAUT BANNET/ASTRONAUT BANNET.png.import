@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cw726cl2w7y01"
-path="res://.godot/imported/Astronaut.png-ec8a5b0baa9cc5add71ffd6617c98efb.ctex"
+uid="uid://dhdcy443ygpxt"
+path="res://.godot/imported/ASTRONAUT BANNET.png-08fd35c1106de225d9a3c4b2b8f3611b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/ASTRONAUT BANNET/Astronaut.png"
-dest_files=["res://.godot/imported/Astronaut.png-ec8a5b0baa9cc5add71ffd6617c98efb.ctex"]
+source_file="res://Assets/sprites/Characters/ASTRONAUT BANNET/ASTRONAUT BANNET.png"
+dest_files=["res://.godot/imported/ASTRONAUT BANNET.png-08fd35c1106de225d9a3c4b2b8f3611b.ctex"]
 
 [params]
 

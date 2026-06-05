@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bvhfgo4ebpewe"]
 
 [ext_resource type="Script" uid="uid://bmwo36ie587vc" path="res://Scripts/Player.gd" id="1_kyqiw"]
-[ext_resource type="Texture2D" uid="uid://cw726cl2w7y01" path="res://Assets/sprites/ASTRONAUT BANNET/Astronaut.png" id="1_rpqav"]
+[ext_resource type="Texture2D" uid="uid://cw726cl2w7y01" path="res://Assets/sprites/Characters/ASTRONAUT BANNET/Astronaut.png" id="1_rpqav"]
 [ext_resource type="AudioStream" uid="uid://cnc81oh2gdff" path="res://Assets/sounds/footsteps.mp3" id="3_gntrk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kyqiw"]

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bc4ewyh5s6id1" path="res://Scenes/Dialog_ext.tscn" id="3_2is65"]
 [ext_resource type="PackedScene" uid="uid://cr35pgufep6ms" path="res://Scenes/Navigation/InGameMenu.tscn" id="4_1j0ck"]
 [ext_resource type="PackedScene" uid="uid://mih0vxt5e552" path="res://Scenes/Trigger.tscn" id="5_dt5ju"]
-[ext_resource type="PackedScene" uid="uid://djv1jrgifgw3i" path="res://Scenes/Object/Interactable_Object.tscn" id="6_20s8d"]
+[ext_resource type="PackedScene" uid="uid://djv1jrgifgw3i" path="res://Scenes/Object/Terminal_Object.tscn" id="6_20s8d"]
 [ext_resource type="PackedScene" uid="uid://bim55ny43falj" path="res://Scenes/Door/Door.tscn" id="7_nbxri"]
 [ext_resource type="PackedScene" uid="uid://c2myae6ncylbb" path="res://Scenes/Door/Door_button.tscn" id="8_lyq5x"]
 [ext_resource type="PackedScene" uid="uid://ba25c6odbjc7" path="res://Scenes/Object/Carry_object.tscn" id="9_agclk"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b3e76oulrbay2" path="res://Scenes/Inventory.tscn" id="13_4h07n"]
 [ext_resource type="PackedScene" uid="uid://cmbd6v3uc22nm" path="res://Scenes/Robot.tscn" id="14_2is65"]
 [ext_resource type="PackedScene" uid="uid://dp1q4rv2c5wsk" path="res://Scenes/Navigation/MiniMap.tscn" id="15_1j0ck"]
+[ext_resource type="PackedScene" uid="uid://co7lv2dynqrby" path="res://Scenes/Terminal_UI.tscn" id="16_dt5ju"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3so38"]
 texture = ExtResource("2_4h07n")
@@ -374,7 +375,7 @@ sources/0 = SubResource("TileSetAtlasSource_3so38")
 position = Vector2(-63, -3)
 
 [node name="Robot" parent="." unique_id=1794440707 instance=ExtResource("14_2is65")]
-position = Vector2(26, -22)
+position = Vector2(-101, 37)
 
 [node name="TileMapBasic" type="TileMap" parent="." unique_id=1156861529 groups=["TileMap"]]
 tile_set = SubResource("TileSet_3cx6b")
@@ -452,6 +453,8 @@ position = Vector2(-7, 71)
 [node name="AmbientMusic" type="AudioStreamPlayer2D" parent="." unique_id=908707863]
 stream = ExtResource("12_rt650")
 autoplay = true
+
+[node name="Terminal" parent="." unique_id=95353647 instance=ExtResource("16_dt5ju")]
 
 [editable path="DoorButton"]
 [editable path="CarryObject_01"]

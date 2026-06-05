@@ -21,7 +21,7 @@ var selected_index := 0
 var inventory_open := false
 
 func _ready():
-	items_panel.modulate.a = 0.6
+	items_panel.modulate.a = 0.75
 	update_slots()
 	
 func add_item(item_data):
@@ -96,11 +96,10 @@ func update_slots():
 	update_selection()
 	
 func update_selection():
-	for i in range(slots.size()):
-		if inventory_open and i == selected_index:
-			slots[i].modulate = Color(1.4, 1.4, 1.4, 1.0)
-		else:
-			slots[i].modulate = Color.WHITE
+	if inventory_open and selected_index >= 0 and selected_index < slots.size():
+		slots[selected_index].grab_focus()
+	else:
+		get_viewport().gui_release_focus()
 			
 func show_selected_item_info():
 	if items.size() == 0:
@@ -130,7 +129,7 @@ func _input(event):
 			items_panel.modulate.a = 1.0
 			inventory_sound.play()
 		else:
-			items_panel.modulate.a = 0.6
+			items_panel.modulate.a = 0.75
 			dialog_box.hide_dialog()
 			inventory_sound_pitched.play()
 			selected_index = -1
@@ -140,20 +139,22 @@ func _input(event):
 	if inventory_open:
 		if event.is_action_pressed("ui_down"):
 			if items.size() > 0:
-				selected_index = min(selected_index + 1, items.size() - 1)
+				selected_index = min(selected_index + 1, slots.size() - 1)
 				inventory_hover_sound.play()
 				update_selection()
 				show_selected_item_info()
+				get_viewport().set_input_as_handled()
 		if event.is_action_pressed("ui_up"):
 			if items.size() > 0:
 				selected_index = max(selected_index - 1, 0)
 				inventory_hover_sound.play()
 				update_selection()
 				show_selected_item_info()
+				get_viewport().set_input_as_handled()
 		if event.is_action_pressed("ui_accept"):
 			use_item()
 			inventory_open = false
 			player.stun = false
-			items_panel.modulate.a = 0.6
+			items_panel.modulate.a = 0.75
 			inventory_use_sound.play()
 			update_selection()

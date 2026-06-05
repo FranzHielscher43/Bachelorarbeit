@@ -9,9 +9,14 @@ var tilemap = null
 var discovered_cells := {}
 
 func _ready():
-	custom_minimum_size = Vector2(200, 200)
-	size = Vector2(200, 200)
+	visible = false
+	custom_minimum_size = Vector2(250, 250)
+	size = Vector2(250, 250)
 	player = get_tree().get_first_node_in_group("Player")
+
+func _input(event):
+	if event.is_action_pressed("map"):
+		visible = !visible
 
 func _process(delta):
 	if player == null:
@@ -19,7 +24,6 @@ func _process(delta):
 
 	reveal_around_player()
 	queue_redraw()
-
 
 func reveal_around_player():
 	var player_cell = Vector2i(
@@ -31,7 +35,6 @@ func reveal_around_player():
 		for y in range(-reveal_radius, reveal_radius + 1):
 			var cell = player_cell + Vector2i(x, y)
 			discovered_cells[cell] = true
-
 
 func _draw():
 	if player == null:
@@ -60,4 +63,4 @@ func _draw():
 
 	draw_circle(center, 4, Color.WHITE)
 	draw_circle(center, 7, Color(0.2, 0.8, 1.0, 0.4))
-	draw_rect(Rect2(Vector2.ZERO, size), Color(0.1, 0.8, 1.0, 1.0), false, 2)
+	draw_rect(Rect2(Vector2.ZERO, size), Color("#10677c"), false, 3)

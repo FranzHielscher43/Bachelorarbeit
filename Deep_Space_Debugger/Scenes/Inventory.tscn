@@ -5,6 +5,21 @@
 [ext_resource type="AudioStream" uid="uid://cn6pjtgbasdvp" path="res://Assets/sounds/dropdown.mp3" id="2_jbd0o"]
 [ext_resource type="AudioStream" uid="uid://b2d1di1u5qwmu" path="res://Assets/sounds/hover_sound.mp3" id="3_1pi3o"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1pi3o"]
+bg_color = Color(0.039215688, 0.07058824, 0.09019608, 0.6784314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2hjaa"]
+bg_color = Color(0.039215688, 0.07058824, 0.09019608, 0.6784314)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0627451, 0.40392157, 0.4862745, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
 [node name="Inventory" type="CanvasLayer" unique_id=1566470225]
 script = ExtResource("1_ersrd")
 
@@ -15,9 +30,10 @@ anchor_top = 0.3
 anchor_right = 1.0
 anchor_bottom = 0.7
 offset_left = -100.0
-offset_top = -100.0
-offset_bottom = 100.0
+offset_top = -106.0
+offset_bottom = 106.0
 grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1pi3o")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Items" unique_id=1858681800]
 layout_mode = 1
@@ -30,10 +46,12 @@ offset_right = -5.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 8
 
 [node name="Slot_01" type="Button" parent="Items/VBoxContainer" unique_id=1844920007]
 custom_minimum_size = Vector2(0, 92)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_2hjaa")
 
 [node name="Icon" type="TextureRect" parent="Items/VBoxContainer/Slot_01" unique_id=1128336776]
 layout_mode = 1
@@ -53,6 +71,7 @@ stretch_mode = 5
 [node name="Slot_02" type="Button" parent="Items/VBoxContainer" unique_id=1983465095]
 custom_minimum_size = Vector2(0, 92)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_2hjaa")
 
 [node name="Icon" type="TextureRect" parent="Items/VBoxContainer/Slot_02" unique_id=433245463]
 layout_mode = 1
@@ -72,6 +91,7 @@ stretch_mode = 5
 [node name="Slot_03" type="Button" parent="Items/VBoxContainer" unique_id=1889363076]
 custom_minimum_size = Vector2(0, 92)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_2hjaa")
 
 [node name="Icon" type="TextureRect" parent="Items/VBoxContainer/Slot_03" unique_id=1485301097]
 layout_mode = 1
@@ -91,6 +111,7 @@ stretch_mode = 5
 [node name="Slot_04" type="Button" parent="Items/VBoxContainer" unique_id=153807558]
 custom_minimum_size = Vector2(0, 92)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_2hjaa")
 
 [node name="Icon" type="TextureRect" parent="Items/VBoxContainer/Slot_04" unique_id=2011105662]
 layout_mode = 1
@@ -110,6 +131,7 @@ stretch_mode = 5
 [node name="Slot_05" type="Button" parent="Items/VBoxContainer" unique_id=1209177624]
 custom_minimum_size = Vector2(0, 92)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_2hjaa")
 
 [node name="Icon" type="TextureRect" parent="Items/VBoxContainer/Slot_05" unique_id=93724521]
 layout_mode = 1

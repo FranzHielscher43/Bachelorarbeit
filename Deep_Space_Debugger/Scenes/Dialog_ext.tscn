@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bc4ewyh5s6id1"]
 
 [ext_resource type="Script" uid="uid://b5wiei7hhm1e7" path="res://Scripts/Dialog_ext.gd" id="1_5ntqh"]
+[ext_resource type="FontFile" uid="uid://giyv3v5cj60r" path="res://Assets/fonts/ShareTechMono-Regular.ttf" id="2_oblh3"]
 [ext_resource type="AudioStream" uid="uid://b7lognojnkypa" path="res://Assets/sounds/typing.mp3" id="2_ug3e0"]
 
 [node name="Dialogbox" type="CanvasLayer" unique_id=1529403298]
@@ -23,6 +24,7 @@ theme_override_constants/margin_bottom = 20
 [node name="Label" type="Label" parent="Panel/MarginContainer" unique_id=857057879]
 custom_minimum_size = Vector2(460, 260)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_oblh3")
 theme_override_font_sizes/font_size = 32
 autowrap_mode = 2
 

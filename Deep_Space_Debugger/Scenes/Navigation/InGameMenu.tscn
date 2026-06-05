@@ -1,43 +1,62 @@
 [gd_scene format=3 uid="uid://cr35pgufep6ms"]
 
 [ext_resource type="Script" uid="uid://mc1yxl86esid" path="res://Scripts/Navigation/In_game_menu.gd" id="1_s5ls1"]
+[ext_resource type="FontFile" uid="uid://giyv3v5cj60r" path="res://Assets/fonts/ShareTechMono-Regular.ttf" id="2_bwhcp"]
 [ext_resource type="AudioStream" uid="uid://bdbhdbx7dvlnm" path="res://Assets/music/main_menu.mp3" id="2_wkqg0"]
 [ext_resource type="AudioStream" uid="uid://cwb7a3d34dwug" path="res://Assets/sounds/button.mp3" id="3_bwhcp"]
 [ext_resource type="AudioStream" uid="uid://b2d1di1u5qwmu" path="res://Assets/sounds/hover_sound.mp3" id="4_26vcs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s5ls1"]
-bg_color = Color(0.2509804, 0.44705883, 0.5176471, 0.6313726)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-expand_margin_left = 10.0
-expand_margin_right = 10.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xo7l2"]
-bg_color = Color(0.30704835, 0.5273268, 0.60704935, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-expand_margin_left = 10.0
-expand_margin_right = 10.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7lvnk"]
-bg_color = Color(0.30704835, 0.5273268, 0.60704935, 1)
+bg_color = Color(0.039215688, 0.07058824, 0.09019608, 0.6784314)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-expand_margin_left = 10.0
-expand_margin_right = 10.0
+border_color = Color(0.0627451, 0.40392157, 0.4862745, 1)
+expand_margin_left = 20.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d3lh4"]
+bg_color = Color(0.039215688, 0.07058824, 0.09019608, 0.6784314)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+expand_margin_left = 20.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26vcs"]
+bg_color = Color(0.039215688, 0.07058824, 0.09019608, 0.6784314)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+expand_margin_left = 20.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bwhcp"]
+bg_color = Color(0.039215688, 0.07058824, 0.09019608, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+expand_margin_left = 20.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 10.0
 
 [node name="InGameMenu" type="CanvasLayer" unique_id=2139800408]
 process_mode = 3
+layer = 100
 script = ExtResource("1_s5ls1")
 
 [node name="Control" type="Control" parent="." unique_id=523485410]
@@ -55,33 +74,55 @@ anchor_left = 0.5
 anchor_top = 0.25
 anchor_right = 0.5
 anchor_bottom = 0.25
+offset_left = 10.0
+offset_top = 10.0
 offset_right = 101.0
-offset_bottom = 101.0
-theme_override_constants/separation = 16
+theme_override_constants/separation = 28
 
 [node name="ContinueButton" type="Button" parent="Control/VBoxContainer" unique_id=986761643]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.16078432, 0.7294118, 0.8666667, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_bwhcp")
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxFlat_s5ls1")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_xo7l2")
-theme_override_styles/focus = SubResource("StyleBoxFlat_7lvnk")
-text = "Fortfahren"
+theme_override_styles/pressed = SubResource("StyleBoxFlat_d3lh4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_26vcs")
+theme_override_styles/focus = SubResource("StyleBoxFlat_bwhcp")
+text = "FORTFAHREN"
 
 [node name="MainMenuButton" type="Button" parent="Control/VBoxContainer" unique_id=323590699]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.16078432, 0.7294118, 0.8666667, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_bwhcp")
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxFlat_s5ls1")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_xo7l2")
-theme_override_styles/focus = SubResource("StyleBoxFlat_7lvnk")
-text = "Hauptmenü"
+theme_override_styles/pressed = SubResource("StyleBoxFlat_d3lh4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_26vcs")
+theme_override_styles/focus = SubResource("StyleBoxFlat_bwhcp")
+text = "HAUPTMENÜ"
 
 [node name="QuitButton" type="Button" parent="Control/VBoxContainer" unique_id=746938476]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.16078432, 0.7294118, 0.8666667, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_bwhcp")
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxFlat_s5ls1")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_xo7l2")
-theme_override_styles/focus = SubResource("StyleBoxFlat_7lvnk")
-text = "Beenden"
+theme_override_styles/pressed = SubResource("StyleBoxFlat_d3lh4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_26vcs")
+theme_override_styles/focus = SubResource("StyleBoxFlat_bwhcp")
+text = "BEENDEN"
 
 [node name="MenuAmbient" type="AudioStreamPlayer2D" parent="." unique_id=2029383484]
 stream = ExtResource("2_wkqg0")

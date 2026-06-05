@@ -12,6 +12,8 @@ extends Control
 @onready var click_sound = $ClickSound
 @onready var hover_sound = $HoverSound
 
+@onready var creator_label = $CreatorContainer/CreatorLabel
+
 func _ready():
 	creator_container.visible = false
 	main_container.visible = true
@@ -36,6 +38,9 @@ func _on_creator_button_pressed():
 	await click_sound.finished
 	main_container.visible = false
 	creator_container.visible = true
+	
+	creator_label.clear()
+	creator_label.append_text("""[color=#29badd][font_size=40]ENTWICKELT VON\nFRANZ HIELSCHER[/font_size][/color]\n\nIm Rahmen der Bachelorarbeit im Studiengang Medieninformatik\n\nHochschule für Technik, Wirtschaft und Kultur Leipzig""")
 	
 	back_button.grab_focus()
 	

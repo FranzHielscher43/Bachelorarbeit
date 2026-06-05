@@ -15,6 +15,8 @@ Sound: https://www.freesound.org
 MP3-Bearbeitung: 
 https://clideo.com/
 
+Font: 
+https://fonts.google.com/specimen/Share+Tech+Mono?preview.script=Latn
 
 Game-Assets:
 
@@ -43,6 +45,7 @@ Sound: https://pixabay.com/sound-effects/film-special-effects-take-item-sound-ef
 	   https://pixabay.com/sound-effects/film-special-effects-pickupplasticobject-91036/
 	
 Robot:
+Sprite: https://ashenremains.itch.io/leftover-art
 Sound: https://pixabay.com/sound-effects/film-special-effects-robot-noises-70217/
 	   https://pixabay.com/sound-effects/film-special-effects-082569-robot-voice-let39s-get-it-on-82780/
 	   https://pixabay.com/sound-effects/film-special-effects-wake-up-the-robot-84894/

@@ -2,41 +2,42 @@
 
 [ext_resource type="Script" uid="uid://gruod1dtpgqp" path="res://Scripts/Navigation/Main_menu.gd" id="1_46h1c"]
 [ext_resource type="Texture2D" uid="uid://cxco17mja15po" path="res://Assets/sprites/title_image.png" id="2_m3dwn"]
+[ext_resource type="FontFile" uid="uid://giyv3v5cj60r" path="res://Assets/fonts/ShareTechMono-Regular.ttf" id="3_em17j"]
 [ext_resource type="AudioStream" uid="uid://cwb7a3d34dwug" path="res://Assets/sounds/button.mp3" id="3_gps84"]
 [ext_resource type="AudioStream" uid="uid://bdbhdbx7dvlnm" path="res://Assets/music/main_menu.mp3" id="3_nt0od"]
 [ext_resource type="AudioStream" uid="uid://b2d1di1u5qwmu" path="res://Assets/sounds/hover_sound.mp3" id="5_5qe8b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m3dwn"]
-bg_color = Color(0.43137255, 0.64705884, 0.6431373, 0.40392157)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nt0od"]
-bg_color = Color(0.39607844, 0.6392157, 0.7294118, 0.5568628)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gps84"]
-bg_color = Color(0.39607844, 0.6392157, 0.7294118, 0.72156864)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5qe8b"]
-bg_color = Color(0.39607844, 0.6392157, 0.7294118, 0.8980392)
+bg_color = Color(0.039215688, 0.07058824, 0.09019608, 0.6784314)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
+border_color = Color(0.0627451, 0.40392157, 0.4862745, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nt0od"]
+bg_color = Color(0.039215688, 0.07058824, 0.09019608, 0.6784314)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gps84"]
+bg_color = Color(0.039215688, 0.07058824, 0.09019608, 0.6784314)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5qe8b"]
+bg_color = Color(0.039215688, 0.07058824, 0.09019608, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
 
 [node name="MainMenu" type="Control" unique_id=1257121950]
 layout_mode = 3
@@ -71,23 +72,16 @@ grow_vertical = 2
 theme_override_constants/separation = 32
 vertical = true
 
-[node name="CreatorLabel" type="Label" parent="CreatorContainer" unique_id=1279822134]
+[node name="CreatorLabel" type="RichTextLabel" parent="CreatorContainer" unique_id=1937549429]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_constants/line_spacing = -10
-theme_override_font_sizes/font_size = 32
-text = "Entwickelt von Franz Hielscher
-
-Bachelorarbeit im Studiengang Medieninformatik
-
-Hochschule für Technik, Wirtschaft und Kultur Leipzig
-
-2026"
+theme_override_fonts/normal_font = ExtResource("3_em17j")
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 2
 justification_flags = 160
-max_lines_visible = 10
 
 [node name="BackButton" type="Button" parent="CreatorContainer" unique_id=1267023412]
 layout_mode = 2
@@ -99,6 +93,7 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_5qe8b")
 text = "Zurück"
 
 [node name="MainContainer" type="VBoxContainer" parent="." unique_id=2010991501]
+visible = false
 z_index = 1
 layout_mode = 1
 anchors_preset = -1
@@ -112,30 +107,54 @@ theme_override_constants/separation = 32
 
 [node name="StartButton" type="Button" parent="MainContainer" unique_id=1576582913]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.16078432, 0.7294118, 0.8666667, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_em17j")
 theme_override_font_sizes/font_size = 75
 theme_override_styles/normal = SubResource("StyleBoxFlat_m3dwn")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_nt0od")
 theme_override_styles/hover = SubResource("StyleBoxFlat_gps84")
 theme_override_styles/focus = SubResource("StyleBoxFlat_5qe8b")
-text = "Start"
+text = "START"
 
 [node name="CreatorButton" type="Button" parent="MainContainer" unique_id=338811034]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.16078432, 0.7294118, 0.8666667, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_em17j")
 theme_override_font_sizes/font_size = 75
 theme_override_styles/normal = SubResource("StyleBoxFlat_m3dwn")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_nt0od")
 theme_override_styles/hover = SubResource("StyleBoxFlat_gps84")
 theme_override_styles/focus = SubResource("StyleBoxFlat_5qe8b")
-text = "Ersteller"
+text = "ERSTELLER"
 
 [node name="QuitButton" type="Button" parent="MainContainer" unique_id=1200863082]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.16078432, 0.7294118, 0.8666667, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_em17j")
 theme_override_font_sizes/font_size = 75
 theme_override_styles/normal = SubResource("StyleBoxFlat_m3dwn")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_nt0od")
 theme_override_styles/hover = SubResource("StyleBoxFlat_gps84")
 theme_override_styles/focus = SubResource("StyleBoxFlat_5qe8b")
-text = "Beenden"
+text = "VERLASSEN"
 
 [node name="MenuAmbient" type="AudioStreamPlayer2D" parent="." unique_id=1865703941]
 stream = ExtResource("3_nt0od")
