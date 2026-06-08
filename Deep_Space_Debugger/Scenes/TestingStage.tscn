@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://cmbd6v3uc22nm" path="res://Scenes/Robot.tscn" id="14_2is65"]
 [ext_resource type="PackedScene" uid="uid://dp1q4rv2c5wsk" path="res://Scenes/Navigation/MiniMap.tscn" id="15_1j0ck"]
 [ext_resource type="PackedScene" uid="uid://co7lv2dynqrby" path="res://Scenes/Terminal_UI.tscn" id="16_dt5ju"]
+[ext_resource type="PackedScene" uid="uid://dsrn6baq7w7ue" path="res://Scenes/Navigation/MissionStatus.tscn" id="17_20s8d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3so38"]
 texture = ExtResource("2_4h07n")
@@ -409,12 +410,15 @@ z_index = -1
 position = Vector2(0, -80)
 open_offset = Vector2(28, 0)
 open_speed = 1.25
+completes_mission = "open_door"
+completes_subtask = "Knopf drücken"
 
 [node name="Door_02" parent="." unique_id=575627596 instance=ExtResource("7_nbxri")]
 z_index = -1
 position = Vector2(-128, -128)
 open_offset = Vector2(0, -28)
 open_speed = 1.25
+completes_mission = ""
 
 [node name="CarryObject_01" parent="." unique_id=1255186265 instance=ExtResource("9_agclk")]
 position = Vector2(92, -113)
@@ -453,8 +457,11 @@ position = Vector2(-7, 71)
 [node name="AmbientMusic" type="AudioStreamPlayer2D" parent="." unique_id=908707863]
 stream = ExtResource("12_rt650")
 autoplay = true
+parameters/looping = true
 
 [node name="Terminal" parent="." unique_id=95353647 instance=ExtResource("16_dt5ju")]
+
+[node name="MissionStatus" parent="." unique_id=1087925174 instance=ExtResource("17_20s8d")]
 
 [editable path="DoorButton"]
 [editable path="CarryObject_01"]

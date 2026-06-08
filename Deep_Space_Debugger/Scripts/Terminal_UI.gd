@@ -13,6 +13,8 @@ extends CanvasLayer
 var current_method := ""
 var complete_methods := {}
 
+@onready var mission_ui = $"../MissionStatus"
+
 @onready var title_label = $Control/OuterBackgroundPanel/InnerBackgroundPanel/TitleLabel
 @onready var info_label = $Control/OuterBackgroundPanel/InnerBackgroundPanel/ContentPanel/InformationPanel/Label
 @onready var data_label = $Control/OuterBackgroundPanel/InnerBackgroundPanel/ContentPanel/DataPanel/Label
@@ -109,6 +111,7 @@ func execute_start_robot():
 	if robot != null:
 		await get_tree().create_timer(2.0).timeout
 		robot.start_robot()
+		MissionManager.complete_subtask("start_robot", "start_button")
 		complete_methods["start_robot"] = true
 		method_button.disabled = true
 		method_button.text = "ROBOTER AKTIVIERT"
@@ -165,6 +168,8 @@ func open_terminal():
 	overview_button.grab_focus()
 	show_title()
 	show_overview()
+	
+	MissionManager.complete_subtask("start_robot", "open_terminal")
 	
 func close_terminal():
 	is_open = false

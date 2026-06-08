@@ -302,6 +302,8 @@ sources/0 = SubResource("TileSetAtlasSource_bgsld")
 [node name="Door" type="StaticBody2D" unique_id=1792774625]
 script = ExtResource("1_mw28t")
 open_offset = Vector2(32, 0)
+open_speed = null
+completes_mission = null
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=500659761]
 scale = Vector2(0.234375, 0.2421875)

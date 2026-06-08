@@ -8,6 +8,9 @@ var closed_position : Vector2
 var open_position : Vector2
 var is_open := false
 
+@export var completes_mission := ""
+@export var completes_subtask := ""
+
 func _ready():
 	closed_position = position
 	open_position = closed_position + open_offset
@@ -18,6 +21,9 @@ func open_door():
 	
 	is_open = true
 	door_sound.play()
+	
+	if completes_mission != "" and completes_subtask != "":
+		MissionManager.complete_subtask(completes_mission, completes_subtask)
 	
 	var tween = create_tween()
 	tween.tween_property(self, "position", open_position, open_speed)

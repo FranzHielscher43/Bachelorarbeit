@@ -5,7 +5,6 @@ extends CanvasLayer
 	$Items/VBoxContainer/Slot_02,
 	$Items/VBoxContainer/Slot_03,
 	$Items/VBoxContainer/Slot_04,
-	$Items/VBoxContainer/Slot_05
 ]
 
 @onready var player = $"../Player"
@@ -138,14 +137,14 @@ func _input(event):
 	
 	if inventory_open:
 		if event.is_action_pressed("ui_down"):
-			if items.size() > 0:
+			if slots.size() > 0:
 				selected_index = min(selected_index + 1, slots.size() - 1)
 				inventory_hover_sound.play()
 				update_selection()
 				show_selected_item_info()
 				get_viewport().set_input_as_handled()
 		if event.is_action_pressed("ui_up"):
-			if items.size() > 0:
+			if slots.size() > 0:
 				selected_index = max(selected_index - 1, 0)
 				inventory_hover_sound.play()
 				update_selection()
