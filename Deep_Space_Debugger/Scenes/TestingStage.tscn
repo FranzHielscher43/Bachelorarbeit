@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://b2dhab4xceahr" path="res://Assets/sprites/TileSet v1.0.png" id="2_4h07n"]
 [ext_resource type="PackedScene" uid="uid://bc4ewyh5s6id1" path="res://Scenes/Dialog_ext.tscn" id="3_2is65"]
 [ext_resource type="PackedScene" uid="uid://cr35pgufep6ms" path="res://Scenes/Navigation/InGameMenu.tscn" id="4_1j0ck"]
-[ext_resource type="PackedScene" uid="uid://mih0vxt5e552" path="res://Scenes/Trigger.tscn" id="5_dt5ju"]
 [ext_resource type="PackedScene" uid="uid://djv1jrgifgw3i" path="res://Scenes/Object/Terminal_Object.tscn" id="6_20s8d"]
 [ext_resource type="PackedScene" uid="uid://bim55ny43falj" path="res://Scenes/Door/Door.tscn" id="7_nbxri"]
 [ext_resource type="PackedScene" uid="uid://c2myae6ncylbb" path="res://Scenes/Door/Door_button.tscn" id="8_lyq5x"]
@@ -392,10 +391,6 @@ visible = false
 
 [node name="MiniMap" parent="." unique_id=1987393684 instance=ExtResource("15_1j0ck")]
 
-[node name="Trigger" parent="." unique_id=1958684169 instance=ExtResource("5_dt5ju")]
-position = Vector2(90, -42)
-dialog_text = "Die hier ist ein Hover-Textfeld!"
-
 [node name="InteractableObject" parent="." unique_id=1985324908 instance=ExtResource("6_20s8d")]
 position = Vector2(-3, 29)
 
@@ -420,24 +415,21 @@ open_offset = Vector2(0, -28)
 open_speed = 1.25
 completes_mission = ""
 
-[node name="CarryObject_01" parent="." unique_id=1255186265 instance=ExtResource("9_agclk")]
-position = Vector2(92, -113)
-object_name = "Energiekern Tür"
-class_name_display = "Energiekern"
-custom_attributes = "Power: 80
-Charged: True"
-
-[node name="CarryObject02" parent="." unique_id=1542433923 instance=ExtResource("9_agclk")]
+[node name="CarryObject_02" parent="." unique_id=1542433923 instance=ExtResource("9_agclk")]
 position = Vector2(-49, -121)
 object_name = "Schraubenschlüssel"
 class_name_display = "Werkzeug"
-custom_attributes = "Zustand: gut"
 item_id = "object_2"
 
 [node name="DropZone" parent="." unique_id=850932415 instance=ExtResource("10_aw7x7")]
 position = Vector2(-90, -121)
+required_attributes = {
+"charged": true,
+"power": "80"
+}
 door_path = NodePath("../Door_02")
-dialog_text = "Korrektes Objekt gefunden!"
+completes_mission = "open_lab"
+completes_subtask = "Korrektes Objekt platzieren"
 
 [node name="CameraZone_02" parent="." unique_id=1771122896 instance=ExtResource("11_0uiiy")]
 position = Vector2(-161, -124)
@@ -463,6 +455,14 @@ parameters/looping = true
 
 [node name="MissionStatus" parent="." unique_id=1087925174 instance=ExtResource("17_20s8d")]
 
+[node name="CarryObject" parent="." unique_id=1255186265 instance=ExtResource("9_agclk")]
+position = Vector2(91, -119)
+object_name = "Kern 1"
+class_name_display = "Energiekern"
+attributes = {
+"charged": true,
+"power": "80"
+}
+
 [editable path="DoorButton"]
-[editable path="CarryObject_01"]
 [editable path="CameraZone_01"]

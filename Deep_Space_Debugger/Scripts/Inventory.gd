@@ -112,9 +112,13 @@ func show_selected_item_info():
 	
 	var info_text = "Objekt: " + item["name"] + "\n"
 	info_text += "Klasse: " + item["class"] + "\n"
-	if item["attributes"] != "":
-		info_text += item["attributes"]
+	info_text += "Attribute: " + "\n"
+	var lines := []
 	
+	for key in item["attributes"].keys():
+		lines.append("• " + key + " = " + str(item["attributes"][key]))
+	
+	info_text += "\n".join(lines)
 	dialog_box.show_dialog(info_text)
 	
 func _input(event):

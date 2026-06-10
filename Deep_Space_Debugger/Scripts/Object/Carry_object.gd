@@ -3,7 +3,11 @@ extends Area2D
 # Dialogfeld - Inhalt
 @export var object_name := ""
 @export var class_name_display := ""
-@export_multiline var custom_attributes := ""
+@export var attributes := {
+	"Power": 80,
+	"Charged": true
+}
+
 @onready var dialog_box = $"../Dialogbox" 
 
 @export var item_id := "object_1"
@@ -72,7 +76,7 @@ func get_inventory_data():
 		"id": item_id,
 		"name": object_name,
 		"class": class_name_display,
-		"attributes": custom_attributes,
+		"attributes": attributes,
 		"texture": sprite.texture,
 		"object": self
 	}
@@ -81,9 +85,13 @@ func show_attributes():
 	var info_text = "Objekt: " + object_name + "\n"
 	info_text += "Klasse: " + class_name_display + "\n"
 	
-	if custom_attributes != "":
-		info_text += custom_attributes
+	var lines := []
 	
+	for key in attributes.keys():
+		lines.append("• " + key + " = " + str(attributes[key]))
+	
+	info_text += "Attribute:\n"
+	info_text += "\n".join(lines)
 	dialog_box.show_dialog(info_text)
 
 func set_placed():

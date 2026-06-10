@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dsrn6baq7w7ue"]
 
 [ext_resource type="FontFile" uid="uid://giyv3v5cj60r" path="res://Assets/fonts/ShareTechMono-Regular.ttf" id="1_45n5x"]
-[ext_resource type="Script" uid="uid://daoa3y8bpuewa" path="res://Scripts/Navigation/Mission_status.gd" id="1_c2y7r"]
+[ext_resource type="Script" uid="uid://daoa3y8bpuewa" path="res://Scripts/Navigation/Mission_Status.gd" id="1_c2y7r"]
 [ext_resource type="AudioStream" uid="uid://b7lognojnkypa" path="res://Assets/sounds/typing.mp3" id="1_dexkd"]
 [ext_resource type="AudioStream" uid="uid://e0uxj41ylve2" path="res://Assets/sounds/Missions/success.mp3" id="4_njdef"]
 [ext_resource type="AudioStream" uid="uid://chph371hyudtr" path="res://Assets/sounds/Missions/check.mp3" id="5_51mi5"]
@@ -27,15 +27,15 @@ script = ExtResource("1_c2y7r")
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -260.0
-offset_bottom = 160.0
+offset_left = -350.0
+offset_bottom = 200.0
 grow_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_c2y7r")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1013332861]
 layout_mode = 0
-offset_right = 260.0
-offset_bottom = 168.0
+offset_right = 350.0
+offset_bottom = 205.0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -43,7 +43,7 @@ theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=946395159]
 layout_mode = 2
-theme_override_constants/separation = 14
+theme_override_constants/separation = 18
 
 [node name="TitleLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1651176465]
 custom_minimum_size = Vector2(0, 20)
@@ -56,12 +56,11 @@ text = "Mission"
 autowrap_mode = 3
 uppercase = true
 
-[node name="MissionLabel" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer" unique_id=977719450]
-custom_minimum_size = Vector2(0, 75)
+[node name="MissionLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1843416029]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
-theme_override_colors/default_color = Color(0.16078432, 0.7294118, 0.8666667, 1)
-bbcode_enabled = true
-vertical_alignment = 1
+theme_override_colors/font_color = Color(0.16078432, 0.7294118, 0.8666667, 1)
+theme_override_fonts/font = ExtResource("1_45n5x")
 
 [node name="TypeSound" type="AudioStreamPlayer2D" parent="Panel/MarginContainer/VBoxContainer" unique_id=1005343582]
 position = Vector2(0, 18)

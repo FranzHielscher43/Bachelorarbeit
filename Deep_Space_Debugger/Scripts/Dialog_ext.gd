@@ -1,8 +1,9 @@
 extends CanvasLayer
 
 @onready var panel = $Panel
-@onready var label = $Panel/MarginContainer/Label
-@onready var type_sound = $Panel/MarginContainer/TypeSound
+@onready var vbox = $Panel/MarginContainer/VBoxContainer
+@onready var label = $Panel/MarginContainer/VBoxContainer/Label
+@onready var type_sound = $Panel/MarginContainer/VBoxContainer/TypeSound
 
 var full_text := ""
 var current_index := 0
@@ -15,12 +16,19 @@ func _ready():
 func show_dialog(text: String, use_typing := true):
 	full_text = text
 	current_index = 0 
+	
+	label.text = full_text
+	update_dialog_size()
 	label.text = ""
+	
 	panel.visible = true
 	is_typing = true
 	
 	if use_typing:
 		type_text()
+	else:
+		label.text = full_text
+		update_dialog_size()
 		
 	panel.modulate = Color.WHITE
 
@@ -32,16 +40,20 @@ func hide_dialog():
 	
 func type_text():
 	while is_typing and current_index < full_text.length():
-		label.text += full_text[current_index]
-		if full_text[current_index] != " " and !type_sound.playing:
+		var character = full_text[current_index]
+		label.text += character
+		if character != " " and !type_sound.playing:
 			type_sound.play()
 		current_index += 1
 		await get_tree().create_timer(typing_speed).timeout
-		update_dialog_size()
+	update_dialog_size()
 	
 func update_dialog_size():
 	var min_height = 60
 	var padding = 40
 	
-	var needed_height = label.get_minimum_size().y + padding
-	panel.size.y = max(min_height, needed_height)
+	var needed_height = vbox.get_combined_minimum_size().y + padding
+	var new_height = max(min_height, needed_height)
+	
+	panel.size.y = new_height
+	panel.custom_minimum_size.y = new_height

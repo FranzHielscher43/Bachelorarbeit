@@ -111,7 +111,7 @@ func execute_start_robot():
 	if robot != null:
 		await get_tree().create_timer(2.0).timeout
 		robot.start_robot()
-		MissionManager.complete_subtask("start_robot", "start_button")
+		MissionManager.complete_subtask("start_robot", "Startknopf betätigen")
 		complete_methods["start_robot"] = true
 		method_button.disabled = true
 		method_button.text = "ROBOTER AKTIVIERT"
@@ -169,7 +169,7 @@ func open_terminal():
 	show_title()
 	show_overview()
 	
-	MissionManager.complete_subtask("start_robot", "open_terminal")
+	MissionManager.complete_subtask("start_robot", "Terminal öffnen")
 	
 func close_terminal():
 	is_open = false

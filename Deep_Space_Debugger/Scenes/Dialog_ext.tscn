@@ -4,30 +4,61 @@
 [ext_resource type="FontFile" uid="uid://giyv3v5cj60r" path="res://Assets/fonts/ShareTechMono-Regular.ttf" id="2_oblh3"]
 [ext_resource type="AudioStream" uid="uid://b7lognojnkypa" path="res://Assets/sounds/typing.mp3" id="2_ug3e0"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oblh3"]
+bg_color = Color(0.043137256, 0.07058824, 0.08235294, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.06666667, 0.45490196, 0.54509807, 0.87058824)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4kkp1"]
+content_margin_bottom = 5.0
+bg_color = Color(0.039215688, 0.07058824, 0.09019608, 0.6784314)
+border_width_bottom = 1
+border_color = Color(0.06666667, 0.45490196, 0.54509807, 0.87058824)
+
 [node name="Dialogbox" type="CanvasLayer" unique_id=1529403298]
 script = ExtResource("1_5ntqh")
 
 [node name="Panel" type="Panel" parent="." unique_id=842510572]
-custom_minimum_size = Vector2(500, 60)
+custom_minimum_size = Vector2(300, 0)
 offset_right = 400.0
-offset_bottom = 300.0
+offset_bottom = 250.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_oblh3")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=714352712]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=2078436069]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Label" type="Label" parent="Panel/MarginContainer" unique_id=857057879]
-custom_minimum_size = Vector2(460, 260)
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=1739840474]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_oblh3")
-theme_override_font_sizes/font_size = 32
-autowrap_mode = 2
+theme_override_constants/separation = 18
 
-[node name="TypeSound" type="AudioStreamPlayer2D" parent="Panel/MarginContainer" unique_id=1892775638]
+[node name="TypeSound" type="AudioStreamPlayer2D" parent="Panel/MarginContainer/VBoxContainer" unique_id=1892775638]
 stream = ExtResource("2_ug3e0")
 pitch_scale = 1.25
+
+[node name="TitleLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=462726345]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.16078432, 0.7294118, 0.8666667, 1)
+theme_override_fonts/font = ExtResource("2_oblh3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_4kkp1")
+text = "Objektinformation"
+uppercase = true
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1017025946]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.16078432, 0.7294118, 0.8666667, 1)
+theme_override_fonts/font = ExtResource("2_oblh3")
