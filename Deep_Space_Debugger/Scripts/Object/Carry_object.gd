@@ -1,11 +1,13 @@
 extends Area2D
 
 # Dialogfeld - Inhalt
+@export var core_texture: AtlasTexture
 @export var object_name := ""
 @export var class_name_display := ""
 @export var attributes := {
-	"Power": 80,
-	"Charged": true
+	"capacity": "0",
+	"stability": "0",
+	"state": "stable"
 }
 
 @onready var dialog_box = $"../Dialogbox" 
@@ -25,6 +27,9 @@ var current_player = null
 var is_placed := false
 
 func _ready():
+	if core_texture != null:
+		sprite.texture = core_texture
+		
 	original_scale = sprite.scale
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
@@ -53,6 +58,21 @@ func pick_up():
 	set_process(false)
 	$CollisionShape2D.disabled = true
 
+func set_carried_by_bot(bot):
+	visible = true
+	set_process(false)
+	$CollisionShape2D.disabled = true
+	player_nearby = false
+	current_player = null
+	dialog_box.hide_dialog()
+	
+func set_place_by_bot(pos: Vector2):
+	global_position = pos
+	visible = true
+	$CollisionShape2D.disabled = false
+	set_process(true)
+	set_placed()
+
 func _on_body_entered(body):
 	if is_placed:
 		return
@@ -61,6 +81,7 @@ func _on_body_entered(body):
 		player_nearby = true
 		current_player = body
 		show_attributes()
+		MissionManager.complete_subtask("energy_core", "Examine energy cores")
 
 func _on_body_exited(body):
 	if body.name == "Player":
@@ -82,15 +103,15 @@ func get_inventory_data():
 	}
 	
 func show_attributes():
-	var info_text = "Objekt: " + object_name + "\n"
-	info_text += "Klasse: " + class_name_display + "\n"
+	var info_text = "Object: " + object_name + "\n"
+	info_text += "Class: " + class_name_display + "\n"
 	
 	var lines := []
 	
 	for key in attributes.keys():
 		lines.append("• " + key + " = " + str(attributes[key]))
 	
-	info_text += "Attribute:\n"
+	info_text += "Attributes:\n"
 	info_text += "\n".join(lines)
 	dialog_box.show_dialog(info_text)
 

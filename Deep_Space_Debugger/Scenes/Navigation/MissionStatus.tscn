@@ -27,14 +27,14 @@ script = ExtResource("1_c2y7r")
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -350.0
+offset_left = -400.0
 offset_bottom = 200.0
 grow_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_c2y7r")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1013332861]
 layout_mode = 0
-offset_right = 350.0
+offset_right = 400.0
 offset_bottom = 205.0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
@@ -61,6 +61,7 @@ custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.16078432, 0.7294118, 0.8666667, 1)
 theme_override_fonts/font = ExtResource("1_45n5x")
+autowrap_mode = 3
 
 [node name="TypeSound" type="AudioStreamPlayer2D" parent="Panel/MarginContainer/VBoxContainer" unique_id=1005343582]
 position = Vector2(0, 18)

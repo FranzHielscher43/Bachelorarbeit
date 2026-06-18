@@ -44,9 +44,15 @@ Inventory:
 Sound: https://pixabay.com/sound-effects/film-special-effects-take-item-sound-effect-163073/
 	   https://pixabay.com/sound-effects/film-special-effects-pickupplasticobject-91036/
 	
+Powersystem / Generator:
+Sound: https://pixabay.com/sound-effects/film-special-effects-spotlight-turning-on-388828/
+
 Mission Status:
 Sound: https://pixabay.com/sound-effects/film-special-effects-ui-success-bloom-526566/
 	   https://pixabay.com/sound-effects/film-special-effects-ui-sound-off-270300/	
+
+Terminal:
+Sound: https://pixabay.com/sound-effects/film-special-effects-success-48018/
 
 Robot:
 Sprite: https://ashenremains.itch.io/leftover-art

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cbf7jomjvwg2v"]
+
+[ext_resource type="Script" uid="uid://dlsttcbcppuv8" path="res://Scripts/Navigation/Fade_In.gd" id="1_l8vyr"]
+
+[node name="FadeIn" type="CanvasLayer" unique_id=729751193]
+script = ExtResource("1_l8vyr")
+
+[node name="FadeRect" type="ColorRect" parent="." unique_id=1370884827]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

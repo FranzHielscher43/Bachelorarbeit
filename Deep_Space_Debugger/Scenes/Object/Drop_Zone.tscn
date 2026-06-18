@@ -1,14 +1,26 @@
 [gd_scene format=3 uid="uid://ddvdrh3dyvjya"]
 
 [ext_resource type="Script" uid="uid://dfe02chpxurj7" path="res://Scripts/Object/Drop_zone.gd" id="1_p5dp6"]
+[ext_resource type="Texture2D" uid="uid://cmnqniapw2n6b" path="res://Assets/sprites/tilesets/SciFi_Warehouse_C2.png" id="2_hk6mr"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_iwnui"]
-radius = 15.033297
+[sub_resource type="AtlasTexture" id="AtlasTexture_cddx0"]
+atlas = ExtResource("2_hk6mr")
+region = Rect2(96, 0, 144, 143)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7m61y"]
 
 [node name="DropZone" type="Area2D" unique_id=850932415]
 script = ExtResource("1_p5dp6")
 
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2068630240]
+position = Vector2(0, 0.2)
+scale = Vector2(0.19, 0.191)
+texture = SubResource("AtlasTexture_cddx0")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=173739762]
-shape = SubResource("CircleShape2D_iwnui")
+shape = SubResource("RectangleShape2D_7m61y")
 
 [node name="SnapPoint" type="Marker2D" parent="." unique_id=2041338773]
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=395198716]
+color = Color(0.1764706, 0.42745098, 0.46666667, 0.5764706)

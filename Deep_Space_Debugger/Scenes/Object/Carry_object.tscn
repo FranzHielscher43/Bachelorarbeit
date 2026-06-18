@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://cn6pjtgbasdvp" path="res://Assets/sounds/dropdown.mp3" id="4_jur7j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jla5h"]
-radius = 38.052597
+radius = 34.999996
 
 [node name="CarryObject" type="Area2D" unique_id=1255186265]
 script = ExtResource("1_jla5h")

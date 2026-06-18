@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://b7lrnij8eqlve"]
+
+[ext_resource type="Script" uid="uid://dar2buuu35uk3" path="res://Scripts/Signal_Switch.gd" id="1_mp3uu"]
+[ext_resource type="Texture2D" uid="uid://cxjjjwarqvol0" path="res://Assets/sprites/tilesets/SciFi_Warehouse_C.png" id="2_1hm6d"]
+[ext_resource type="AudioStream" uid="uid://618l757g3dtj" path="res://Assets/sounds/send.mp3" id="3_1hm6d"]
+[ext_resource type="Texture2D" uid="uid://diq5hkg3o0bbw" path="res://Assets/sprites/tilesets/pixil-frame-0-2.png" id="3_mra3g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mra3g"]
+atlas = ExtResource("2_1hm6d")
+region = Rect2(624, 491, 48, 85)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvjdv"]
+atlas = ExtResource("3_mra3g")
+region = Rect2(614, 481, 48, 86)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uvmru"]
+size = Vector2(16, 26)
+
+[node name="SignalSwitch" type="Area2D" unique_id=1171400425]
+script = ExtResource("1_mp3uu")
+connection_line_path = NodePath("Line2D")
+send_sound_path = NodePath("SendSound")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=171617979]
+points = PackedVector2Array(0, 0)
+width = 2.0
+
+[node name="MainSprite2D" type="Sprite2D" parent="." unique_id=1446608679]
+position = Vector2(1.9073486e-06, -4.7683716e-07)
+scale = Vector2(0.3, 0.3)
+texture = SubResource("AtlasTexture_mra3g")
+
+[node name="ActivatedSprite2D" type="Sprite2D" parent="." unique_id=1690004201]
+visible = false
+position = Vector2(1.9073486e-06, 0.5)
+scale = Vector2(0.3, 0.3)
+texture = SubResource("AtlasTexture_vvjdv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1083992906]
+shape = SubResource("RectangleShape2D_uvmru")
+
+[node name="SendSound" type="AudioStreamPlayer2D" parent="." unique_id=233214425]
+stream = ExtResource("3_1hm6d")
+volume_db = -10.0

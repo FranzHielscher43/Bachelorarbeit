@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://big7vbqqn3w5i"]
+
+[ext_resource type="PackedScene" uid="uid://cbf7jomjvwg2v" path="res://Scenes/Navigation/Fade_In.tscn" id="1_l5n5u"]
+[ext_resource type="PackedScene" uid="uid://dp1q4rv2c5wsk" path="res://Scenes/Navigation/MiniMap.tscn" id="2_y0501"]
+[ext_resource type="PackedScene" uid="uid://cr35pgufep6ms" path="res://Scenes/Navigation/InGameMenu.tscn" id="3_or4rn"]
+[ext_resource type="PackedScene" uid="uid://dsrn6baq7w7ue" path="res://Scenes/Navigation/MissionStatus.tscn" id="4_ihon3"]
+[ext_resource type="PackedScene" uid="uid://bc4ewyh5s6id1" path="res://Scenes/Dialog_ext.tscn" id="5_ihon3"]
+[ext_resource type="PackedScene" uid="uid://btqaw3xl5qqk5" path="res://Scenes/Navigation/Level_Transition.tscn" id="5_ue525"]
+[ext_resource type="PackedScene" uid="uid://b3e76oulrbay2" path="res://Scenes/Inventory.tscn" id="6_x5dfy"]
+[ext_resource type="PackedScene" uid="uid://bvhfgo4ebpewe" path="res://Scenes/Player.tscn" id="7_14bhg"]
+[ext_resource type="PackedScene" uid="uid://co7lv2dynqrby" path="res://Scenes/Terminal_UI.tscn" id="8_ue525"]
+[ext_resource type="AudioStream" uid="uid://c5b4ffq3vchw0" path="res://Assets/sounds/Ambient/ambient_level_02.mp3" id="9_dymbd"]
+[ext_resource type="PackedScene" uid="uid://ddvdrh3dyvjya" path="res://Scenes/Object/Drop_Zone.tscn" id="11_x5dfy"]
+[ext_resource type="PackedScene" uid="uid://ba25c6odbjc7" path="res://Scenes/Object/Carry_object.tscn" id="12_14bhg"]
+[ext_resource type="Texture2D" uid="uid://d4cubri7pq6m0" path="res://Assets/sprites/tilesets/SciFi_Warehouse_E.png" id="13_dymbd"]
+[ext_resource type="PackedScene" uid="uid://djv1jrgifgw3i" path="res://Scenes/Object/Terminal_Object.tscn" id="13_ue8kr"]
+[ext_resource type="PackedScene" uid="uid://dm3ygw7wv70vu" path="res://Scenes/Door/SecurityDoor.tscn" id="14_nmell"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f54q7"]
+atlas = ExtResource("13_dymbd")
+region = Rect2(54, 53, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_esdtc"]
+atlas = ExtResource("13_dymbd")
+region = Rect2(54, 53, 33, 32)
+
+[node name="Level_02" type="Node2D" unique_id=1458931900]
+
+[node name="FadeIn" parent="." unique_id=729751193 instance=ExtResource("1_l5n5u")]
+visible = false
+
+[node name="Player" parent="." unique_id=1729184082 instance=ExtResource("7_14bhg")]
+
+[node name="Inventory" parent="." unique_id=1566470225 instance=ExtResource("6_x5dfy")]
+
+[node name="MiniMap" parent="." unique_id=212183129 instance=ExtResource("2_y0501")]
+
+[node name="Dialogbox" parent="." unique_id=1529403298 instance=ExtResource("5_ihon3")]
+
+[node name="InGameMenu" parent="." unique_id=2139800408 instance=ExtResource("3_or4rn")]
+
+[node name="MissionStatus" parent="." unique_id=1087925174 instance=ExtResource("4_ihon3")]
+start_mission_id = "security_access"
+
+[node name="Terminal" parent="." unique_id=95353647 instance=ExtResource("8_ue525")]
+terminal_level = 2
+security_door_path = NodePath("../SecurityDoor/Door")
+
+[node name="AmbientMusic" type="AudioStreamPlayer2D" parent="." unique_id=762077586]
+stream = ExtResource("9_dymbd")
+volume_db = -15.0
+autoplay = true
+parameters/looping = true
+
+[node name="LevelTransition" parent="." unique_id=1149047680 instance=ExtResource("5_ue525")]
+position = Vector2(-123, 61)
+next_level_path = "uid://d201kln3iav1p"
+
+[node name="Security_Console_Dropzone" parent="." unique_id=850932415 instance=ExtResource("11_x5dfy")]
+position = Vector2(-111, -9)
+required_class = "Access Module"
+required_attributes = {
+"active": "true",
+"clearance": "3"
+}
+success_target_path = NodePath("../Terminal")
+success_method = "insert_access_module"
+dialog_text = "Correct object inserted."
+completes_mission = "security_access"
+completes_subtask = "Insert appropriate access module"
+
+[node name="AccessModule_A" parent="." unique_id=1255186265 instance=ExtResource("12_14bhg")]
+position = Vector2(64, -57)
+scale = Vector2(2, 2)
+core_texture = SubResource("AtlasTexture_f54q7")
+object_name = "Access Module 01"
+class_name_display = "Access Module"
+attributes = {
+"active": "true",
+"clearance": "3"
+}
+item_id = "AccessModule_A"
+
+[node name="AccessModule_B" parent="." unique_id=1177798623 instance=ExtResource("12_14bhg")]
+position = Vector2(26, -59)
+scale = Vector2(2, 2)
+core_texture = SubResource("AtlasTexture_esdtc")
+object_name = "Access Module 02"
+class_name_display = "Access Module"
+attributes = {
+"active": "false",
+"clearance": "3"
+}
+item_id = "AccessModule_B"
+
+[node name="TerminalObject" parent="." unique_id=1985324908 instance=ExtResource("13_ue8kr")]
+position = Vector2(-112, -49)
+
+[node name="SecurityDoor" parent="." unique_id=1792774625 instance=ExtResource("14_nmell")]
+position = Vector2(-42, -66)
+
+[editable path="SecurityDoor"]

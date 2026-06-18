@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://yf5bvnb3ud5p"]
+
+[ext_resource type="Script" uid="uid://cwapwq0rtytae" path="res://Scripts/ai_Core.gd" id="1_otd2x"]
+[ext_resource type="Texture2D" uid="uid://cmnqniapw2n6b" path="res://Assets/sprites/tilesets/SciFi_Warehouse_C2.png" id="2_otd2x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rctn1"]
+atlas = ExtResource("2_otd2x")
+region = Rect2(0, 481, 95, 131)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_otd2x"]
+size = Vector2(16, 21)
+
+[node name="aiCore" type="Area2D" unique_id=780392045]
+script = ExtResource("1_otd2x")
+
+[node name="TargetPoint" type="Marker2D" parent="." unique_id=995778687]
+position = Vector2(0, 15)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=917331701]
+position = Vector2(1.9073486e-06, 0.5)
+scale = Vector2(0.15625, 0.14843751)
+texture = SubResource("AtlasTexture_rctn1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=78629723]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_otd2x")

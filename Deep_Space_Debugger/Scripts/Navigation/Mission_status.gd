@@ -8,10 +8,19 @@ extends CanvasLayer
 @onready var panel = $Panel
 @onready var vbox = $Panel/MarginContainer/VBoxContainer
 
+@export var start_mission_id := ""
+
 var mission_steps = [
-	{"id": "start_robot", "text": "Roboter starten", "done": false, "subtasks": {"Terminal öffnen": false, "Startknopf betätigen": false}},
-	{"id": "open_door", "text": "Tür öffnen", "done": false, "subtasks": {"Knopf drücken": false}},
-	{"id": "open_lab", "text": "Zugang zum Labor", "done":false, "subtasks": {"Korrektes Objekt platzieren": false}}
+	{"id": "tutorial", "text": "Tutorial", "done": false, "subtasks": {"Press any movement key": false, "Open menu with ESC": false, "Open the inventory with I": false, "Navigate with Up and Down": false, "Open the minimap with M": false, "Open terminal with ENTER": false, "Pick up object": false, "Drop object": false}},
+	{"id": "level_01", "text": "Proceed to the power supply", "done": false, "subtasks": {"Go to the power supply": false}},
+	{"id": "energy_core", "text": "Restore power supply", "done": false, "subtasks": {"Open terminal": false, "Examine energy cores": false, "Insert matching energy core": false}},
+	{"id": "level_02", "text": "Go to the security center", "done": false, "subtasks": {"Use the unlocked passageway": false}},
+	{"id": "security_access", "text": "Obtain security access", "done": false, "subtasks": {"Check security door": false, "Insert appropriate access module": false, "Open security terminal": false, "Request clearance": false}},
+	{"id": "level_03", "text": "Proceed to the communications center", "done": false, "subtasks": {"Open security door": false}},
+	{"id": "robotics", "text": "Repair the communication relay", "done": false, "subtasks": {"Open terminal": false, "Select & send repair robot": false, "Select & send transport robot": false, "Select & send security robot": false}},
+	{"id": "level_04", "text": "Go to the next area", "done": false, "subtasks": {}},
+	{"id": "communication", "text": "Activate communication system", "done": false, "subtasks": {"Send navigation signal": false, "Send life support signal": false, "Send security channel signal": false}},
+	{"id": "ai_core", "text": "Reboot AI core system", "done": false, "subtasks": {"Open terminal": false, "Activate core method": false}}
 ]
 
 var current_mission_index := 0
@@ -20,6 +29,11 @@ var is_typing := false
 
 func _ready():
 	MissionManager.mission_ui = self
+	for i in range(mission_steps.size()):
+		if mission_steps[i]["id"] == start_mission_id:
+			current_mission_index = i
+			break
+			
 	panel.size.y = 60
 	await show_full_mission_typed()
 
@@ -37,7 +51,7 @@ func complete_mission(id: String):
 	success_sound.play()
 	await get_tree().create_timer(2.0).timeout
 	
-	type_message("Empfange nächste Mission...")
+	await type_message("Receive next mission...")
 	await get_tree().create_timer(3.0).timeout
 	
 	current_mission_index += 1
@@ -50,8 +64,6 @@ func complete_mission(id: String):
 		else:
 			await show_full_mission_typed()
 	else:
-		success_sound.play()
-		mission_label.text = "Alle Missionen erfolgreich abgeschlossen!"
 		await update_mission_size()
 
 func complete_subtask(mission_id: String, subtask_id: String):
@@ -63,7 +75,7 @@ func complete_subtask(mission_id: String, subtask_id: String):
 				if i != current_mission_index:
 					return
 				check_sound.play()
-				update_mission_display()
+				await show_next_subtask_typed()
 				var all_done := true
 				for value in mission["subtasks"].values():
 					if value == false:
@@ -78,10 +90,14 @@ func update_mission_display():
 	var mission = mission_steps[current_mission_index]
 	var text := ""
 	text += "□ " + mission["text"] + "\n"
+	var show_next := true
 	for subtask_id in mission["subtasks"].keys():
 		var done = mission["subtasks"][subtask_id]
-		var symbol = "☑" if done else "□ "
-		text += "     " + symbol + " " + subtask_id + "\n"
+		if done:
+			text += "   ☑ " + subtask_id + "\n"
+		elif show_next:
+			text += "   □ " + subtask_id + "\n"
+			show_next = false
 	mission_label.text = text
 	await update_mission_size()
 
@@ -103,7 +119,7 @@ func show_current_mission(use_typing: bool):
 		await update_mission_size()
 		mission_label.text = "□ "
 		if use_typing:
-			type_text(mission["text"])
+			await type_text(mission["text"])
 		else:
 			mission_label.text += mission["text"]
 			await update_mission_size()
@@ -151,20 +167,48 @@ func type_message(text: String):
 	await update_mission_size()
 	
 func show_full_mission_typed():
-	if current_mission_index >= mission_steps.size():
 
+	if current_mission_index >= mission_steps.size():
 		return
 	var mission = mission_steps[current_mission_index]
 	var full_text := ""
-	full_text += "□ " + mission["text"] + "\n"
+	full_text += "□  " + mission["text"] + "\n"
 	for subtask_id in mission["subtasks"].keys():
-		var done = mission["subtasks"][subtask_id]
-		var symbol = "☑" if done else "□ "
-		full_text += "     " + symbol + " " + subtask_id + "\n"
+		if !mission["subtasks"][subtask_id]:
+			full_text += "   □  " + subtask_id + "\n"
+			break
 	mission_label.text = full_text
 	await update_mission_size()
 	mission_label.text = ""
 	await type_text(full_text)
+	
+func show_next_subtask_typed():
+	var mission = mission_steps[current_mission_index]
+
+	var completed_text := ""
+	var next_subtask := ""
+
+	for subtask_id in mission["subtasks"].keys():
+		if mission["subtasks"][subtask_id]:
+			completed_text += "   ☑ " + subtask_id + "\n"
+		else:
+			next_subtask = subtask_id
+			break
+
+	var full_preview = "□  " + mission["text"] + "\n" + completed_text
+
+	if next_subtask != "":
+		full_preview += "   □ " + next_subtask + "\n"
+
+	mission_label.modulate.a = 0.0
+	mission_label.text = full_preview
+	await update_mission_size()
+	
+	mission_label.text = "□ " + mission["text"] + "\n" + completed_text
+	mission_label.modulate.a = 1.0
+
+	if next_subtask != "":
+		await type_text("   □  " + next_subtask + "\n")
 	
 func update_mission_size():
 	await get_tree().process_frame

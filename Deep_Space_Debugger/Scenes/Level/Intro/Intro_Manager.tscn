@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://biuqcgdep3aua"]
+
+[ext_resource type="Script" uid="uid://bnraivx0n1h6g" path="res://Scripts/Level/Intro/Intro_Manager.gd" id="1_ltn3e"]
+[ext_resource type="AudioStream" uid="uid://63r50odd3auc" path="res://Assets/sounds/boot.mp3" id="2_kkr4n"]
+[ext_resource type="AudioStream" uid="uid://2ucle7glauix" path="res://Assets/sounds/wakingup.mp3" id="3_5js5n"]
+
+[node name="IntroManager" type="Node2D" unique_id=1088261265]
+script = ExtResource("1_ltn3e")
+
+[node name="BootSound" type="AudioStreamPlayer2D" parent="." unique_id=1020604192]
+stream = ExtResource("2_kkr4n")
+volume_db = -5.0
+pitch_scale = 0.7
+autoplay = true
+
+[node name="WakingUpSound" type="AudioStreamPlayer2D" parent="." unique_id=1375114648]
+stream = ExtResource("3_5js5n")

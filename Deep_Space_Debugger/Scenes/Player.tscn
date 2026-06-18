@@ -107,7 +107,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1e7my"]
-radius = 9.0
+radius = 11.0
 height = 28.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1729184082 groups=["Player"]]
@@ -115,10 +115,10 @@ z_index = 1
 script = ExtResource("1_kyqiw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1730305811]
-scale = Vector2(0.75, 0.75)
+scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_o3h8g")
-animation = &"walk_side"
-frame_progress = 0.69806397
+animation = &"walk_down"
+autoplay = "walk_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128645113]
 shape = SubResource("CapsuleShape2D_1e7my")

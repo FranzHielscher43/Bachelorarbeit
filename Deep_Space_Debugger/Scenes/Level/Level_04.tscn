@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://bkqh5y6xecmiu"]
+
+[ext_resource type="PackedScene" uid="uid://cbf7jomjvwg2v" path="res://Scenes/Navigation/Fade_In.tscn" id="1_r4pjw"]
+[ext_resource type="PackedScene" uid="uid://bvhfgo4ebpewe" path="res://Scenes/Player.tscn" id="2_n3red"]
+[ext_resource type="PackedScene" uid="uid://cr35pgufep6ms" path="res://Scenes/Navigation/InGameMenu.tscn" id="3_kk7g7"]
+[ext_resource type="PackedScene" uid="uid://b3e76oulrbay2" path="res://Scenes/Inventory.tscn" id="3_us51m"]
+[ext_resource type="PackedScene" uid="uid://dp1q4rv2c5wsk" path="res://Scenes/Navigation/MiniMap.tscn" id="4_5p1ka"]
+[ext_resource type="PackedScene" uid="uid://bc4ewyh5s6id1" path="res://Scenes/Dialog_ext.tscn" id="5_2gf66"]
+[ext_resource type="PackedScene" uid="uid://dsrn6baq7w7ue" path="res://Scenes/Navigation/MissionStatus.tscn" id="7_l7kmt"]
+[ext_resource type="PackedScene" uid="uid://co7lv2dynqrby" path="res://Scenes/Terminal_UI.tscn" id="8_ld7h8"]
+[ext_resource type="AudioStream" uid="uid://7013hmqwqqyx" path="res://Assets/sounds/Ambient/ambient_level_04.mp3" id="8_oi71q"]
+[ext_resource type="PackedScene" uid="uid://btqaw3xl5qqk5" path="res://Scenes/Navigation/Level_Transition.tscn" id="10_osq70"]
+[ext_resource type="PackedScene" uid="uid://bim55ny43falj" path="res://Scenes/Door/Door.tscn" id="10_us51m"]
+[ext_resource type="PackedScene" uid="uid://dl7uuj3grqc84" path="res://Scenes/Communication_Server.tscn" id="11_2gf66"]
+[ext_resource type="PackedScene" uid="uid://b7lrnij8eqlve" path="res://Scenes/Signal_Switch.tscn" id="12_l7kmt"]
+[ext_resource type="PackedScene" uid="uid://yf5bvnb3ud5p" path="res://Scenes/AI_Core.tscn" id="13_ld7h8"]
+[ext_resource type="PackedScene" uid="uid://djv1jrgifgw3i" path="res://Scenes/Object/Terminal_Object.tscn" id="15_kix61"]
+[ext_resource type="PackedScene" uid="uid://cq6qp0sv5loj6" path="res://Scenes/Camera_Zone.tscn" id="16_5yuid"]
+[ext_resource type="PackedScene" uid="uid://sd6k6t7bsm03" path="res://Scenes/Robot/RepairBot.tscn" id="17_oi71q"]
+[ext_resource type="PackedScene" uid="uid://c08vah3c1ee4" path="res://Scenes/Robot/SecurityBot.tscn" id="18_eafag"]
+[ext_resource type="PackedScene" uid="uid://byv8yt5ft7gkl" path="res://Scenes/Robot/TransportBot.tscn" id="19_eg83b"]
+
+[node name="Level_04" type="Node2D" unique_id=1238807758]
+
+[node name="Player" parent="." unique_id=1729184082 instance=ExtResource("2_n3red")]
+
+[node name="Inventory" parent="." unique_id=1566470225 instance=ExtResource("3_us51m")]
+
+[node name="MiniMap" parent="." unique_id=212183129 instance=ExtResource("4_5p1ka")]
+
+[node name="FadeIn" parent="." unique_id=729751193 instance=ExtResource("1_r4pjw")]
+
+[node name="Dialogbox" parent="." unique_id=1529403298 instance=ExtResource("5_2gf66")]
+
+[node name="InGameMenu" parent="." unique_id=2139800408 instance=ExtResource("3_kk7g7")]
+
+[node name="MissionStatus" parent="." unique_id=1087925174 instance=ExtResource("7_l7kmt")]
+start_mission_id = "communication"
+
+[node name="AmbientMusic" type="AudioStreamPlayer2D" parent="." unique_id=331048311]
+stream = ExtResource("8_oi71q")
+volume_db = -22.0
+autoplay = true
+parameters/looping = true
+
+[node name="LevelTransition" parent="." unique_id=1149047680 instance=ExtResource("10_osq70")]
+position = Vector2(111, -57)
+next_level_path = "uid://drmkntxirk1vd"
+
+[node name="ExitDoor" parent="." unique_id=1792774625 instance=ExtResource("10_us51m")]
+position = Vector2(-120, -4)
+
+[node name="SignalSwitch_Navigation" parent="." unique_id=1171400425 instance=ExtResource("12_l7kmt")]
+position = Vector2(124, 60)
+signal_id = "navigation"
+target_path = NodePath("../CommunicationServer")
+
+[node name="Line2D" parent="SignalSwitch_Navigation" index="0" unique_id=171617979]
+points = PackedVector2Array(0, 0, 0, -50, -60, -50, -60, -120, -120, -120)
+
+[node name="SignalSwitch_LifeSupport" parent="." unique_id=1550869469 instance=ExtResource("12_l7kmt")]
+position = Vector2(0, 62)
+signal_id = "life_support"
+target_path = NodePath("../CommunicationServer")
+
+[node name="Line2D" parent="SignalSwitch_LifeSupport" index="0" unique_id=171617979]
+points = PackedVector2Array(0, 0, 0, -126)
+
+[node name="SignalSwitch_Security" parent="." unique_id=1018821703 instance=ExtResource("12_l7kmt")]
+position = Vector2(-126, 63)
+signal_id = "security_channel"
+target_path = NodePath("../CommunicationServer")
+
+[node name="Line2D" parent="SignalSwitch_Security" index="0" unique_id=171617979]
+points = PackedVector2Array(0, 0, 0, -30, 60, -30, 60, -123, 120, -123)
+
+[node name="CommunicationServer" parent="." unique_id=1524339930 instance=ExtResource("11_2gf66")]
+position = Vector2(0, -64)
+door_path = NodePath("../ExitDoor")
+ai_core_path = NodePath("../aiCore")
+
+[node name="aiCore" parent="." unique_id=985027347 instance=ExtResource("13_ld7h8")]
+position = Vector2(-128, -66)
+
+[node name="Terminal" parent="." unique_id=95353647 instance=ExtResource("8_ld7h8")]
+terminal_level = 4
+repair_bot_path = NodePath("../RepairBot")
+security_bot_path = NodePath("../SecurityBot")
+transport_bot_path = NodePath("../TransportBot")
+ai_core_path = NodePath("../aiCore")
+
+[node name="TerminalObject" parent="." unique_id=1985324908 instance=ExtResource("15_kix61")]
+position = Vector2(-176, -51)
+
+[node name="CameraZone" parent="." unique_id=876321968 instance=ExtResource("16_5yuid")]
+position = Vector2(-163, -4)
+limit_left = -200
+
+[node name="RepairBot" parent="." unique_id=1794440707 instance=ExtResource("17_oi71q")]
+position = Vector2(-160, 47)
+
+[node name="SecurityBot" parent="." unique_id=1929186580 instance=ExtResource("18_eafag")]
+position = Vector2(-185, 46)
+
+[node name="TransportBot" parent="." unique_id=73969044 instance=ExtResource("19_eg83b")]
+position = Vector2(-210, 47)
+
+[editable path="SignalSwitch_Navigation"]
+[editable path="SignalSwitch_LifeSupport"]
+[editable path="SignalSwitch_Security"]

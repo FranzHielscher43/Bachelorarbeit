@@ -18,6 +18,8 @@ extends CanvasLayer
 var items := []
 var selected_index := 0
 var inventory_open := false
+var was_picked_up := false
+var was_dropped := false
 
 func _ready():
 	items_panel.modulate.a = 0.75
@@ -25,9 +27,10 @@ func _ready():
 	
 func add_item(item_data):
 	if items.size() >= 5:
-		print("Inventar voll")
 		return
+		
 	items.append(item_data)
+	was_picked_up = true
 	update_slots()
 	
 func use_item():
@@ -67,6 +70,7 @@ func drop_item(item_data):
 			final_position = test_position
 			break
 	
+	was_dropped = true
 	item.visible = true
 	item.set_process(true)
 	item.global_position = final_position
@@ -110,9 +114,9 @@ func show_selected_item_info():
 		
 	var item = items[selected_index]
 	
-	var info_text = "Objekt: " + item["name"] + "\n"
-	info_text += "Klasse: " + item["class"] + "\n"
-	info_text += "Attribute: " + "\n"
+	var info_text = "Object: " + item["name"] + "\n"
+	info_text += "Class: " + item["class"] + "\n"
+	info_text += "Attrbiutes: " + "\n"
 	var lines := []
 	
 	for key in item["attributes"].keys():

@@ -26,7 +26,7 @@ func _ready():
 func _on_start_button_pressed():
 	click_sound.play()
 	await click_sound.finished
-	get_tree().change_scene_to_file("res://Scenes/TestingStage.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Level/Level_01.tscn")
 
 func _on_quit_button_pressed():
 	click_sound.play()
@@ -40,7 +40,7 @@ func _on_creator_button_pressed():
 	creator_container.visible = true
 	
 	creator_label.clear()
-	creator_label.append_text("""[color=#29badd][font_size=40]ENTWICKELT VON\nFRANZ HIELSCHER[/font_size][/color]\n\nIm Rahmen der Bachelorarbeit im Studiengang Medieninformatik\n\nHochschule für Technik, Wirtschaft und Kultur Leipzig""")
+	creator_label.append_text("""[color=#29badd][font_size=40]DEVELOPED BY\nFRANZ HIELSCHER[/font_size][/color]\n\nAs part of a Bachelor's thesis in the Media Informatics degree\n\nLeipzig University of Applied Sciences (HTWK Leipzig)""")
 	
 	back_button.grab_focus()
 	

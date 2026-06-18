@@ -10,6 +10,8 @@ var current_index := 0
 var typing_speed := 0.03
 var is_typing := false
 
+var dialog_id := 0
+
 func _ready():
 	hide_dialog()
 
@@ -57,3 +59,13 @@ func update_dialog_size():
 	
 	panel.size.y = new_height
 	panel.custom_minimum_size.y = new_height
+	
+func show_timed_dialog(text: String, duration: float):
+	dialog_id += 1
+	var current_id = dialog_id
+	
+	show_dialog(text)
+	await get_tree().create_timer(duration).timeout
+	
+	if current_id == dialog_id:
+		hide_dialog()

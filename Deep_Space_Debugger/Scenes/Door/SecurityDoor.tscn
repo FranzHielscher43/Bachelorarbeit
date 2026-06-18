@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://dm3ygw7wv70vu"]
+
+[ext_resource type="Script" uid="uid://du7ch2h7v8bht" path="res://Scripts/Door/Security_Door.gd" id="1_mc0fk"]
+[ext_resource type="Script" uid="uid://c5nfvu12yscln" path="res://Scripts/Door/SecurityDoorGroup.gd" id="1_w4co7"]
+[ext_resource type="Texture2D" uid="uid://dxuu7y7udt0h7" path="res://Assets/sprites/tilesets/SciFi_Warehouse_A3.png" id="2_a5sdc"]
+[ext_resource type="AudioStream" uid="uid://b6s8etf5vymx0" path="res://Assets/sounds/door.mp3" id="2_mc0fk"]
+[ext_resource type="Script" uid="uid://3rsa3rcfsq00" path="res://Scripts/Door/Interaction_Area.gd" id="5_a5sdc"]
+[ext_resource type="Texture2D" uid="uid://cmnqniapw2n6b" path="res://Assets/sprites/tilesets/SciFi_Warehouse_C2.png" id="5_w4co7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4co7"]
+atlas = ExtResource("2_a5sdc")
+region = Rect2(289, 289, 94, 94)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mw28t"]
+size = Vector2(30, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7xuc"]
+atlas = ExtResource("5_w4co7")
+region = Rect2(95, 0, 146, 146)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mc0fk"]
+
+[node name="SecurityDoor" type="Node2D" unique_id=169789727]
+script = ExtResource("1_w4co7")
+
+[node name="TargetPoint" type="Marker2D" parent="." unique_id=178049822]
+position = Vector2(0, 30)
+
+[node name="Door" type="StaticBody2D" parent="." unique_id=1792774625]
+script = ExtResource("1_mc0fk")
+
+[node name="Sprite2D" type="Sprite2D" parent="Door" unique_id=500659761]
+scale = Vector2(0.3, 0.311)
+texture = SubResource("AtlasTexture_w4co7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door" unique_id=1994051236]
+shape = SubResource("RectangleShape2D_mw28t")
+
+[node name="DoorSound" type="AudioStreamPlayer2D" parent="Door" unique_id=277344276]
+stream = ExtResource("2_mc0fk")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1752958834]
+position = Vector2(30, 35)
+script = ExtResource("5_a5sdc")
+security_door_path = NodePath("../Door")
+
+[node name="Sprite2D" type="Sprite2D" parent="InteractionArea" unique_id=99542791]
+position = Vector2(0, -22)
+scale = Vector2(0.125, 0.125)
+texture = SubResource("AtlasTexture_q7xuc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1880945592]
+position = Vector2(0, -22.3)
+scale = Vector2(0.7, 0.7)
+shape = SubResource("RectangleShape2D_mc0fk")
+
+[node name="Polygon2D" type="Polygon2D" parent="InteractionArea" unique_id=725388269]
+position = Vector2(0, -22.4)

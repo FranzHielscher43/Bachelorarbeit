@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://btqaw3xl5qqk5"]
+
+[ext_resource type="Script" uid="uid://26sem4se2kyj" path="res://Scripts/Navigation/Level_Transition.gd" id="1_o1e6k"]
+[ext_resource type="Texture2D" uid="uid://cmnqniapw2n6b" path="res://Assets/sprites/tilesets/SciFi_Warehouse_C2.png" id="2_qaw5r"]
+[ext_resource type="Texture2D" uid="uid://ce5yl4ognkdew" path="res://Assets/sprites/tilesets/pixil-frame-0.png" id="3_d2muk"]
+[ext_resource type="Texture2D" uid="uid://dxuu7y7udt0h7" path="res://Assets/sprites/tilesets/SciFi_Warehouse_A3.png" id="4_2isqv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mir1x"]
+size = Vector2(26.666668, 26.555557)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2muk"]
+atlas = ExtResource("2_qaw5r")
+region = Rect2(657, 21, 76, 77)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qaw5r"]
+atlas = ExtResource("3_d2muk")
+region = Rect2(633, 0, 124, 145)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31cy1"]
+atlas = ExtResource("4_2isqv")
+region = Rect2(1, 1, 94, 94)
+
+[node name="LevelTransition" type="Area2D" unique_id=1149047680]
+script = ExtResource("1_o1e6k")
+player_point_path = NodePath("PlayerPoint")
+player_z_index = 1
+inner_sprite_path = NodePath("InnerSprite2D")
+outer_sprite_path = NodePath("OuterSprite2D")
+player_target_offset = Vector2(0, 24)
+elevator_sprite_path = NodePath("ElevatorSprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=132760971]
+position = Vector2(-1.1920929e-07, -4.05)
+scale = Vector2(0.9, 0.9)
+shape = SubResource("RectangleShape2D_mir1x")
+
+[node name="InnerSprite2D" type="Sprite2D" parent="." unique_id=1947852523]
+position = Vector2(0, -4)
+scale = Vector2(0.3, 0.3)
+texture = SubResource("AtlasTexture_d2muk")
+
+[node name="OuterSprite2D" type="Sprite2D" parent="." unique_id=1102121008]
+scale = Vector2(0.3, 0.3)
+texture = SubResource("AtlasTexture_qaw5r")
+region_rect = Rect2(0, 0, 101, 145)
+
+[node name="PlayerPoint" type="Marker2D" parent="." unique_id=1281481969]
+position = Vector2(0, -1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=567436409]
+
+[node name="FadeRect" type="ColorRect" parent="CanvasLayer" unique_id=855434498]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ElevatorSprite2D" type="Sprite2D" parent="." unique_id=71165654]
+position = Vector2(0, -1)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_31cy1")

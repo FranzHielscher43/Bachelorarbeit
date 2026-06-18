@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://giyv3v5cj60r" path="res://Assets/fonts/ShareTechMono-Regular.ttf" id="3_2d7vq"]
 [ext_resource type="AudioStream" uid="uid://b2d1di1u5qwmu" path="res://Assets/sounds/hover_sound.mp3" id="3_ptq1v"]
 [ext_resource type="AudioStream" uid="uid://cwb7a3d34dwug" path="res://Assets/sounds/button.mp3" id="4_2d7vq"]
+[ext_resource type="AudioStream" uid="uid://51b2d1fewxog" path="res://Assets/sounds/success.mp3" id="6_ou454"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0y550"]
 bg_color = Color(0.041727163, 0.07092445, 0.081496574, 1)
@@ -225,7 +226,7 @@ theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_40dey")
 theme_override_styles/hover = SubResource("StyleBoxFlat_2d7vq")
 theme_override_styles/focus = SubResource("StyleBoxFlat_ptq1v")
-text = "  1  ÜBERSICHT"
+text = "  1  OVERVIEW"
 alignment = 0
 autowrap_mode = 2
 
@@ -238,7 +239,7 @@ theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_40dey")
 theme_override_styles/hover = SubResource("StyleBoxFlat_2d7vq")
 theme_override_styles/focus = SubResource("StyleBoxFlat_ptq1v")
-text = "  2  ENERGIE"
+text = "  2  ENERGY"
 alignment = 0
 autowrap_mode = 2
 
@@ -251,7 +252,7 @@ theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_40dey")
 theme_override_styles/hover = SubResource("StyleBoxFlat_2d7vq")
 theme_override_styles/focus = SubResource("StyleBoxFlat_ptq1v")
-text = "  3  SICHERHEIT"
+text = "  3  SECURITY"
 alignment = 0
 autowrap_mode = 2
 
@@ -264,7 +265,7 @@ theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_40dey")
 theme_override_styles/hover = SubResource("StyleBoxFlat_2d7vq")
 theme_override_styles/focus = SubResource("StyleBoxFlat_ptq1v")
-text = "  4  PROTOKOLLE"
+text = "  4  LOGS"
 alignment = 0
 autowrap_mode = 2
 
@@ -277,7 +278,7 @@ theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_2kn2t")
 theme_override_styles/hover = SubResource("StyleBoxFlat_2d7vq")
 theme_override_styles/focus = SubResource("StyleBoxFlat_ptq1v")
-text = "  <  VERLASSEN"
+text = "  <  QUIT"
 alignment = 0
 autowrap_mode = 2
 
@@ -301,7 +302,8 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_right = 40.0
+offset_right = -6.7720337
+offset_bottom = -6.1035156e-05
 theme_override_styles/panel = SubResource("StyleBoxFlat_0d6js")
 
 [node name="Label" type="RichTextLabel" parent="Control/OuterBackgroundPanel/InnerBackgroundPanel/ContentPanel/InformationPanel" unique_id=485603673]
@@ -318,6 +320,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/default_color = Color(0.16078432, 0.7294118, 0.8666667, 1)
 theme_override_fonts/normal_font = ExtResource("3_2d7vq")
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/bold_font_size = 14
+theme_override_font_sizes/bold_italics_font_size = 14
+theme_override_font_sizes/italics_font_size = 14
+theme_override_font_sizes/mono_font_size = 14
 bbcode_enabled = true
 text = "WILLKOMMEN, TECHNIKER.
 Bitte wählen Sie eine Kategorie oder geben Sie einen Befehl ein."
@@ -329,7 +336,8 @@ anchors_preset = -1
 anchor_left = 0.61
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -40.0
+offset_left = -92.0
+offset_bottom = -6.1035156e-05
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_0d6js")
@@ -347,17 +355,97 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/default_color = Color(0.16078432, 0.7294118, 0.8666667, 1)
 theme_override_fonts/normal_font = ExtResource("3_2d7vq")
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/bold_font_size = 14
+theme_override_font_sizes/bold_italics_font_size = 14
+theme_override_font_sizes/italics_font_size = 14
+theme_override_font_sizes/mono_font_size = 14
 bbcode_enabled = true
-text = "SYSTEMSTATUS"
+text = "SYSTEM STATUS"
 
-[node name="MethodButton" type="Button" parent="Control/OuterBackgroundPanel/InnerBackgroundPanel/ContentPanel/DataPanel" unique_id=2070449283]
+[node name="MethodButton" type="Button" parent="Control/OuterBackgroundPanel/InnerBackgroundPanel/ContentPanel/DataPanel" unique_id=2070449283 groups=["Terminal"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -175.0
+offset_left = -250.0
+offset_top = -50.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.16078432, 0.7294118, 0.8666667, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_2d7vq")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ou454")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qlhr6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_u1phn")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_5cgw2")
+text = "METHODE AUSFÜHREN"
+
+[node name="RepairBotButton" type="Button" parent="Control/OuterBackgroundPanel/InnerBackgroundPanel/ContentPanel/DataPanel" unique_id=1091312539]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -140.16806
+offset_right = -15.000153
+offset_bottom = -105.16806
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.16078432, 0.7294118, 0.8666667, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_2d7vq")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ou454")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qlhr6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_u1phn")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_5cgw2")
+text = "METHODE AUSFÜHREN"
+
+[node name="SecurityBotButton" type="Button" parent="Control/OuterBackgroundPanel/InnerBackgroundPanel/ContentPanel/DataPanel" unique_id=1236173244]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -95.16806
+offset_right = -15.000153
+offset_bottom = -60.16806
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.16078432, 0.7294118, 0.8666667, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_2d7vq")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ou454")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qlhr6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_u1phn")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_5cgw2")
+text = "METHODE AUSFÜHREN"
+
+[node name="TransportBotButton" type="Button" parent="Control/OuterBackgroundPanel/InnerBackgroundPanel/ContentPanel/DataPanel" unique_id=1539415892]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -250.0
 offset_top = -50.0
 offset_right = -15.0
 offset_bottom = -15.0
@@ -398,7 +486,7 @@ theme_override_colors/default_color = Color(0.16078432, 0.7294118, 0.8666667, 1)
 theme_override_fonts/normal_font = ExtResource("3_2d7vq")
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
-text = "    VERBINDUNG: "
+text = "    CONNECTION: "
 vertical_alignment = 1
 
 [node name="PingInformation" type="RichTextLabel" parent="Control/OuterBackgroundPanel/InnerBackgroundPanel/ConnectionPanel" unique_id=1546263285]
@@ -497,3 +585,6 @@ stream = ExtResource("3_ptq1v")
 
 [node name="ClickSound" type="AudioStreamPlayer2D" parent="." unique_id=378346287]
 stream = ExtResource("4_2d7vq")
+
+[node name="SuccessSound" type="AudioStreamPlayer2D" parent="." unique_id=983137992]
+stream = ExtResource("6_ou454")

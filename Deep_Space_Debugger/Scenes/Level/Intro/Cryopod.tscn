@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bmg1xbfnoso0d"]
+
+[ext_resource type="Texture2D" uid="uid://d4cubri7pq6m0" path="res://Assets/sprites/tilesets/SciFi_Warehouse_E.png" id="1_aa6fl"]
+[ext_resource type="Script" uid="uid://xf06ib0u5rjs" path="res://Scripts/Level/Intro/Cryopod.gd" id="1_vg2so"]
+[ext_resource type="AudioStream" uid="uid://b1kmntwvvurqr" path="res://Assets/sounds/cryopod.mp3" id="3_lc8w1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vg2so"]
+atlas = ExtResource("1_aa6fl")
+region = Rect2(110, 53, 20, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lc8w1"]
+size = Vector2(20, 19.679487)
+
+[node name="Cryopod" type="Node2D" unique_id=1801135151]
+scale = Vector2(1.3, 1.3)
+script = ExtResource("1_vg2so")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=560588872]
+texture = SubResource("AtlasTexture_vg2so")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D" unique_id=1105330441]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D" unique_id=942221917]
+position = Vector2(0, -5.9935904)
+shape = SubResource("RectangleShape2D_lc8w1")
+
+[node name="OpenSound" type="AudioStreamPlayer2D" parent="." unique_id=1804753407]
+stream = ExtResource("3_lc8w1")

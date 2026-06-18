@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cxco17mja15po" path="res://Assets/sprites/title_image.png" id="2_m3dwn"]
 [ext_resource type="FontFile" uid="uid://giyv3v5cj60r" path="res://Assets/fonts/ShareTechMono-Regular.ttf" id="3_em17j"]
 [ext_resource type="AudioStream" uid="uid://cwb7a3d34dwug" path="res://Assets/sounds/button.mp3" id="3_gps84"]
-[ext_resource type="AudioStream" uid="uid://bdbhdbx7dvlnm" path="res://Assets/music/main_menu.mp3" id="3_nt0od"]
+[ext_resource type="AudioStream" uid="uid://5bjl5bpxcxg1" path="res://Assets/sounds/Ambient/main_menu.mp3" id="4_em17j"]
 [ext_resource type="AudioStream" uid="uid://b2d1di1u5qwmu" path="res://Assets/sounds/hover_sound.mp3" id="5_5qe8b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m3dwn"]
@@ -90,7 +90,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_m3dwn")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_nt0od")
 theme_override_styles/hover = SubResource("StyleBoxFlat_gps84")
 theme_override_styles/focus = SubResource("StyleBoxFlat_5qe8b")
-text = "Zurück"
+text = "BACK"
 
 [node name="MainContainer" type="VBoxContainer" parent="." unique_id=2010991501]
 visible = false
@@ -137,7 +137,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_m3dwn")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_nt0od")
 theme_override_styles/hover = SubResource("StyleBoxFlat_gps84")
 theme_override_styles/focus = SubResource("StyleBoxFlat_5qe8b")
-text = "ERSTELLER"
+text = "CREATOR"
 
 [node name="QuitButton" type="Button" parent="MainContainer" unique_id=1200863082]
 layout_mode = 2
@@ -154,10 +154,11 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_m3dwn")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_nt0od")
 theme_override_styles/hover = SubResource("StyleBoxFlat_gps84")
 theme_override_styles/focus = SubResource("StyleBoxFlat_5qe8b")
-text = "VERLASSEN"
+text = "QUIT"
 
 [node name="MenuAmbient" type="AudioStreamPlayer2D" parent="." unique_id=1865703941]
-stream = ExtResource("3_nt0od")
+stream = ExtResource("4_em17j")
+volume_db = -10.0
 autoplay = true
 parameters/looping = true
 

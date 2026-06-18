@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dl7uuj3grqc84"]
+
+[ext_resource type="Script" uid="uid://c2vsh62epvoii" path="res://Scripts/Communication_Server.gd" id="1_l8ipg"]
+[ext_resource type="Texture2D" uid="uid://cmnqniapw2n6b" path="res://Assets/sprites/tilesets/SciFi_Warehouse_C2.png" id="2_hco6q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eocij"]
+atlas = ExtResource("2_hco6q")
+region = Rect2(100, 489, 87, 86)
+
+[node name="CommunicationServer" type="Node2D" unique_id=1524339930]
+script = ExtResource("1_l8ipg")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=662138484]
+scale = Vector2(0.25, 0.25)
+texture = SubResource("AtlasTexture_eocij")

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Deep Space Debugger"
-run/main_scene="uid://82ukwd2j17dj"
+run/main_scene="uid://dr2f1o1skt0tp"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -34,6 +34,9 @@ project/assembly_name="serious-game-OOP"
 Player=""
 TileMap=""
 Robot=""
+RepairBot=""
+CommunicationRelay=""
+Terminal=""
 
 [input]
 

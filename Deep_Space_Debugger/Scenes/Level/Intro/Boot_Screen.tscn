@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://xsdqkbmsva31"]
+
+[ext_resource type="AudioStream" uid="uid://b7lognojnkypa" path="res://Assets/sounds/typing.mp3" id="1_13crm"]
+[ext_resource type="Script" uid="uid://cvp45s88cek8y" path="res://Scripts/Level/Intro/Boot_Screen.gd" id="1_heufi"]
+[ext_resource type="FontFile" uid="uid://giyv3v5cj60r" path="res://Assets/fonts/ShareTechMono-Regular.ttf" id="2_uv202"]
+
+[node name="BootScreen" type="CanvasLayer" unique_id=1904354321]
+script = ExtResource("1_heufi")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1765384269]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="FlickerOverlay" type="ColorRect" parent="." unique_id=1039171146]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Label" type="Label" parent="." unique_id=1349641711]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = -50.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.16078432, 0.7294118, 0.8666667, 1)
+theme_override_fonts/font = ExtResource("2_uv202")
+theme_override_font_sizes/font_size = 36
+uppercase = true
+
+[node name="TypeSound" type="AudioStreamPlayer2D" parent="." unique_id=1021069874]
+position = Vector2(0, 18)
+stream = ExtResource("1_13crm")

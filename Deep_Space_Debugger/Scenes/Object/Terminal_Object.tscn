@@ -1,15 +1,20 @@
 [gd_scene format=3 uid="uid://djv1jrgifgw3i"]
 
 [ext_resource type="Script" uid="uid://dgn5idcqftw1a" path="res://Scripts/Object/Terminal_Object.gd" id="1_45dk5"]
-[ext_resource type="Texture2D" uid="uid://bsksffxh8e32b" path="res://icon.svg" id="2_i1egy"]
+[ext_resource type="Texture2D" uid="uid://cxjjjwarqvol0" path="res://Assets/sprites/tilesets/SciFi_Warehouse_C.png" id="2_lepda"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_45dk5"]
 radius = 83.548485
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_fr0nu"]
+atlas = ExtResource("2_lepda")
+region = Rect2(464, 672, 128, 88)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_clnfq"]
 radius = 18.000002
 
-[node name="InteractableObject" type="Area2D" unique_id=1985324908]
+[node name="TerminalObject" type="Area2D" unique_id=1985324908]
+scale = Vector2(1.2, 1.2)
 script = ExtResource("1_45dk5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=894563553]
@@ -19,8 +24,8 @@ shape = SubResource("CircleShape2D_45dk5")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1506021223]
 position = Vector2(1.5, -2.2499979)
-scale = Vector2(0.2578125, 0.2460938)
-texture = ExtResource("2_i1egy")
+scale = Vector2(0.2, 0.3)
+texture = SubResource("AtlasTexture_fr0nu")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1074381412]
 position = Vector2(1.5, -2.2499979)

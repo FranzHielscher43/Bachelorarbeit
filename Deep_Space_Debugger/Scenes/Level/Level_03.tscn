@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://d201kln3iav1p"]
+
+[ext_resource type="PackedScene" uid="uid://cbf7jomjvwg2v" path="res://Scenes/Navigation/Fade_In.tscn" id="1_kbka6"]
+[ext_resource type="PackedScene" uid="uid://bvhfgo4ebpewe" path="res://Scenes/Player.tscn" id="2_uedec"]
+[ext_resource type="PackedScene" uid="uid://b3e76oulrbay2" path="res://Scenes/Inventory.tscn" id="3_wlyad"]
+[ext_resource type="PackedScene" uid="uid://dp1q4rv2c5wsk" path="res://Scenes/Navigation/MiniMap.tscn" id="4_m6hm5"]
+[ext_resource type="PackedScene" uid="uid://bc4ewyh5s6id1" path="res://Scenes/Dialog_ext.tscn" id="5_ln6mn"]
+[ext_resource type="PackedScene" uid="uid://cr35pgufep6ms" path="res://Scenes/Navigation/InGameMenu.tscn" id="6_c1ex2"]
+[ext_resource type="PackedScene" uid="uid://dsrn6baq7w7ue" path="res://Scenes/Navigation/MissionStatus.tscn" id="7_m6hm5"]
+[ext_resource type="PackedScene" uid="uid://co7lv2dynqrby" path="res://Scenes/Terminal_UI.tscn" id="8_ln6mn"]
+[ext_resource type="AudioStream" uid="uid://d1p52smtt80nu" path="res://Assets/sounds/Ambient/ambient_level_03.mp3" id="9_itpdu"]
+[ext_resource type="PackedScene" uid="uid://btqaw3xl5qqk5" path="res://Scenes/Navigation/Level_Transition.tscn" id="10_q434a"]
+[ext_resource type="PackedScene" uid="uid://sd6k6t7bsm03" path="res://Scenes/Robot/RepairBot.tscn" id="11_o5ygy"]
+[ext_resource type="PackedScene" uid="uid://tmjmq6pmfmn2" path="res://Scenes/Robot/Communication_Relay.tscn" id="12_m175t"]
+[ext_resource type="PackedScene" uid="uid://djv1jrgifgw3i" path="res://Scenes/Object/Terminal_Object.tscn" id="13_m175t"]
+[ext_resource type="PackedScene" uid="uid://c08vah3c1ee4" path="res://Scenes/Robot/SecurityBot.tscn" id="14_oibhg"]
+[ext_resource type="PackedScene" uid="uid://byv8yt5ft7gkl" path="res://Scenes/Robot/TransportBot.tscn" id="15_nne3a"]
+[ext_resource type="PackedScene" uid="uid://ba25c6odbjc7" path="res://Scenes/Object/Carry_object.tscn" id="16_ttlar"]
+[ext_resource type="Texture2D" uid="uid://d4cubri7pq6m0" path="res://Assets/sprites/tilesets/SciFi_Warehouse_E.png" id="17_itpdu"]
+[ext_resource type="PackedScene" uid="uid://bim55ny43falj" path="res://Scenes/Door/Door.tscn" id="18_2ypqf"]
+[ext_resource type="PackedScene" uid="uid://ddvdrh3dyvjya" path="res://Scenes/Object/Drop_Zone.tscn" id="19_qorak"]
+[ext_resource type="PackedScene" uid="uid://cq6qp0sv5loj6" path="res://Scenes/Camera_Zone.tscn" id="20_qorak"]
+[ext_resource type="PackedScene" uid="uid://dm3ygw7wv70vu" path="res://Scenes/Door/SecurityDoor.tscn" id="21_itpdu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpooj"]
+atlas = ExtResource("17_itpdu")
+region = Rect2(251, 9, 23, 32)
+
+[node name="Level_03" type="Node2D" unique_id=767704603]
+
+[node name="FadeIn" parent="." unique_id=729751193 instance=ExtResource("1_kbka6")]
+
+[node name="Player" parent="." unique_id=1729184082 instance=ExtResource("2_uedec")]
+
+[node name="Inventory" parent="." unique_id=1566470225 instance=ExtResource("3_wlyad")]
+
+[node name="MiniMap" parent="." unique_id=212183129 instance=ExtResource("4_m6hm5")]
+
+[node name="Dialogbox" parent="." unique_id=1529403298 instance=ExtResource("5_ln6mn")]
+
+[node name="InGameMenu" parent="." unique_id=2139800408 instance=ExtResource("6_c1ex2")]
+
+[node name="MissionStatus" parent="." unique_id=1087925174 instance=ExtResource("7_m6hm5")]
+start_mission_id = "robotics"
+
+[node name="Terminal" parent="." unique_id=95353647 groups=["Terminal"] instance=ExtResource("8_ln6mn")]
+terminal_level = 3
+repair_bot_path = NodePath("../RepairBot")
+security_bot_path = NodePath("../SecurityBot")
+transport_bot_path = NodePath("../TransportBot")
+communication_relay_path = NodePath("../CommunicationRelay")
+elevator_door_path = NodePath("../SecurityDoor")
+
+[node name="TargetPoint" type="Marker2D" parent="Terminal" unique_id=812140736]
+position = Vector2(-11, -5)
+
+[node name="AmbientMusic" type="AudioStreamPlayer2D" parent="." unique_id=399552156]
+stream = ExtResource("9_itpdu")
+volume_db = -15.0
+autoplay = true
+parameters/looping = true
+
+[node name="LevelTransition" parent="." unique_id=1149047680 instance=ExtResource("10_q434a")]
+position = Vector2(55, -125)
+next_level_path = "uid://bkqh5y6xecmiu"
+player_target_offset = Vector2(0, -24)
+use_elevator = true
+
+[node name="RepairBot" parent="." unique_id=1794440707 groups=["RepairBot"] instance=ExtResource("11_o5ygy")]
+position = Vector2(-124, 64)
+speed = 30
+
+[node name="TerminalObject" parent="." unique_id=1985324908 instance=ExtResource("13_m175t")]
+position = Vector2(-52, 50)
+
+[node name="SecurityBot" parent="." unique_id=1291967179 instance=ExtResource("14_oibhg")]
+position = Vector2(-12, 65)
+
+[node name="TransportBot" parent="." unique_id=1047483244 instance=ExtResource("15_nne3a")]
+position = Vector2(51, -33)
+object_path = NodePath("../EnergyCore")
+drop_zone_path = NodePath("../Transport_DropZone")
+
+[node name="EnergyCore" parent="." unique_id=1255186265 instance=ExtResource("16_ttlar")]
+position = Vector2(-116, -9)
+scale = Vector2(2, 2)
+core_texture = SubResource("AtlasTexture_tpooj")
+object_name = "EC"
+class_name_display = "Energycore"
+attributes = {
+"capacity": 100,
+"stability": 95,
+"state": "stable"
+}
+item_id = "EnergyCore"
+
+[node name="ExitDoor" parent="." unique_id=1792774625 instance=ExtResource("18_2ypqf")]
+position = Vector2(-1, -64)
+
+[node name="Transport_DropZone" parent="." unique_id=850932415 instance=ExtResource("19_qorak")]
+position = Vector2(-31, -60)
+required_class = "Energycore"
+required_attributes = {
+"capacity": "100",
+"stability": "95",
+"state": "stable"
+}
+success_target_path = NodePath("../ExitDoor")
+success_method = "open_door"
+dialog_text = "Correct object inserted."
+
+[node name="CameraZone" parent="." unique_id=876321968 instance=ExtResource("20_qorak")]
+position = Vector2(-1, -100)
+limit_top = -175
+limit_bottom = 80
+
+[node name="SecurityDoor" parent="." unique_id=1583383087 instance=ExtResource("21_itpdu")]
+position = Vector2(-1, -173)
+
+[node name="CommunicationRelay" parent="." unique_id=1225628872 groups=["CommunicationRelay"] instance=ExtResource("12_m175t")]
+position = Vector2(-68, -58)
+
+[editable path="SecurityDoor"]

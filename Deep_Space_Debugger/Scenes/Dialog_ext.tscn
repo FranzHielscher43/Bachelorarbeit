@@ -55,7 +55,7 @@ theme_override_colors/font_color = Color(0.16078432, 0.7294118, 0.8666667, 1)
 theme_override_fonts/font = ExtResource("2_oblh3")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_4kkp1")
-text = "Objektinformation"
+text = "INFORMATION"
 uppercase = true
 
 [node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1017025946]

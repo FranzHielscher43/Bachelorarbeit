@@ -1,25 +1,49 @@
 extends Area2D
 
-@export var required_class := "Energiekern"
-@export var required_attributes := {
-	"power": 80,
-	"charged": true
-} 
-@export var door_path : NodePath
+@export var required_class := ""
+@export var required_attributes := {} 
+@export var success_target_path : NodePath
+@export var success_method := ""
+@onready var success_target = get_node_or_null(success_target_path)
 
 @onready var snap_point = $SnapPoint
-@onready var door = get_node(door_path)
 
 @onready var dialog_box = $"../Dialogbox" 
-@export_multiline var dialog_text = "Korrektes Objekt gefunden!"
+@export_multiline var dialog_text = "Correct object inserted!"
 
 @export var completes_mission := ""
 @export var completes_subtask := ""
+
+@onready var cube = $Polygon2D
+var pulse_time := 0.0
+var original_cube_scale = Vector2.ONE
 
 var placed_object = null
 
 func _ready():
 	area_entered.connect(_on_area_entered)
+	
+	cube.polygon = PackedVector2Array([
+		Vector2(-10, -10),
+		Vector2(10, -10),
+		Vector2(10, 10),
+		Vector2(-10, 10)
+	])
+
+	cube.color = Color(0, 1, 1, 0.5)
+	original_cube_scale = cube.scale
+
+func _process(delta):
+	if placed_object != null:
+		cube.visible = false
+		return
+		
+	cube.visible = true
+	pulse_time += delta
+	var pulse = sin(pulse_time * 3.0)
+	var scale_factor = 1.0 + pulse * 0.075
+	cube.scale = original_cube_scale * scale_factor
+	cube.color = Color(0, 1, 1, 0.35 + pulse * 0.15)
 
 func _on_area_entered(area):
 	if placed_object != null:
@@ -36,7 +60,7 @@ func _on_area_entered(area):
 	var item_attributes = item_data["attributes"]
 	
 	if !is_valid_item(item_class, item_attributes):
-		dialog_box.show_dialog("Falsches Objekt!")
+		dialog_box.show_dialog("Incorrect object")
 		await get_tree().create_timer(2.0).timeout
 		dialog_box.hide_dialog()
 		return
@@ -53,8 +77,11 @@ func _on_area_entered(area):
 	await get_tree().create_timer(2.0).timeout
 	dialog_box.hide_dialog()
 
-	if door != null:
-		door.open_door()
+	if success_target != null and success_method != "":
+		if success_target.has_method(success_method):
+			success_target.call(success_method)
+		else:
+			push_warning("Method not found: " + success_method)
 
 func is_valid_item(item_class, item_attributes) -> bool:
 
@@ -66,6 +93,6 @@ func is_valid_item(item_class, item_attributes) -> bool:
 			return false
 		var required_value = required_attributes[key]
 		var item_value = item_attributes[key]
-		if item_value != required_value:
+		if str(item_value) != str(required_value):
 			return false
 	return true
