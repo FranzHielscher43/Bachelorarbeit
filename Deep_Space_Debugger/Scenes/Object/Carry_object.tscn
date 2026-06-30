@@ -6,13 +6,14 @@
 [ext_resource type="AudioStream" uid="uid://cn6pjtgbasdvp" path="res://Assets/sounds/dropdown.mp3" id="4_jur7j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jla5h"]
-radius = 34.999996
+radius = 39.63812
 
 [node name="CarryObject" type="Area2D" unique_id=1255186265]
+scale = Vector2(1.2, 1.2)
 script = ExtResource("1_jla5h")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1913160868]
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_8wecm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1221512607]

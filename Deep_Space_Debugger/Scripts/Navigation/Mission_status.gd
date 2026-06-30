@@ -17,9 +17,11 @@ var mission_steps = [
 	{"id": "level_02", "text": "Go to the security center", "done": false, "subtasks": {"Use the unlocked passageway": false}},
 	{"id": "security_access", "text": "Obtain security access", "done": false, "subtasks": {"Check security door": false, "Insert appropriate access module": false, "Open security terminal": false, "Request clearance": false}},
 	{"id": "level_03", "text": "Proceed to the communications center", "done": false, "subtasks": {"Open security door": false}},
-	{"id": "robotics", "text": "Repair the communication relay", "done": false, "subtasks": {"Open terminal": false, "Select & send repair robot": false, "Select & send transport robot": false, "Select & send security robot": false}},
-	{"id": "level_04", "text": "Go to the next area", "done": false, "subtasks": {}},
-	{"id": "communication", "text": "Activate communication system", "done": false, "subtasks": {"Send navigation signal": false, "Send life support signal": false, "Send security channel signal": false}},
+	{"id": "repair", "text": "Repair the communication relay", "done": false, "subtasks": {"Open terminal": false, "Select & send repair robot": false, "Escort repair robot": false}},
+	{"id": "transport", "text": "Open the locked door", "done": false, "subtasks": {"Select & send transport robot": false, "Wait for the transport robot": false}},
+	{"id": "secure", "text": "Access the security door", "done": false, "subtasks": {"Select & send security robot": false, "Escort security robot": false}},
+	{"id": "level_04", "text": "Proceed to the AI Core", "done": false, "subtasks": {"Use the elevator": false}},
+	{"id": "communication", "text": "Activate station server", "done": false, "subtasks": {"Send navigation signal": false, "Send life support signal": false, "Send security channel signal": false}},
 	{"id": "ai_core", "text": "Reboot AI core system", "done": false, "subtasks": {"Open terminal": false, "Activate core method": false}}
 ]
 

@@ -2,15 +2,85 @@
 
 [ext_resource type="Script" uid="uid://cwapwq0rtytae" path="res://Scripts/ai_Core.gd" id="1_otd2x"]
 [ext_resource type="Texture2D" uid="uid://cmnqniapw2n6b" path="res://Assets/sprites/tilesets/SciFi_Warehouse_C2.png" id="2_otd2x"]
+[ext_resource type="AudioStream" uid="uid://bi6dmo3nln4jo" path="res://Assets/sounds/Robot/repair.mp3" id="3_fqgx6"]
+[ext_resource type="Texture2D" uid="uid://c6usu43yknm1v" path="res://Assets/sprites/smokegif-ezgif.com-gif-to-sprite-converter.png" id="4_j1inm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rctn1"]
 atlas = ExtResource("2_otd2x")
 region = Rect2(0, 481, 95, 131)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_otd2x"]
-size = Vector2(16, 21)
+size = Vector2(21, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rctn1"]
+size = Vector2(15.25, 19.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eo7q8"]
+atlas = ExtResource("4_j1inm")
+region = Rect2(0, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04epa"]
+atlas = ExtResource("4_j1inm")
+region = Rect2(1024, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3ofn"]
+atlas = ExtResource("4_j1inm")
+region = Rect2(2048, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ux12y"]
+atlas = ExtResource("4_j1inm")
+region = Rect2(3072, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvabv"]
+atlas = ExtResource("4_j1inm")
+region = Rect2(4096, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbel7"]
+atlas = ExtResource("4_j1inm")
+region = Rect2(5120, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74rwf"]
+atlas = ExtResource("4_j1inm")
+region = Rect2(6144, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qj2nr"]
+atlas = ExtResource("4_j1inm")
+region = Rect2(7168, 0, 1024, 1024)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ivw3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eo7q8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04epa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3ofn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ux12y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvabv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbel7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74rwf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qj2nr")
+}],
+"loop": true,
+"name": &"repair",
+"speed": 5.0
+}]
 
 [node name="aiCore" type="Area2D" unique_id=780392045]
+scale = Vector2(2, 2)
 script = ExtResource("1_otd2x")
 
 [node name="TargetPoint" type="Marker2D" parent="." unique_id=995778687]
@@ -24,3 +94,19 @@ texture = SubResource("AtlasTexture_rctn1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=78629723]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_otd2x")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1265029773]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=2080822763]
+position = Vector2(-0.125, 0.5)
+shape = SubResource("RectangleShape2D_rctn1")
+
+[node name="RepairSound" type="AudioStreamPlayer2D" parent="." unique_id=2090388255]
+stream = ExtResource("3_fqgx6")
+
+[node name="RepairEffect" type="AnimatedSprite2D" parent="." unique_id=1706319459]
+visible = false
+position = Vector2(0, -5)
+scale = Vector2(0.03, 0.03)
+sprite_frames = SubResource("SpriteFrames_8ivw3")
+animation = &"repair"

@@ -11,8 +11,13 @@ extends Node
 @onready var canvas_modulate = get_node(canvas_modulate_path)
 @onready var door = get_node(door_path)
 @onready var power_on_sound = $PowerOnSound
+@onready var power_off_sound = $PowerOffSound
 
 var power_enabled := false
+
+func _ready():
+	canvas_modulate.color = Color(1, 1, 1, 1)
+	power_off()
 
 func power_on():
 	if power_enabled:
@@ -40,3 +45,20 @@ func power_on():
 		ambient_sound_before_power.stop()
 	
 	door.open_door()
+
+func power_off():
+	power_enabled = false
+	
+	if power_off_sound != null:
+		power_off_sound.play()
+	
+	if power_on_sound != null:
+		power_on_sound.stop()
+		
+	var tween = create_tween()
+	tween.tween_property(canvas_modulate, "color", Color(0.4, 0.4, 0.4, 1.0), 2.0)
+	
+	if ambient_sound_before_power != null:
+		tween.parallel().tween_property(ambient_sound_before_power, "volume_db", -8, 2.0)
+		
+	await tween.finished

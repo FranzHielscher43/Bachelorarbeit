@@ -19,6 +19,8 @@ extends Area2D
 
 @onready var inventory = $"../Inventory"
 
+@export var is_carryable := true
+
 var original_scale : Vector2
 
 var player_nearby := false
@@ -35,9 +37,11 @@ func _ready():
 	body_exited.connect(_on_body_exited)
 
 func _process(delta):
-	if player_nearby and Input.is_action_just_pressed("ui_accept"):
+	if player_nearby and Input.is_action_just_pressed("ui_accept") and is_carryable:
 		pick_up()
-		
+	elif player_nearby and Input.is_action_just_pressed("ui_accept") and !is_carryable:
+		dialog_box.show_dialog("This object is too heavy to carry.\nLook for another way to move it.", true, "Too Heavy")
+				
 	if player_nearby:
 		var pulse = 0.7 + sin(Time.get_ticks_msec() * 0.005) * 0.3
 		sprite.modulate = Color.WHITE.lerp(Color(1.5, 1.5, 1.5, 1.0), pulse)

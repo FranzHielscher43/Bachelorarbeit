@@ -23,9 +23,12 @@ var player_collision = null
 
 @onready var fade_rect = $CanvasLayer/FadeRect
 var is_transitioning := false
+var fade_started := false
 
 @export var completes_mission := ""
 @export var completes_subtask := ""
+
+@onready var elevator_sound = $ElevatorSound
 
 func _ready():
 	if use_elevator:
@@ -85,17 +88,29 @@ func _on_body_entered(body):
 		var elevator_target_position = elevator_sprite.global_position + elevator_move_offset
 		
 		tween.tween_method(func(pos): body.global_position = pos, body.global_position, final_player_position, elevator_move_duration)
+		elevator_sound.play()
 		tween.parallel().tween_property(elevator_sprite, "global_position", elevator_target_position, elevator_move_duration)
+		await get_tree().create_timer(elevator_move_duration * 0.5).timeout
+		fade_started = true
+		fade_out()
 	else:
 		final_player_position = body.global_position + player_target_offset
 		tween.tween_property(body, "global_position", final_player_position, 2.0)
 		
+		
 	await tween.finished
 	body.velocity = Vector2.ZERO
 	body.global_position = final_player_position 
-	await fade_out()
+	
+	if !fade_started:
+		await fade_out()
+	else:
+		while fade_rect.modulate.a < 0.99:
+			await get_tree().process_frame
+	
 	if player_collision != null:
 		player_collision.disabled = false
+	
 	get_tree().change_scene_to_file(next_level_path)
 
 func fade_out():

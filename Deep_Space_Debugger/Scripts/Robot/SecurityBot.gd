@@ -22,6 +22,11 @@ func execute_task(target):
 		target.unlock_by_security_bot()
 		secure_sound.play()
 		await get_tree().create_timer(2.5).timeout
+		MissionManager.complete_subtask("secure", "Escort security robot")
+		var terminal = get_tree().get_first_node_in_group("Terminal")
+		if terminal != null:
+			terminal.security_job_done = true
+			terminal.update_robot_button_locks()
 		return_home()
 		return
 		

@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cmnqniapw2n6b" path="res://Assets/sprites/tilesets/SciFi_Warehouse_C2.png" id="2_qaw5r"]
 [ext_resource type="Texture2D" uid="uid://ce5yl4ognkdew" path="res://Assets/sprites/tilesets/pixil-frame-0.png" id="3_d2muk"]
 [ext_resource type="Texture2D" uid="uid://dxuu7y7udt0h7" path="res://Assets/sprites/tilesets/SciFi_Warehouse_A3.png" id="4_2isqv"]
+[ext_resource type="AudioStream" uid="uid://bnovtxqtdyfeh" path="res://Assets/sounds/elevator.mp3" id="5_31cy1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mir1x"]
 size = Vector2(26.666668, 26.555557)
@@ -18,7 +19,7 @@ region = Rect2(633, 0, 124, 145)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_31cy1"]
 atlas = ExtResource("4_2isqv")
-region = Rect2(1, 1, 94, 94)
+region = Rect2(193, 1, 94, 94)
 
 [node name="LevelTransition" type="Area2D" unique_id=1149047680]
 script = ExtResource("1_o1e6k")
@@ -63,3 +64,7 @@ color = Color(0, 0, 0, 1)
 position = Vector2(0, -1)
 scale = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_31cy1")
+
+[node name="ElevatorSound" type="AudioStreamPlayer2D" parent="." unique_id=570777677]
+stream = ExtResource("5_31cy1")
+volume_db = -15.0

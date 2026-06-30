@@ -15,12 +15,19 @@ extends Area2D
 @export var completes_subtask := ""
 
 @onready var cube = $Polygon2D
+@onready var line = $Line2D
+@export var inactive_line_color := Color("233461ff")
+@export var active_line_color := Color("#15ba12")
+@export var wrong_line_color := Color("#FF4D4D")
+
 var pulse_time := 0.0
 var original_cube_scale = Vector2.ONE
 
 var placed_object = null
 
 func _ready():
+	line.default_color = inactive_line_color
+	line.width = 2
 	area_entered.connect(_on_area_entered)
 	
 	cube.polygon = PackedVector2Array([
@@ -60,13 +67,15 @@ func _on_area_entered(area):
 	var item_attributes = item_data["attributes"]
 	
 	if !is_valid_item(item_class, item_attributes):
+		show_wrong_connection()
 		dialog_box.show_dialog("Incorrect object")
 		await get_tree().create_timer(2.0).timeout
 		dialog_box.hide_dialog()
 		return
 
 	placed_object = area
-		
+	activate_connection()
+	
 	if area.has_method("set_placed"):
 		area.set_placed()
 			
@@ -96,3 +105,13 @@ func is_valid_item(item_class, item_attributes) -> bool:
 		if str(item_value) != str(required_value):
 			return false
 	return true
+	
+func show_wrong_connection():
+	var tween = create_tween()
+	tween.tween_property(line, "default_color", wrong_line_color, 0.15)
+	tween.tween_property(line, "default_color", inactive_line_color, 0.5)
+
+func activate_connection():
+	var tween = create_tween()
+	tween.tween_property(line, "default_color", active_line_color, 0.5)
+	tween.parallel().tween_property(line, "width", 3.0, 0.5)

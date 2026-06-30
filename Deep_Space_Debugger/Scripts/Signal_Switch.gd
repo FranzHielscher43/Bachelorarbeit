@@ -5,6 +5,7 @@ extends Area2D
 @onready var target = get_node_or_null(target_path)
 
 @export var hint_text := "Press ENTER to send signal"
+@export var hint_title := "INFORMATION"
 @onready var dialogbox = $"../Dialogbox"
 @onready var main_sprite = $MainSprite2D
 @onready var activated_sprite = $ActivatedSprite2D
@@ -44,24 +45,40 @@ func send_signal_to_target():
 	
 	if target == null:
 		return
-		
-	used = true
 	
-	if connection_line != null:
-		send_sound.play()
-		connection_line.modulate = Color("#15ba12")
-	
-	if target.has_method("receive_signal"):
-		await dialogbox.show_timed_dialog("Sender: " + signal_id + "\n\n" + "send_signal_to_target()\n" + "→ CommunicationServer.receive_signal()\n\n" + "Message is being transmitted...", 5.0)
-		target.receive_signal(signal_id)
-	else:
+	if !target.has_method("receive_signal"):
 		await dialogbox.show_timed_dialog("Target has no receive_signal method.", 5.0)
+		return
 	
+	if send_sound != null:
+		send_sound.play()
+	
+	await dialogbox.show_timed_dialog(
+		"Sender: " + signal_id + "\n\n" +
+		"send_signal_to_target()\n" +
+		"→ CommunicationServer.receive_signal()\n\n" +
+		"Message is being transmitted...",
+		5.0
+	)
+	
+	var success = await target.receive_signal(signal_id)
+	
+	if success:
+		used = true
+		
+		if connection_line != null:
+			connection_line.modulate = Color("#15ba12")
+	else:
+		if connection_line != null:
+			connection_line.modulate = Color("#ff4d4d")
+			await get_tree().create_timer(2.5).timeout
+			connection_line.modulate = Color("#233461")
+			
 func _on_body_entered(body):
 	if body.name == "Player":
 		player_nearby = true
 		if !used:
-			dialogbox.show_dialog(hint_text)
+			dialogbox.show_dialog(hint_text, true, hint_title)
 	
 func _on_body_exited(body):
 	if body.name == "Player":

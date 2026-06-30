@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://b5fp6uxk08lqq"]
+
+[ext_resource type="Script" uid="uid://pkir3332rnh8" path="res://Scripts/Hologram.gd" id="1_iuu2a"]
+[ext_resource type="Texture2D" uid="uid://c1r1dv0sfc6xi" path="res://Assets/sprites/Floor+Objects.png" id="2_wu8ef"]
+[ext_resource type="AudioStream" uid="uid://13ya5yli42sk" path="res://Assets/sounds/hologram.mp3" id="3_d36o4"]
+[ext_resource type="FontFile" uid="uid://giyv3v5cj60r" path="res://Assets/fonts/ShareTechMono-Regular.ttf" id="3_sy2dy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wxnx7"]
+radius = 6.2111807
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d36o4"]
+radius = 14.782609
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sy2dy"]
+atlas = ExtResource("2_wu8ef")
+region = Rect2(386, 3, 28, 27)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu8ef"]
+bg_color = Color(0.4, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sy2dy"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.4, 1, 1, 1)
+
+[node name="Hologram" type="StaticBody2D" unique_id=1831553138]
+scale = Vector2(1.15, 1.15)
+script = ExtResource("1_iuu2a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=941860883]
+scale = Vector2(1.4, 1.4)
+shape = SubResource("CircleShape2D_wxnx7")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1788836348]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2116740865]
+shape = SubResource("CircleShape2D_d36o4")
+
+[node name="ProjectorSprite" type="Sprite2D" parent="." unique_id=154897751]
+scale = Vector2(0.6, 0.6)
+texture = SubResource("AtlasTexture_sy2dy")
+
+[node name="HologramSound" type="AudioStreamPlayer2D" parent="." unique_id=618481528]
+stream = ExtResource("3_d36o4")
+volume_db = -15.0
+
+[node name="LightCone" type="Polygon2D" parent="." unique_id=2080324383]
+modulate = Color(0.4, 1, 1, 1)
+z_index = 100
+position = Vector2(-4.7683716e-07, -1.9999998)
+scale = Vector2(0.8, 0.8)
+color = Color(0.4, 1, 1, 1)
+polygon = PackedVector2Array(0, -2.5, 5, -4, 20, -10, -20, -10, -4, -4)
+
+[node name="HologramPanel" type="Control" parent="." unique_id=1955712798]
+z_index = 100
+layout_mode = 3
+anchors_preset = 0
+offset_top = -1.9999998
+offset_bottom = -1.9999998
+scale = Vector2(0.4, 0.4)
+
+[node name="Panel" type="Panel" parent="HologramPanel" unique_id=565681985]
+layout_mode = 0
+offset_left = -40.0
+offset_top = -80.0
+offset_right = 40.0
+offset_bottom = -20.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_wu8ef")
+
+[node name="Label" type="Label" parent="HologramPanel/Panel" unique_id=683004745]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("3_sy2dy")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_sy2dy")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3

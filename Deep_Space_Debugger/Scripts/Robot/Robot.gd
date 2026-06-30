@@ -19,6 +19,19 @@ var task_target = null
 @onready var walk_sound = $WalkingSound
 @onready var hit_sound = $HitSound
 
+@export var route_points_parent : Node2D
+
+var route_points := []
+var return_points := []
+var current_return_index := 0
+var current_route_index := 0
+
+@export var require_player_nearby := true
+@export var max_player_distance := 120
+@export var escort_player_path : NodePath
+@export var wait_after_task := 0.0
+@onready var escort_player = get_node_or_null(escort_player_path)
+
 func _ready():
 	start_position = global_position
 	direction = Vector2.ZERO
@@ -27,7 +40,7 @@ func _ready():
 	$Timer.timeout.connect(_on_timer_timeout)
 	$PlayerDetection.body_entered.connect(_on_detection_entered)
 	$PlayerDetection.body_exited.connect(_on_detection_exited)
-
+	
 func _physics_process(delta):
 	if !is_active:
 		velocity = Vector2.ZERO
@@ -35,39 +48,68 @@ func _physics_process(delta):
 		return
 		
 	if returning_home:
-		var to_home = start_position - global_position
+		var to_home = target_position - global_position
+	
 		if to_home.length() < 8:
 			velocity = Vector2.ZERO
-			global_position = start_position
+			global_position = target_position
 			move_and_slide()
 			update_animation(Vector2.ZERO)
-			
-			returning_home = true
+
+			current_return_index += 1
+
+			if current_return_index < return_points.size():
+				target_position = return_points[current_return_index]
+				return
+
+			returning_home = false
 			is_active = false
 			walk_sound.stop()
 			return
-		
+
 		direction = to_home.normalized()
 		velocity = direction * speed
 		move_and_slide()
 		update_animation(direction)
-		return	
+		return
 		
 	if moving_to_target:
+		if require_player_nearby and escort_player != null:
+			var distance = global_position.distance_to(escort_player.global_position)
+
+			if distance > max_player_distance:
+				velocity = Vector2.ZERO
+				update_animation(Vector2.ZERO)
+				walk_sound.stop()
+				return
+
+			if !walk_sound.playing:
+				walk_sound.play()
+
 		var to_target = target_position - global_position
-		
+
 		if to_target.length() < 8:
 			velocity = Vector2.ZERO
 			global_position = target_position
 			move_and_slide()
 			update_animation(Vector2.ZERO)
-			
-			returning_home = false
+
+			current_route_index += 1
+
+			if current_route_index < route_points.size():
+				target_position = route_points[current_route_index]
+				return
+
+			moving_to_target = false
 			is_active = false
 			walk_sound.stop()
-			execute_task(task_target)
+			await execute_task(task_target)
+			if wait_after_task > 0:
+				await get_tree().create_timer(wait_after_task).timeout
+				
+			return_home()
 			return
-	
+
 		direction = to_target.normalized()
 		velocity = direction * speed
 		move_and_slide()
@@ -96,11 +138,24 @@ func start_robot():
 	walk_sound.play()
 	
 func return_home():
-	target_position = start_position
+	get_route()
+	return_points = route_points.duplicate()
+	return_points.reverse()
+	return_points.append(start_position)
+	
+	current_return_index = 0
+	
+	if return_points.size() == 0:
+		return
+		
+	target_position = return_points[current_return_index]
+	
 	returning_home = true
 	moving_to_target = false
 	is_active = true
+	
 	start_sound.play()
+	walk_sound.play()
 
 func choose_random_direction():
 	var directions = [
@@ -153,23 +208,40 @@ func get_ability() -> String:
 	
 func execute_task(target):
 	if target != null and target.has_method("receive_robot_task"):
-		target.receive_robot_task(self)
+		await target.receive_robot_task(self)
 		return
 	print(get_bot_name() + " cannot perform this task.")
+	
+func get_route():
+	route_points.clear()
+	if route_points_parent == null:
+		return
+	
+	for child in route_points_parent.get_children():
+		route_points.append(child.global_position)
 
 func move_to_task(target):
-
 	if target == null:
 		return
 		
 	task_target = target
 	
+	get_route()
+	current_route_index = 0
+	
+	
 	if target.has_node("TargetPoint"):
-		target_position = target.get_node("TargetPoint").global_position
+		route_points.append(target.get_node("TargetPoint").global_position)
 	else:
-		target_position = target.global_position
+		route_points.append(target.global_position)
+		
+	if route_points.size() == 0:
+		return
+		
+	target_position = route_points[current_route_index]
 	
 	moving_to_target = true
 	returning_home = false
 	is_active = true
 	start_sound.play()
+	walk_sound.play()

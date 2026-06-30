@@ -20,10 +20,18 @@ https://fonts.google.com/specimen/Share+Tech+Mono?preview.script=Latn
 
 Game-Assets:
 
+Tilesets:
+https://kenam0.itch.io/pixel-smoke
+https://foozlecc.itch.io/void-environment-pack
+https://steelsoldier.itch.io/top-down-sci-fi-tileset
+https://comshadow.itch.io/space-station-interior --> nicht genutzt bisher
+https://psychronic.itch.io/galacti-chrons-sci-fi-warehouse-tileset?__cf_chl_f_tk=DbbeL9J1A_hMVCBmcQTxHKVqbhs3s6gLs44TYe3Eccs-1782807481-1.0.1.1-N0.DF45Cnw1Rb04M8CiKX8hSSkHoG6lrRtToLPcWQx4
+
 Character:
 Sprite: https://saraspiegelberg.itch.io/free-pixel-art-character-asset-astronaut
+		https://itch.io/queue/c/2452473/spacegame?game_id=2941101&password=
 Sound: https://pixabay.com/sound-effects/household-metal-footsteps-14727/
-
+	   https://pixabay.com/sound-effects/people-male-yawn-effect-376879/
 Button:
 Sound: https://pixabay.com/sound-effects/film-special-effects-pickupplasticobject-91036/
 
@@ -46,6 +54,7 @@ Sound: https://pixabay.com/sound-effects/film-special-effects-take-item-sound-ef
 	
 Powersystem / Generator:
 Sound: https://pixabay.com/sound-effects/film-special-effects-spotlight-turning-on-388828/
+	   https://pixabay.com/sound-effects/film-special-effects-sucked-into-classroom-103774/
 
 Mission Status:
 Sound: https://pixabay.com/sound-effects/film-special-effects-ui-success-bloom-526566/
@@ -54,8 +63,31 @@ Sound: https://pixabay.com/sound-effects/film-special-effects-ui-success-bloom-5
 Terminal:
 Sound: https://pixabay.com/sound-effects/film-special-effects-success-48018/
 
+Hologram:
+Sound: https://pixabay.com/sound-effects/film-special-effects-ui-hologram-interface-blip-527096/
+
 Robot:
 Sprite: https://ashenremains.itch.io/leftover-art
 Sound: https://pixabay.com/sound-effects/film-special-effects-robot-noises-70217/
 	   https://pixabay.com/sound-effects/film-special-effects-082569-robot-voice-let39s-get-it-on-82780/
 	   https://pixabay.com/sound-effects/film-special-effects-wake-up-the-robot-84894/
+
+
+Noch nicht zugeordnet:
+Sound: https://pixabay.com/sound-effects/film-special-effects-teleporter-70253/
+	   https://pixabay.com/sound-effects/film-special-effects-sci-fi-sfx-8-350836/
+	   https://pixabay.com/sound-effects/film-special-effects-ui-system-access-granted-534603/
+	   https://pixabay.com/sound-effects/film-special-effects-unclear-message-in-ship-station-23456/
+	   https://pixabay.com/sound-effects/film-special-effects-sci-fi-station-18745/
+	   https://pixabay.com/sound-effects/musical-cyber-day-alarm-clock-418781/
+	   https://pixabay.com/sound-effects/film-special-effects-lower-deck-atmo-119108/
+	   https://pixabay.com/music/ambient-space-ambient-351305/
+	   https://pixabay.com/sound-effects/film-special-effects-sci-fi-swipe-405451/
+	   https://pixabay.com/sound-effects/film-special-effects-sci-fi-door-unlock-and-hydraulic-open-2-546619   
+	   https://pixabay.com/sound-effects/film-special-effects-sci-fi-sound-effect-designed-circuits-hum-10-200831/
+	   https://pixabay.com/sound-effects/film-special-effects-electrical-shock-zap-106412/
+	   https://pixabay.com/sound-effects/film-special-effects-ui-system-access-granted-534603/
+	   https://pixabay.com/sound-effects/film-special-effects-sci-fi-sfx-8-350836/
+	   https://pixabay.com/sound-effects/film-special-effects-spotlight-turning-on-388828/
+	   https://pixabay.com/sound-effects/film-special-effects-success-48018/
+	

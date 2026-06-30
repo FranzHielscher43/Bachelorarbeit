@@ -12,6 +12,10 @@ region = Rect2(96, 0, 144, 143)
 [node name="DropZone" type="Area2D" unique_id=850932415]
 script = ExtResource("1_p5dp6")
 
+[node name="Line2D" type="Line2D" parent="." unique_id=471936632]
+points = PackedVector2Array(0, 0)
+width = 2.0
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2068630240]
 position = Vector2(0, 0.2)
 scale = Vector2(0.19, 0.191)

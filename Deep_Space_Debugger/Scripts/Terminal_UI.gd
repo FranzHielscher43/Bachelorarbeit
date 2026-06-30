@@ -40,7 +40,9 @@ var selected_bot_method := ""
 @onready var repair_bot_button = $Control/OuterBackgroundPanel/InnerBackgroundPanel/ContentPanel/DataPanel/RepairBotButton
 @onready var security_bot_button = $Control/OuterBackgroundPanel/InnerBackgroundPanel/ContentPanel/DataPanel/SecurityBotButton
 @onready var transport_bot_button = $Control/OuterBackgroundPanel/InnerBackgroundPanel/ContentPanel/DataPanel/TransportBotButton
+var repair_job_done := false
 var transport_job_done := false
+var security_job_done := false
 @export var elevator_door_path : NodePath
 @onready var elevator_door = get_node_or_null(elevator_door_path)
 
@@ -169,6 +171,7 @@ func get_selected_bot_name() -> String:
 
 func _on_method_pressed():
 	click_sound.play()
+	print("CURRENT METHOD: " +  current_method)
 	await  click_sound.finished
 	
 	match current_method:
@@ -176,13 +179,13 @@ func _on_method_pressed():
 			MissionManager.complete_subtask("security_access", "Request clearance")
 			execute_request_access()
 		"send_repair_bot":
-			MissionManager.complete_subtask("robotics", "Select & send repair robot")
+			MissionManager.complete_subtask("repair", "Select & send repair robot")
 			execute_send_repair_bot()
 		"send_security_bot":
-			MissionManager.complete_subtask("robotics", "Select & send security robot")
+			MissionManager.complete_subtask("secure", "Select & send security robot")
 			execute_send_security_bot()
 		"send_transport_bot":
-			MissionManager.complete_subtask("robotics", "Select & send transport robot")
+			MissionManager.complete_subtask("transport", "Select & send transport robot")
 			execute_send_transport_bot()
 		"send_all_robots":
 			execute_send_all_robots()
@@ -257,12 +260,12 @@ func execute_send_all_robots():
 		
 	current_method = ""
 	method_button.disabled = true
-	method_button.text = "ROBOTS DEPLOYED"
+	method_button.text = "ACTIVATE PROTOCOL"
 	
 	repair_bot.move_to_task(ai_core)
-	await get_tree().create_timer(5.0).timeout
+	await get_tree().create_timer(10.0).timeout
 	security_bot.move_to_task(ai_core)
-	await get_tree().create_timer(5.0).timeout
+	await get_tree().create_timer(10.0).timeout
 	transport_bot.move_to_task(ai_core)
 
 func show_title():
@@ -504,6 +507,7 @@ func show_robot_task():
 		security_bot_button.text = "SELECT SECURITYBOT"
 		transport_bot_button.text = "SELECT TRANSPORTBOT"
 		method_button.visible = false
+		update_robot_button_locks()
 		update_button_highlight()
 		return
 
@@ -521,6 +525,7 @@ func show_robot_task():
 	security_bot_button.text = "SELECT SECURITYBOT"
 	transport_bot_button.text = "SELECT TRANSPORTBOT"
 	method_button.visible = false
+	update_robot_button_locks()
 	update_button_highlight()
 	
 func show_ai_core():
@@ -622,7 +627,7 @@ func open_terminal():
 		3: 
 			title_label.clear()
 			title_label.append_text("""[font_size=40]TERMINAL_02[/font_size]\n[font_size=24]STATION: ECLIPSE-9[/font_size]""")
-			MissionManager.complete_subtask("robotics", "Open terminal")
+			MissionManager.complete_subtask("repair", "Open terminal")
 		4:
 			title_label.clear()
 			title_label.append_text("""[font_size=40]TERMINAL_04[/font_size]\n[font_size=24]STATION: ECLIPSE-9[/font_size]""")
@@ -720,3 +725,11 @@ func update_button_highlight():
 		
 func is_ai_core_available() -> bool:
 	return ai_core != null and ai_core.communication_online
+
+func update_robot_button_locks():
+	if terminal_level != 3:
+		return
+		
+	repair_bot_button.disabled = repair_job_done
+	transport_bot_button.disabled = !repair_job_done or transport_job_done
+	security_bot_button.disabled = !transport_job_done or security_job_done

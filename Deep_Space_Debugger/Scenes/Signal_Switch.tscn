@@ -17,6 +17,7 @@ region = Rect2(614, 481, 48, 86)
 size = Vector2(16, 26)
 
 [node name="SignalSwitch" type="Area2D" unique_id=1171400425]
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_mp3uu")
 connection_line_path = NodePath("Line2D")
 send_sound_path = NodePath("SendSound")

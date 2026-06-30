@@ -26,7 +26,7 @@ func _ready():
 func _on_start_button_pressed():
 	click_sound.play()
 	await click_sound.finished
-	get_tree().change_scene_to_file("res://Scenes/Level/Level_01.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Level/Intro/Intro.tscn")
 
 func _on_quit_button_pressed():
 	click_sound.play()
