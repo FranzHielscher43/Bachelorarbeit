@@ -9,8 +9,16 @@ var repair_done := false
 var security_done := false
 var transport_done := false
 
+var player_nearby := false
+var station_rebooted := false
+
 @export var door_path : NodePath
 @onready var door = get_node_or_null(door_path)
+
+@export var credits_path := "res://Scenes/Level/Credits.tscn"
+
+@export var canvas_modulate_path : NodePath
+@onready var canvas_modulate = get_node_or_null(canvas_modulate_path)
 
 @onready var repair_effect = $RepairEffect
 @onready var repair_sound = $RepairSound
@@ -20,6 +28,13 @@ var core_online := false
 func _ready():
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
+	
+func _process(_delta):
+	if player_nearby and core_online and !station_rebooted:
+		if Input.is_action_just_pressed("ui_accept"):
+			station_rebooted = true
+			MissionManager.complete_subtask("ai_core", "Reboot space station")
+			await reboot_station()
 
 func activate_communication():
 	communication_online = true
@@ -36,10 +51,8 @@ func receive_robot_task(bot):
 	
 	match bot_ability:
 		"repair":
-			MissionManager.complete_subtask("ai_core", "Use repair bot")
 			await repair_core()
 		"secure":
-			MissionManager.complete_subtask("ai_core", "Use security bot")
 			security_done = true
 			await show_timed_dialog(
 				"SecurityBot received.\n\n" +
@@ -49,7 +62,6 @@ func receive_robot_task(bot):
 			)
 			await check_core_status()
 		"transport":
-			MissionManager.complete_subtask("ai_core", "Use transport bot")
 			transport_done = true
 			await show_timed_dialog(
 				"TransportBot received.\n\n" +
@@ -58,18 +70,21 @@ func receive_robot_task(bot):
 				5.0
 			)
 			await check_core_status()
-
+			
 func check_core_status():
-	if repair_done and security_done and transport_done and !core_online:
-		core_online = true
-		MissionManager.complete_subtask("ai_core", "Activate core method")
-		await show_timed_dialog("AI core rebooted.\n\n" + "Used POLYMORPHISM:\n" + "A united method call produced different behavior.", 5.0)
-		await get_tree().create_timer(5.0).timeout
-		await show_timed_dialog("Exit door opened in the robot area.", 5.0)
-		door.open_door()
-	else: 
-		await show_timed_dialog("Execution of common method necessary.", 5.0)
+	if !(repair_done and security_done and transport_done):
+		return
+		
+	if core_online:
+		return
+	
+	core_online = true
+	MissionManager.complete_subtask("ai_core", "Wait for the robots")
+	await show_timed_dialog("AI Core online.\n\n" +"All robot tasks completed.", 5.0)
 
+	if player_nearby and !station_rebooted:
+		dialogbox.show_dialog("AI Core online.\n\nPress [ENTER] to reboot the space station.", true, "AI CORE")
+			
 func repair_core():
 	if repair_done:
 		return
@@ -88,6 +103,39 @@ func repair_core():
 	
 	await check_core_status()
 
+func reboot_station():
+
+	dialogbox.hide_dialog()
+	
+	await show_timed_dialog(
+		"REBOOT INITIATED...\n\n" +
+		"Loading AI Core...\n" +
+		"Restoring station services...\n" +
+		"Synchronizing object network...",
+		5.0
+	)
+	if repair_effect != null:
+		repair_effect.visible = true
+		repair_effect.play("repair")
+	if repair_sound != null:
+		repair_sound.play()
+	await flicker()
+	await get_tree().create_timer(3.0).timeout
+	if repair_effect != null:
+		repair_effect.visible = false
+	if repair_sound != null:
+		repair_sound.stop()
+	await show_timed_dialog(
+		"SPACE STATION ECLIPSE-9\n\n" +
+		"STATUS: ONLINE\n\n" +
+		"Object communication restored.\n" +
+		"All systems operational.",
+		5.0
+	)
+	MissionManager.complete_subtask("ai_core", "Reboot space station")
+	if door != null:
+		door.open_door()
+
 func is_online() -> bool:
 	return core_online
 	
@@ -100,11 +148,32 @@ func show_timed_dialog(text: String, duration: float):
 	
 	if current_id == dialog_id:
 		dialogbox.hide_dialog()
+		
+func flicker():
+	if canvas_modulate == null:
+		return
+		
+	var normal_color = Color.WHITE
+	var dark_color = Color("#696969")
+	
+	for i in range(8):
+		canvas_modulate.color = dark_color
+		await get_tree().create_timer(0.08).timeout
+		canvas_modulate.color = normal_color
+		await get_tree().create_timer(0.12).timeout
+	
+	var tween = create_tween()
+	tween.tween_property(canvas_modulate, "color", normal_color, 2.0)
 
 func _on_body_entered(body):
 	if body.name == "Player":
-		dialogbox.show_dialog("This central intelligence coordinates\nall major station systems.\n\nEvery connected OBJECT can exchange\nmessages with the AI Core through\nmethod calls.\n\nRestore the station server to regain\nfull system control.", true, "AI CORE")
-	
+		player_nearby = true
+		if !core_online:
+			dialogbox.show_dialog("This central intelligence coordinates\nall major station systems.\n\nEvery connected OBJECT can exchange\nmessages with the AI Core through\nmethod calls.\n\nRestore the station server to regain\nfull system control.", true, "AI CORE")
+		elif !station_rebooted:
+			dialogbox.show_dialog("AI Core online.\n\nPress [ENTER] to reboot the space station.", true, "AI CORE")
+
 func _on_body_exited(body):
 	if body.name == "Player":
+		player_nearby = false
 		dialogbox.hide_dialog()

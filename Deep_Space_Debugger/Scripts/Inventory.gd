@@ -3,8 +3,7 @@ extends CanvasLayer
 @onready var slots = [
 	$Items/VBoxContainer/Slot_01,
 	$Items/VBoxContainer/Slot_02,
-	$Items/VBoxContainer/Slot_03,
-	$Items/VBoxContainer/Slot_04,
+	$Items/VBoxContainer/Slot_03
 ]
 
 @onready var player = $"../Player"
@@ -26,7 +25,7 @@ func _ready():
 	update_slots()
 	
 func add_item(item_data):
-	if items.size() >= 5:
+	if items.size() >= 3:
 		return
 		
 	items.append(item_data)

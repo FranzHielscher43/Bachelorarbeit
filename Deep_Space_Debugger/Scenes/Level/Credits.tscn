@@ -1,3 +1,91 @@
 [gd_scene format=3 uid="uid://drmkntxirk1vd"]
 
-[node name="Level_05" type="Node2D" unique_id=1013862092]
+[ext_resource type="Script" uid="uid://kudi6w3rgb8s" path="res://Scripts/Level/Credits.gd" id="1_d06hb"]
+[ext_resource type="AudioStream" uid="uid://c5b4ffq3vchw0" path="res://Assets/sounds/Ambient/ambient_level_02.mp3" id="1_fu1lk"]
+[ext_resource type="FontFile" uid="uid://giyv3v5cj60r" path="res://Assets/fonts/ShareTechMono-Regular.ttf" id="2_tujs7"]
+
+[node name="Credits" type="Control" unique_id=1336024094]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d06hb")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=385018416]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1337088289]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_tujs7")
+theme_override_font_sizes/normal_font_size = 24
+text = "Deep Space Debugger
+
+A Serious Game
+for learning
+Object-Oriented Programming
+
+
+Bachelor Thesis
+
+Franz Hielscher
+
+HTWK Leipzig
+
+
+Supervisor
+
+Dr. Nico Graebling
+
+Second Supervisor
+
+M.Sc. Felix Steffen Stolze
+
+
+Godot Engine 4
+
+
+Graphics
+
+Pixel Art Assets
+(credits according to license)
+
+
+Sound Effects
+
+...
+
+
+Music
+
+...
+
+
+Special Thanks
+
+To everyone who supported
+this project.
+
+
+Thank you for playing!
+
+The station has been restored."
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CreditsAudio" type="AudioStreamPlayer2D" parent="." unique_id=1967520906]
+stream = ExtResource("1_fu1lk")
+volume_db = -10.0

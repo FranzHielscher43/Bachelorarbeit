@@ -39,18 +39,18 @@ shape = SubResource("RectangleShape2D_mw28t")
 [node name="DoorSound" type="AudioStreamPlayer2D" parent="Door" unique_id=277344276]
 stream = ExtResource("2_mc0fk")
 
-[node name="InteractionArea" type="Area2D" parent="." unique_id=1752958834]
+[node name="CheckArea" type="Area2D" parent="." unique_id=1752958834]
 position = Vector2(-48, 2.1457672e-06)
 scale = Vector2(1.5, 1.5)
 script = ExtResource("5_a5sdc")
 security_door_path = NodePath("../Door")
 
-[node name="Sprite2D" type="Sprite2D" parent="InteractionArea" unique_id=99542791]
+[node name="Sprite2D" type="Sprite2D" parent="CheckArea" unique_id=99542791]
 scale = Vector2(0.3, 0.3)
 texture = SubResource("AtlasTexture_q7xuc")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1880945592]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckArea" unique_id=1880945592]
 scale = Vector2(0.7, 0.7)
 shape = SubResource("RectangleShape2D_mc0fk")
 
-[node name="Polygon2D" type="Polygon2D" parent="InteractionArea" unique_id=725388269]
+[node name="Polygon2D" type="Polygon2D" parent="CheckArea" unique_id=725388269]

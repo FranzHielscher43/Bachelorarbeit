@@ -114,7 +114,7 @@ bg_color = Color(0.039215688, 0.07058824, 0.09019608, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mydtt"]
 
-[node name="Terminal" type="CanvasLayer" unique_id=95353647]
+[node name="Terminal" type="CanvasLayer" unique_id=95353647 groups=["Terminal"]]
 script = ExtResource("1_q6j3v")
 
 [node name="Control" type="Control" parent="." unique_id=1197237779]

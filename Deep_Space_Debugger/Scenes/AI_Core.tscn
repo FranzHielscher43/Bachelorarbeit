@@ -80,7 +80,7 @@ animations = [{
 }]
 
 [node name="aiCore" type="Area2D" unique_id=780392045]
-scale = Vector2(2, 2)
+scale = Vector2(3, 3)
 script = ExtResource("1_otd2x")
 
 [node name="TargetPoint" type="Marker2D" parent="." unique_id=995778687]

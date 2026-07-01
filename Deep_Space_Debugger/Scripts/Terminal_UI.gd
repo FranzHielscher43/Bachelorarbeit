@@ -188,6 +188,7 @@ func _on_method_pressed():
 			MissionManager.complete_subtask("transport", "Select & send transport robot")
 			execute_send_transport_bot()
 		"send_all_robots":
+			MissionManager.complete_subtask("ai_core", "Activate core method")
 			execute_send_all_robots()
 
 	close_terminal()
@@ -266,7 +267,7 @@ func execute_send_all_robots():
 	await get_tree().create_timer(10.0).timeout
 	security_bot.move_to_task(ai_core)
 	await get_tree().create_timer(10.0).timeout
-	transport_bot.move_to_task(ai_core)
+	transport_bot.move_to_task(transport_bot.object)
 
 func show_title():
 	title_label.clear()
@@ -623,7 +624,7 @@ func open_terminal():
 		2:
 			title_label.clear()
 			title_label.append_text("""[font_size=40]SECURITY CONSOLE[/font_size]\n[font_size=24]STATION: ECLIPSE-9[/font_size]""")
-			MissionManager.complete_subtask("security_access", "Open security terminal")
+			MissionManager.complete_subtask("security_access", "Check security terminal")
 		3: 
 			title_label.clear()
 			title_label.append_text("""[font_size=40]TERMINAL_02[/font_size]\n[font_size=24]STATION: ECLIPSE-9[/font_size]""")

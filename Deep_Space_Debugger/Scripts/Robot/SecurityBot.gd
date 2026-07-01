@@ -12,10 +12,9 @@ func get_ability() -> String:
 	
 func execute_task(target):
 	if target != null and target.has_method("receive_robot_task"):
-		target.receive_robot_task(self)
-		secure_sound.play()
-		await get_tree().create_timer(2.5).timeout
-		return_home()
+		if secure_sound != null:
+			secure_sound.play()
+		await target.receive_robot_task(self)
 		return
 	
 	if target != null and target.has_method("unlock_by_security_bot"):

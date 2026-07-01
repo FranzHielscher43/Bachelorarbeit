@@ -2,6 +2,8 @@ extends Area2D
 
 @export var security_door_path : NodePath
 @onready var security_door = get_node_or_null(security_door_path)
+
+@onready var dialogbox = $"../../Dialogbox"
 var player_nearby := false
 
 @onready var cube = $Polygon2D
@@ -39,7 +41,10 @@ func _process(delta):
 func _on_body_entered(body):
 	if body.name == "Player":
 		player_nearby = true
+		dialogbox.show_dialog("Press [ENTER] to open door.")
+		
 
 func _on_body_exited(body):
 	if body.name == "Player":
 		player_nearby = false
+		dialogbox.hide_dialog()

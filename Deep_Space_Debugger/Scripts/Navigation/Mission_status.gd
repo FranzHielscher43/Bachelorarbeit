@@ -9,20 +9,136 @@ extends CanvasLayer
 @onready var vbox = $Panel/MarginContainer/VBoxContainer
 
 @export var start_mission_id := ""
+@export var minimap_path : NodePath
+@onready var minimap = get_node_or_null(minimap_path)
 
 var mission_steps = [
-	{"id": "tutorial", "text": "Tutorial", "done": false, "subtasks": {"Press any movement key": false, "Open menu with ESC": false, "Open the inventory with I": false, "Navigate with Up and Down": false, "Open the minimap with M": false, "Open terminal with ENTER": false, "Pick up object": false, "Drop object": false}},
-	{"id": "level_01", "text": "Proceed to the power supply", "done": false, "subtasks": {"Go to the power supply": false}},
-	{"id": "energy_core", "text": "Restore power supply", "done": false, "subtasks": {"Open terminal": false, "Examine energy cores": false, "Insert matching energy core": false}},
-	{"id": "level_02", "text": "Go to the security center", "done": false, "subtasks": {"Use the unlocked passageway": false}},
-	{"id": "security_access", "text": "Obtain security access", "done": false, "subtasks": {"Check security door": false, "Insert appropriate access module": false, "Open security terminal": false, "Request clearance": false}},
-	{"id": "level_03", "text": "Proceed to the communications center", "done": false, "subtasks": {"Open security door": false}},
-	{"id": "repair", "text": "Repair the communication relay", "done": false, "subtasks": {"Open terminal": false, "Select & send repair robot": false, "Escort repair robot": false}},
-	{"id": "transport", "text": "Open the locked door", "done": false, "subtasks": {"Select & send transport robot": false, "Wait for the transport robot": false}},
-	{"id": "secure", "text": "Access the security door", "done": false, "subtasks": {"Select & send security robot": false, "Escort security robot": false}},
-	{"id": "level_04", "text": "Proceed to the AI Core", "done": false, "subtasks": {"Use the elevator": false}},
-	{"id": "communication", "text": "Activate station server", "done": false, "subtasks": {"Send navigation signal": false, "Send life support signal": false, "Send security channel signal": false}},
-	{"id": "ai_core", "text": "Reboot AI core system", "done": false, "subtasks": {"Open terminal": false, "Activate core method": false}}
+	{
+		"id": "tutorial",
+		"text": "Tutorial",
+		"done": false,
+		"subtasks": [
+			{"text": "Press any movement key", "done": false, "target": ""},
+			{"text": "Open menu with [ESC]", "done": false, "target": ""},
+			{"text": "Open inventory with [I]", "done": false, "target": ""},
+			{"text": "Navigate inventory with [↑/↓]", "done": false, "target": ""},
+			{"text": "Open/Close minimap with [M]", "done": false, "target": ""},
+			{"text": "Open terminal with [ENTER]", "done": false, "target": "TerminalObject"},
+			{"text": "Pick up object [ENTER]", "done": false, "target": "TutorialObject"},
+			{"text": "Drop object [I]+[↑/↓]+[ENTER]", "done": false, "target": ""}
+		]
+	},
+	{
+		"id": "level_01",
+		"text": "Proceed to the power supply",
+		"done": false,
+		"subtasks": [
+			{"text": "Go to the power supply", "done": false, "target": "LevelTransition"}
+		]
+	},
+	{
+		"id": "energy_core",
+		"text": "Restore power supply",
+		"done": false,
+		"subtasks": [
+			{"text": "Open terminal", "done": false, "target": "TerminalObject"},
+			{"text": "Examine energy cores", "done": false, "target": "EnergyCore_A"},
+			{"text": "Insert matching energy core", "done": false, "target": "Generator_Dropzone"}
+		]
+	},
+	{
+		"id": "level_02",
+		"text": "Go to the security center",
+		"done": false,
+		"subtasks": [
+			{"text": "Use the unlocked passageway", "done": false, "target": "LevelTransition"}
+		]
+	},
+	{
+		"id": "security_access",
+		"text": "Obtain security access",
+		"done": false,
+		"subtasks": [
+			{"text": "Check security door", "done": false, "target": "CheckArea"},
+			{"text": "Check security terminal", "done": false, "target": "TerminalObject"},
+			{"text": "Insert appropriate access module", "done": false, "target": "Security_Console_Dropzone"},
+			{"text": "Request clearance", "done": false, "target": "TerminalObject"}
+		]
+	},
+	{
+		"id": "level_03",
+		"text": "Proceed to the communications center",
+		"done": false,
+		"subtasks": [
+			{"text": "Open security door", "done": false, "target": "CheckArea"},
+			{"text": "Use the unlocked passageway", "done": false, "target": "LevelTransition"}
+		]
+	},
+	{
+		"id": "repair",
+		"text": "Repair the communication relay",
+		"done": false,
+		"subtasks": [
+			{"text": "Open terminal", "done": false, "target": "TerminalObject"},
+			{"text": "Select & send repair robot", "done": false, "target": "TerminalObject"},
+			{"text": "Escort repair robot", "done": false, "target": "RepairBot"}
+		]
+	},
+	{
+		"id": "transport",
+		"text": "Open the locked door",
+		"done": false,
+		"subtasks": [
+			{"text": "Select & send transport robot", "done": false, "target": "TerminalObject"},
+			{"text": "Wait for the transport robot", "done": false, "target": "TransportBot"}
+		]
+	},
+	{
+		"id": "secure",
+		"text": "Access the security door",
+		"done": false,
+		"subtasks": [
+			{"text": "Select & send security robot", "done": false, "target": "TerminalObject"},
+			{"text": "Escort security robot", "done": false, "target": "SecurityBot"}
+		]
+	},
+	{
+		"id": "level_04",
+		"text": "Proceed to the Station command center",
+		"done": false,
+		"subtasks": [
+			{"text": "Use the elevator", "done": false, "target": "LevelTransition"}
+		]
+	},
+	{
+		"id": "communication",
+		"text": "Activate station server",
+		"done": false,
+		"subtasks": [
+			{"text": "Send navigation signal", "done": false, "target": "SignalSwitch_Navigation"},
+			{"text": "Send life support signal", "done": false, "target": "SignalSwitch_LifeSupport"},
+			{"text": "Send security channel signal", "done": false, "target": "SignalSwitch_Security"}
+		]
+	},
+	{
+		"id": "ai_core",
+		"text": "Reboot AI core system",
+		"done": false,
+		"subtasks": [
+			{"text": "Open terminal", "done": false, "target": "TerminalObject"},
+			{"text": "Activate core method", "done": false, "target": "TerminalObject"},
+			{"text": "Wait for the robots", "done": false, "target": "aiCore"},
+			{"text": "Reboot space station", "done": false, "target": "aiCore"}
+		]
+	},
+	{
+		"id": "end",
+		"text": "Leave the station command center",
+		"done": false,
+		"subtasks": [
+			{"text": "Go to the exit in the robotics area", "done": false, "target": "LevelTransition"}
+		]
+	}
 ]
 
 var current_mission_index := 0
@@ -38,6 +154,7 @@ func _ready():
 			
 	panel.size.y = 60
 	await show_full_mission_typed()
+	update_minimap_target()
 
 func complete_mission(id: String):
 	if current_mission_index >= mission_steps.size():
@@ -65,41 +182,48 @@ func complete_mission(id: String):
 			complete_mission(mission_steps[current_mission_index]["id"])
 		else:
 			await show_full_mission_typed()
+			update_minimap_target()
 	else:
 		await update_mission_size()
+		update_minimap_target()
 
 func complete_subtask(mission_id: String, subtask_id: String):
 	for i in range(mission_steps.size()):
 		var mission = mission_steps[i]
-		if mission["id"] == mission_id:
-			if mission["subtasks"].has(subtask_id):
-				mission["subtasks"][subtask_id] = true
+		
+		if mission["id"] != mission_id:
+			continue
+			
+		for subtask in mission["subtasks"]:
+			if subtask["text"] == subtask_id:
+				subtask["done"] = true
+
 				if i != current_mission_index:
 					return
+					
 				check_sound.play()
 				await show_next_subtask_typed()
-				var all_done := true
-				for value in mission["subtasks"].values():
-					if value == false:
-						all_done = false
-				if all_done:
-					await get_tree().create_timer(3.0).timeout
-					complete_mission(mission_id)
+				update_minimap_target()
+				
+				if are_all_subtasks_done(mission):
+					await get_tree().create_timer(2.0).timeout
+					await complete_mission(mission_id)
 				return
 
 func update_mission_display():
-
 	var mission = mission_steps[current_mission_index]
 	var text := ""
 	text += "□ " + mission["text"] + "\n"
+	
 	var show_next := true
-	for subtask_id in mission["subtasks"].keys():
-		var done = mission["subtasks"][subtask_id]
-		if done:
-			text += "   ☑ " + subtask_id + "\n"
+	
+	for subtask in mission["subtasks"]:
+		if subtask["done"]:
+			text += "   ☑ " + subtask["text"] + "\n"
 		elif show_next:
-			text += "   □ " + subtask_id + "\n"
+			text += "   □  " + subtask["text"] + "\n"
 			show_next = false
+			
 	mission_label.text = text
 	await update_mission_size()
 
@@ -132,11 +256,11 @@ func check_and_complete_current_mission():
 	var mission = mission_steps[current_mission_index]
 	if are_all_subtasks_done(mission):
 		mission["done"] = true
-		update_mission_display()
+		await update_mission_display()
 		
 func are_all_subtasks_done(mission) -> bool:
-	for value in mission["subtasks"].values():
-		if value == false:
+	for subtask in mission["subtasks"]:
+		if !subtask["done"]:
 			return false
 	return true
 	
@@ -169,18 +293,22 @@ func type_message(text: String):
 	await update_mission_size()
 	
 func show_full_mission_typed():
-
 	if current_mission_index >= mission_steps.size():
 		return
+		
 	var mission = mission_steps[current_mission_index]
 	var full_text := ""
+	
 	full_text += "□  " + mission["text"] + "\n"
-	for subtask_id in mission["subtasks"].keys():
-		if !mission["subtasks"][subtask_id]:
-			full_text += "   □  " + subtask_id + "\n"
+	
+	for subtask in mission["subtasks"]:
+		if !subtask["done"]:
+			full_text += "   □  " + subtask["text"] + "\n"
 			break
+			
 	mission_label.text = full_text
 	await update_mission_size()
+	
 	mission_label.text = ""
 	await type_text(full_text)
 	
@@ -190,11 +318,11 @@ func show_next_subtask_typed():
 	var completed_text := ""
 	var next_subtask := ""
 
-	for subtask_id in mission["subtasks"].keys():
-		if mission["subtasks"][subtask_id]:
-			completed_text += "   ☑ " + subtask_id + "\n"
+	for subtask in mission["subtasks"]:
+		if subtask["done"]:
+			completed_text += "   ☑ " + subtask["text"] + "\n"
 		else:
-			next_subtask = subtask_id
+			next_subtask = subtask["text"]
 			break
 
 	var full_preview = "□  " + mission["text"] + "\n" + completed_text
@@ -223,3 +351,27 @@ func update_mission_size():
 
 	panel.size.y = new_height
 	panel.custom_minimum_size.y = new_height
+
+func update_minimap_target():
+	if minimap == null:
+		return
+		
+	if current_mission_index >= mission_steps.size():
+		minimap.set_target(null)
+		return
+	
+	var mission = mission_steps[current_mission_index]
+	
+	for subtask in mission["subtasks"]:
+		if !subtask["done"]:
+			var target_name = subtask.get("target", "")
+			
+			if target_name == "":
+				minimap.set_target(null)
+				return
+			
+			var target_node = get_tree().current_scene.find_child(target_name, true, false)
+			minimap.set_target(target_node)
+			return
+	
+	minimap.set_target(null)

@@ -7,7 +7,7 @@ var was_moving := false
 var last_direction := Vector2.DOWN
 var stun := false
 
-func _physics_process(delta):
+func _physics_process(_delta):
 
 	var direction = Input.get_vector(
 		"ui_left",

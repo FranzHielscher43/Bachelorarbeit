@@ -14,10 +14,8 @@ size = Vector2(44, 43)
 size = Vector2(36, 35)
 
 [node name="StationServer" type="Area2D" unique_id=838841010]
+scale = Vector2(1.1, 1.1)
 script = ExtResource("1_l8ipg")
-door_path = null
-expected_order = null
-ai_core_path = null
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=662138484]
 scale = Vector2(0.4, 0.4)

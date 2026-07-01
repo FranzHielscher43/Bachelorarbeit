@@ -93,7 +93,7 @@ func _on_body_entered(body):
 		await get_tree().create_timer(elevator_move_duration * 0.5).timeout
 		fade_started = true
 		fade_out()
-	else:
+	else: 
 		final_player_position = body.global_position + player_target_offset
 		tween.tween_property(body, "global_position", final_player_position, 2.0)
 		
@@ -107,10 +107,17 @@ func _on_body_entered(body):
 	else:
 		while fade_rect.modulate.a < 0.99:
 			await get_tree().process_frame
-	
+
+	if next_level_path.ends_with("Credits.tscn"):
+		fade_rect.modulate.a = 1.0
+		await get_tree().process_frame
+		get_tree().change_scene_to_file(next_level_path)
+		return
+
 	if player_collision != null:
 		player_collision.disabled = false
 	
+	await get_tree().process_frame
 	get_tree().change_scene_to_file(next_level_path)
 
 func fade_out():

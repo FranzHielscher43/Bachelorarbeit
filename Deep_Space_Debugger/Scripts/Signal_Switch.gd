@@ -53,14 +53,6 @@ func send_signal_to_target():
 	if send_sound != null:
 		send_sound.play()
 	
-	await dialogbox.show_timed_dialog(
-		"Sender: " + signal_id + "\n\n" +
-		"send_signal_to_target()\n" +
-		"→ CommunicationServer.receive_signal()\n\n" +
-		"Message is being transmitted...",
-		5.0
-	)
-	
 	var success = await target.receive_signal(signal_id)
 	
 	if success:
@@ -68,12 +60,20 @@ func send_signal_to_target():
 		
 		if connection_line != null:
 			connection_line.modulate = Color("#15ba12")
+		
+		await dialogbox.show_timed_dialog(
+			"Sender: " + signal_id + "\n\n" +
+			"send_signal_to_target()\n" +
+			"→ StationServer.receive_signal()\n\n" +
+			"Message transmitted successfully.",
+			3.0
+		)
 	else:
 		if connection_line != null:
 			connection_line.modulate = Color("#ff4d4d")
 			await get_tree().create_timer(2.5).timeout
 			connection_line.modulate = Color("#233461")
-			
+			 			
 func _on_body_entered(body):
 	if body.name == "Player":
 		player_nearby = true

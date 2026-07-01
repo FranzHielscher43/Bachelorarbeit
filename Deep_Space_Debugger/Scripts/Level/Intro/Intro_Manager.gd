@@ -94,9 +94,9 @@ func _ready():
 	wake_fade.visible = false
 	
 	dialogbox.show_dialog("Vitals stable.\n\n" + "Cryostasis terminated.\n\n" + "Welcome back, Engineer.")
-	await get_tree().create_timer(5.0).timeout
+	await get_tree().create_timer(4.0).timeout
 	dialogbox.show_dialog("Primary objective:\n" +"Restore station functionality.")
-	await get_tree().create_timer(5.0).timeout
+	await get_tree().create_timer(4.0).timeout
 	dialogbox.show_dialog("Check the Mission Status to proceed.")
 	waiting_for_movement = true
 
@@ -110,36 +110,36 @@ func _process(_delta):
 	elif waiting_for_menu:
 		if Input.is_action_just_pressed("ui_cancel"):
 			waiting_for_menu = false
-			MissionManager.complete_subtask(task, "Open menu with ESC")
+			MissionManager.complete_subtask(task, "Open menu with [ESC]")
 			waiting_for_inventory = true
 	elif waiting_for_inventory:
 		if Input.is_action_just_pressed("inventory"):
 			waiting_for_inventory = false
-			MissionManager.complete_subtask(task, "Open the inventory with I")
+			MissionManager.complete_subtask(task, "Open inventory with [I]")
 			waiting_for_navigation = true
 	elif waiting_for_navigation:
 		if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_down"):
 			waiting_for_navigation = false
-			MissionManager.complete_subtask(task, "Navigate with Up and Down")
+			MissionManager.complete_subtask(task, "Navigate inventory with [↑/↓]")
 			waiting_for_minimap = true
 	elif waiting_for_minimap:
 		if Input.is_action_just_pressed("map"):
 			waiting_for_minimap = false
-			MissionManager.complete_subtask(task, "Open the minimap with M")
+			MissionManager.complete_subtask(task, "Open/Close minimap with [M]")
 			waiting_for_terminal = true
 	elif waiting_for_terminal:
 		if terminal.is_open:
 			waiting_for_terminal = false
-			MissionManager.complete_subtask(task, "Open terminal with ENTER")
+			MissionManager.complete_subtask(task, "Open terminal with [ENTER]")
 			waiting_for_object_pickup = true
 	elif waiting_for_object_pickup:
 		if inventory.was_picked_up:
 			waiting_for_object_pickup = false
-			MissionManager.complete_subtask(task, "Pick up object")
+			MissionManager.complete_subtask(task, "Pick up object [ENTER]")
 			waiting_for_object_drop = true
 	elif waiting_for_object_drop:
 		if inventory.was_dropped:
 			waiting_for_object_drop = false
-			MissionManager.complete_subtask(task, "Drop object")
+			MissionManager.complete_subtask(task, "Drop object [I]+[↑/↓]+[ENTER]")
 			await get_tree().create_timer(2.0).timeout
 			door.open_door()

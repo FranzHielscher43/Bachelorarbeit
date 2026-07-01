@@ -13,6 +13,7 @@ var start_position := Vector2.ZERO
 var returning_home := false
 var moving_to_target := false
 var target_position := Vector2.ZERO
+var handles_own_return := false
 var task_target = null
 
 @onready var start_sound = $"StartSound"
@@ -103,11 +104,16 @@ func _physics_process(delta):
 			moving_to_target = false
 			is_active = false
 			walk_sound.stop()
+			print(get_bot_name(), " reached final target")
+			print("task_target: ", task_target)
+			print("drop_zone? ", task_target == get("drop_zone"))
 			await execute_task(task_target)
 			if wait_after_task > 0:
 				await get_tree().create_timer(wait_after_task).timeout
+			
+			if !handles_own_return:
+				return_home()
 				
-			return_home()
 			return
 
 		direction = to_target.normalized()

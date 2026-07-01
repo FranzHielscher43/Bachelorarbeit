@@ -18,6 +18,9 @@ var carrying_object := false
 @export var door_path : NodePath
 @onready var door = get_node_or_null(door_path)
 
+@export var ai_core_path : NodePath
+@onready var ai_core = get_node_or_null(ai_core_path)
+
 func get_bot_name() -> String:
 	return "TransportBot"
 	
@@ -25,6 +28,11 @@ func get_ability() -> String:
 	return "transport"
 	
 func execute_task(target):
+	print("TRANSPORT EXECUTE TASK: ", target)
+
+	print("object: ", object)
+	print("drop_zone: ", drop_zone)
+	print("carrying: ", carrying_object)
 	if target == object:
 		pick_up_object()
 		return
@@ -34,9 +42,7 @@ func execute_task(target):
 		return
 		
 	if target != null and target.has_method("receive_robot_task"):
-		target.receive_robot_task(self)
-		await get_tree().create_timer(2.5).timeout
-		return_home()
+		await super.execute_task(target)
 		return
 	
 	fail_task()
@@ -45,6 +51,7 @@ func pick_up_object():
 	if object == null or drop_zone == null:
 		return
 	carrying_object = true
+	handles_own_return = true
 	
 	object.reparent(target_point)
 	object.position = Vector2.ZERO
@@ -75,6 +82,7 @@ func drop_object():
 		drop_zone._on_area_entered(object)
 		
 	var terminal = get_tree().get_first_node_in_group("Terminal")
+	
 	if terminal != null:
 		terminal.transport_job_done = true
 		terminal.update_robot_button_locks()
@@ -83,6 +91,10 @@ func drop_object():
 	if door != null and door.has_method("open_door"):
 		door.open_door()
 		MissionManager.complete_subtask("transport", "Wait for the transport robot")
+
+	if ai_core != null:
+		ai_core.transport_done = true
+		await ai_core.check_core_status()
 
 	await get_tree().create_timer(3.0).timeout
 	return_home_from_drop_zone()
@@ -129,6 +141,7 @@ func move_to_drop_zone():
 		walk_sound.play()
 		
 func return_home_from_drop_zone():
+	handles_own_return = false
 	return_points.clear()
 
 	if return_route_points_parent != null:
