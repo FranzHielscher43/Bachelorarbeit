@@ -49,8 +49,11 @@ func main_menu_pressed():
 	
 func quit_pressed():
 	click_sound.play()
+	if OS.has_feature("web"):
+		get_tree().change_scene_to_file("res://Scenes/Navigation/MainMenu.tscn")
+	else:
+		get_tree().quit()
 	await click_sound.finished
-	get_tree().quit()
 	
 func _on_button_hover():
 	if first_click:

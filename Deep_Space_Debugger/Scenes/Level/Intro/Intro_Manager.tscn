@@ -9,7 +9,6 @@ script = ExtResource("1_ltn3e")
 
 [node name="BootSound" type="AudioStreamPlayer2D" parent="." unique_id=1020604192]
 stream = ExtResource("2_kkr4n")
-volume_db = -5.0
 pitch_scale = 0.7
 autoplay = true
 

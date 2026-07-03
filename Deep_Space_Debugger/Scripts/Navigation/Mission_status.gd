@@ -18,14 +18,14 @@ var mission_steps = [
 		"text": "Tutorial",
 		"done": false,
 		"subtasks": [
-			{"text": "Press any movement key", "done": false, "target": ""},
+			{"text": "Press any movement key [WASD]", "done": false, "target": ""},
 			{"text": "Open menu with [ESC]", "done": false, "target": ""},
 			{"text": "Open inventory with [I]", "done": false, "target": ""},
-			{"text": "Navigate inventory with [↑/↓]", "done": false, "target": ""},
+			{"text": "Navigate inventory with [UP/DOWN]", "done": false, "target": ""},
 			{"text": "Open/Close minimap with [M]", "done": false, "target": ""},
 			{"text": "Open terminal with [ENTER]", "done": false, "target": "TerminalObject"},
 			{"text": "Pick up object [ENTER]", "done": false, "target": "TutorialObject"},
-			{"text": "Drop object [I]+[↑/↓]+[ENTER]", "done": false, "target": ""}
+			{"text": "Drop object [I]+[UP/DOWN]+[ENTER]", "done": false, "target": ""}
 		]
 	},
 	{
@@ -42,8 +42,8 @@ var mission_steps = [
 		"done": false,
 		"subtasks": [
 			{"text": "Open terminal", "done": false, "target": "TerminalObject"},
-			{"text": "Examine energy cores", "done": false, "target": "EnergyCore_A"},
-			{"text": "Insert matching energy core", "done": false, "target": "Generator_Dropzone"}
+			{"text": "Examine energy cores", "done": false, "target": "EnergyCore_Broken"},
+			{"text": "Find & insert matching energy core", "done": false, "target": "Generator_Dropzone"}
 		]
 	},
 	{
@@ -213,15 +213,15 @@ func complete_subtask(mission_id: String, subtask_id: String):
 func update_mission_display():
 	var mission = mission_steps[current_mission_index]
 	var text := ""
-	text += "□ " + mission["text"] + "\n"
+	text += "[ ] " + mission["text"] + "\n"
 	
 	var show_next := true
 	
 	for subtask in mission["subtasks"]:
 		if subtask["done"]:
-			text += "   ☑ " + subtask["text"] + "\n"
+			text += "   [X] " + subtask["text"] + "\n"
 		elif show_next:
-			text += "   □  " + subtask["text"] + "\n"
+			text += "   [ ] " + subtask["text"] + "\n"
 			show_next = false
 			
 	mission_label.text = text
@@ -237,13 +237,13 @@ func show_current_mission(use_typing: bool):
 	type_sound.stop()
 	
 	if mission["done"]:
-		mission_label.text = "☑ " + mission["text"]
+		mission_label.text = "[X] " + mission["text"]
 		await update_mission_size()
 	else:
-		var preview_text = "□ " + mission["text"]
+		var preview_text = "[ ]  " + mission["text"]
 		mission_label.text = preview_text
 		await update_mission_size()
-		mission_label.text = "□ "
+		mission_label.text = "[ ]  "
 		if use_typing:
 			await type_text(mission["text"])
 		else:
@@ -281,11 +281,11 @@ func type_text(text: String):
 func type_message(text: String):
 	is_typing = true
 	mission_label.text = ""
-	for char in text:
+	for chars in text:
 		if !is_typing:
 			return
-		mission_label.text += char
-		if char != " " and !type_sound.playing:
+		mission_label.text += chars
+		if chars != " " and !type_sound.playing:
 			type_sound.play()
 		await get_tree().create_timer(typing_speed).timeout
 		
@@ -299,11 +299,11 @@ func show_full_mission_typed():
 	var mission = mission_steps[current_mission_index]
 	var full_text := ""
 	
-	full_text += "□  " + mission["text"] + "\n"
+	full_text += "[ ] " + mission["text"] + "\n"
 	
 	for subtask in mission["subtasks"]:
 		if !subtask["done"]:
-			full_text += "   □  " + subtask["text"] + "\n"
+			full_text += "   [ ] " + subtask["text"] + "\n"
 			break
 			
 	mission_label.text = full_text
@@ -320,25 +320,25 @@ func show_next_subtask_typed():
 
 	for subtask in mission["subtasks"]:
 		if subtask["done"]:
-			completed_text += "   ☑ " + subtask["text"] + "\n"
+			completed_text += "   [X] " + subtask["text"] + "\n"
 		else:
 			next_subtask = subtask["text"]
 			break
 
-	var full_preview = "□  " + mission["text"] + "\n" + completed_text
+	var full_preview = "[ ] " + mission["text"] + "\n" + completed_text
 
 	if next_subtask != "":
-		full_preview += "   □ " + next_subtask + "\n"
+		full_preview += "   [ ] " + next_subtask + "\n"
 
 	mission_label.modulate.a = 0.0
 	mission_label.text = full_preview
 	await update_mission_size()
 	
-	mission_label.text = "□ " + mission["text"] + "\n" + completed_text
+	mission_label.text = "[ ] " + mission["text"] + "\n" + completed_text
 	mission_label.modulate.a = 1.0
 
 	if next_subtask != "":
-		await type_text("   □  " + next_subtask + "\n")
+		await type_text("   [ ] " + next_subtask + "\n")
 	
 func update_mission_size():
 	await get_tree().process_frame

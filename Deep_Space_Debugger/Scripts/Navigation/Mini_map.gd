@@ -19,7 +19,7 @@ func _input(event):
 	if event.is_action_pressed("map"):
 		visible = !visible
 
-func _process(delta):
+func _process(_delta):
 	if player == null:
 		return
 

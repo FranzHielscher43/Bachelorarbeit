@@ -28,6 +28,8 @@ var current_player = null
 
 var is_placed := false
 
+var examined := false
+
 func _ready():
 	if core_texture != null:
 		sprite.texture = core_texture
@@ -36,7 +38,7 @@ func _ready():
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 
-func _process(delta):
+func _process(_delta):
 	if player_nearby and Input.is_action_just_pressed("ui_accept") and is_carryable:
 		pick_up()
 	elif player_nearby and Input.is_action_just_pressed("ui_accept") and !is_carryable:
@@ -62,7 +64,7 @@ func pick_up():
 	set_process(false)
 	$CollisionShape2D.disabled = true
 
-func set_carried_by_bot(bot):
+func set_carried_by_bot(_bot):
 	visible = true
 	set_process(false)
 	$CollisionShape2D.disabled = true
@@ -85,7 +87,10 @@ func _on_body_entered(body):
 		player_nearby = true
 		current_player = body
 		show_attributes()
-		MissionManager.complete_subtask("energy_core", "Examine energy cores")
+		
+		if !examined:
+			examined = true
+			MissionManager.complete_subtask("energy_core", "Examine energy cores")
 
 func _on_body_exited(body):
 	if body.name == "Player":

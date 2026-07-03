@@ -97,7 +97,7 @@ func _ready():
 	await get_tree().create_timer(4.0).timeout
 	dialogbox.show_dialog("Primary objective:\n" +"Restore station functionality.")
 	await get_tree().create_timer(4.0).timeout
-	dialogbox.show_dialog("Check the Mission Status to proceed.")
+	dialogbox.show_dialog("Check the Mission Status to proceed.\n\n" + "Use the minimap to locate the objectives.")
 	waiting_for_movement = true
 
 func _process(_delta):
@@ -105,7 +105,7 @@ func _process(_delta):
 		if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_down") or Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right"):
 			waiting_for_movement = false
 			player.stun = false
-			MissionManager.complete_subtask(task, "Press any movement key")
+			MissionManager.complete_subtask(task, "Press any movement key [WASD]")
 			waiting_for_menu = true
 	elif waiting_for_menu:
 		if Input.is_action_just_pressed("ui_cancel"):
@@ -120,7 +120,7 @@ func _process(_delta):
 	elif waiting_for_navigation:
 		if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_down"):
 			waiting_for_navigation = false
-			MissionManager.complete_subtask(task, "Navigate inventory with [↑/↓]")
+			MissionManager.complete_subtask(task, "Navigate inventory with [UP/DOWN]")
 			waiting_for_minimap = true
 	elif waiting_for_minimap:
 		if Input.is_action_just_pressed("map"):
@@ -140,6 +140,6 @@ func _process(_delta):
 	elif waiting_for_object_drop:
 		if inventory.was_dropped:
 			waiting_for_object_drop = false
-			MissionManager.complete_subtask(task, "Drop object [I]+[↑/↓]+[ENTER]")
+			MissionManager.complete_subtask(task, "Drop object [I]+[UP/DOWN]+[ENTER]")
 			await get_tree().create_timer(2.0).timeout
 			door.open_door()
