@@ -3,6 +3,7 @@ extends Node2D
 @onready var player = $"../Player"
 @onready var dialogbox = $"../Dialogbox"
 @onready var inventory = $"../Inventory"
+@onready var hologram = $"../Hologram"
 @onready var minimap = $"../MiniMap"
 @onready var terminal = $"../Terminal"
 @onready var object = $"../TutorialObject"
@@ -27,13 +28,19 @@ var waiting_for_menu := false
 var waiting_for_inventory := false
 var waiting_for_navigation := false
 var waiting_for_minimap := false
+var waiting_for_hologram := false
 var waiting_for_terminal := false
 var waiting_for_object_pickup := false
 var waiting_for_object_drop := false
 
 var task := "tutorial"
 
+var is_mobile := false
+
 func _ready():
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	is_mobile = DisplayServer.is_touchscreen_available()
+	
 	if ambient_music != null:
 		ambient_music.play()
 		
@@ -48,23 +55,23 @@ func _ready():
 	await get_tree().process_frame
 
 	await boot_screen.typing("> SYSTEM REBOOTING...")
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.2).timeout
 	await boot_screen.glitch()
 	await boot_screen.typing("> MEMORY MODULE...........OK")
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.15).timeout
 	await boot_screen.typing("> SENSOR ARRAY............ERROR")
-	await get_tree().create_timer(0.5)
+	await get_tree().create_timer(0.2)
 	await boot_screen.glitch()
 	await boot_screen.typing("> RECOVERING..............OK")
-	await get_tree().create_timer(0.6).timeout
+	await get_tree().create_timer(0.3).timeout
 	await boot_screen.typing("> PLAYER INPUT............OK")
-	await get_tree().create_timer(0.4).timeout
+	await get_tree().create_timer(0.2).timeout
 	await boot_screen.glitch()
 	await boot_screen.typing("> MISSION SYSTEM..........ONLINE")
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.2).timeout
 	await boot_screen.typing("> DEEP SPACE DEBUGGER.....READY")
 	await boot_screen.glitch()
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.5).timeout
 	
 	boot_sound.stop()
 	boot_screen.visible = false
@@ -98,8 +105,18 @@ func _ready():
 	dialogbox.show_dialog("Primary objective:\n" +"Restore station functionality.")
 	await get_tree().create_timer(4.0).timeout
 	dialogbox.show_dialog("Check the Mission Status to proceed.\n\n" + "Use the minimap to locate the objectives.")
-	waiting_for_movement = true
-
+	
+	if is_mobile:
+		player.stun = false
+		MissionManager.complete_subtask(task, "Press any movement key [WASD]")
+		MissionManager.complete_subtask(task, "Open menu with [ESC]")
+		MissionManager.complete_subtask(task, "Open inventory with [I]")
+		MissionManager.complete_subtask(task, "Navigate inventory with [UP/DOWN]")
+		MissionManager.complete_subtask(task, "Open/Close minimap with [M]")
+		waiting_for_hologram = true
+	else:
+		waiting_for_movement = true
+		
 func _process(_delta):
 	if waiting_for_movement:
 		if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_down") or Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_right"):
@@ -126,11 +143,16 @@ func _process(_delta):
 		if Input.is_action_just_pressed("map"):
 			waiting_for_minimap = false
 			MissionManager.complete_subtask(task, "Open/Close minimap with [M]")
+			waiting_for_hologram = true
+	elif waiting_for_hologram:
+		if hologram.is_open:
+			waiting_for_hologram = false
+			MissionManager.complete_subtask(task, "Find & open hologram with [ENTER]")
 			waiting_for_terminal = true
 	elif waiting_for_terminal:
 		if terminal.is_open:
 			waiting_for_terminal = false
-			MissionManager.complete_subtask(task, "Open terminal with [ENTER]")
+			MissionManager.complete_subtask(task, "Find & open terminal with [ENTER]")
 			waiting_for_object_pickup = true
 	elif waiting_for_object_pickup:
 		if inventory.was_picked_up:

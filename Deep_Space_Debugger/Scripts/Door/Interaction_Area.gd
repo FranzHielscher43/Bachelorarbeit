@@ -41,7 +41,7 @@ func _process(delta):
 func _on_body_entered(body):
 	if body.name == "Player":
 		player_nearby = true
-		dialogbox.show_dialog("Press [ENTER] to open door.")
+		dialogbox.show_dialog("Press [ENTER] to open door.", true, "SECURITY DOOR")
 		
 
 func _on_body_exited(body):

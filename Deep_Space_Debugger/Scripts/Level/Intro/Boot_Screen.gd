@@ -5,7 +5,7 @@ extends CanvasLayer
 @onready var flicker = $FlickerOverlay
 var label_start_position := Vector2.ZERO
 
-var typing_speed := 0.04
+var typing_speed := 0.06
 var is_typing := false
 
 func _ready():

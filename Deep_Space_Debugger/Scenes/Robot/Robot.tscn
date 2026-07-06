@@ -123,7 +123,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_h3foj")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walk_down",
 "speed": 10.0
 }, {
@@ -146,7 +146,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uk5s7")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walk_left",
 "speed": 10.0
 }, {
@@ -169,7 +169,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8tmir")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walk_right",
 "speed": 10.0
 }, {
@@ -192,7 +192,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_u2erk")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walk_up",
 "speed": 10.0
 }]
@@ -201,9 +201,11 @@ animations = [{
 size = Vector2(12, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tmyft"]
+size = Vector2(16, 16)
 
 [node name="Robot" type="CharacterBody2D" unique_id=1794440707 groups=["Robot"]]
 script = ExtResource("1_kqei7")
+speed = 75
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1911469178]
 position = Vector2(-1, -1)

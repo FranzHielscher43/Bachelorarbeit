@@ -34,6 +34,7 @@
 [ext_resource type="AudioStream" uid="uid://uhb0o4afpcdc" path="res://Assets/sounds/Ambient/ambient_after_level_01.mp3" id="22_eoc4p"]
 [ext_resource type="AudioStream" uid="uid://b5x8i5j1vifov" path="res://Assets/sounds/power_off.mp3" id="30_yk0vq"]
 [ext_resource type="PackedScene" uid="uid://b5fp6uxk08lqq" path="res://Scenes/Hologram.tscn" id="31_hgnya"]
+[ext_resource type="PackedScene" uid="uid://djprixp343pwm" path="res://Scenes/Navigation/Mobile_Control.tscn" id="35_kmqhf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yk0vq"]
 texture = ExtResource("17_62g71")
@@ -15649,7 +15650,7 @@ sources/7 = SubResource("TileSetAtlasSource_p0wm4")
 sources/8 = SubResource("TileSetAtlasSource_8f06f")
 sources/10 = SubResource("TileSetAtlasSource_kmqhf")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0ee3x"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmqhf"]
 resource_local_to_scene = true
 atlas = ExtResource("7_2hads")
 region = Rect2(251, 9, 23, 32)
@@ -15663,6 +15664,11 @@ atlas = ExtResource("7_2hads")
 region = Rect2(251, 9, 23, 32)
 
 [node name="Level_01" type="Node2D" unique_id=1261604331]
+
+[node name="MobileControl" parent="." unique_id=574819889 instance=ExtResource("35_kmqhf")]
+
+[node name="Joystick" parent="MobileControl" index="1" unique_id=325939660]
+radius = 25.0
 
 [node name="FadeIn" parent="." unique_id=729751193 instance=ExtResource("1_0ee3x")]
 
@@ -15899,10 +15905,9 @@ z_index = 2
 position = Vector2(40, -254)
 
 [node name="EnergyCore_A" parent="." unique_id=1255186265 instance=ExtResource("8_llvsh")]
-z_index = 2
 position = Vector2(154, -437)
 scale = Vector2(2, 2)
-core_texture = SubResource("AtlasTexture_0ee3x")
+core_texture = SubResource("AtlasTexture_kmqhf")
 object_name = "EC A"
 class_name_display = "Energycore"
 attributes = {
@@ -15913,7 +15918,6 @@ attributes = {
 item_id = "EnergyCore_A"
 
 [node name="EnergyCore_B" parent="." unique_id=2040689184 instance=ExtResource("8_llvsh")]
-z_index = 2
 position = Vector2(-447, 71)
 scale = Vector2(2, 2)
 core_texture = SubResource("AtlasTexture_7whiy")
@@ -15927,7 +15931,6 @@ attributes = {
 item_id = "EnergyCore_B"
 
 [node name="EnergyCore_C" parent="." unique_id=59557959 instance=ExtResource("8_llvsh")]
-z_index = 2
 position = Vector2(81, 245)
 scale = Vector2(2, 2)
 core_texture = SubResource("AtlasTexture_oeein")
@@ -15941,7 +15944,6 @@ attributes = {
 item_id = "EnergyCore_C"
 
 [node name="EnergyCore_Broken" parent="." unique_id=352981834 instance=ExtResource("8_llvsh")]
-z_index = 2
 position = Vector2(-151, -222)
 scale = Vector2(2, 2)
 core_texture = SubResource("AtlasTexture_oeein")
@@ -16045,6 +16047,7 @@ Only one fulfills the generator
 requirements."
 dialogbox_path = NodePath("../../Dialogbox")
 
+[editable path="MobileControl"]
 [editable path="MiniMap"]
 [editable path="Door_to_Level_02"]
 [editable path="Generator_Dropzone"]

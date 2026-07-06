@@ -12,6 +12,9 @@ extends CanvasLayer
 @export var minimap_path : NodePath
 @onready var minimap = get_node_or_null(minimap_path)
 
+var is_updating_mission := false
+var pending_refresh := false
+
 var mission_steps = [
 	{
 		"id": "tutorial",
@@ -23,7 +26,8 @@ var mission_steps = [
 			{"text": "Open inventory with [I]", "done": false, "target": ""},
 			{"text": "Navigate inventory with [UP/DOWN]", "done": false, "target": ""},
 			{"text": "Open/Close minimap with [M]", "done": false, "target": ""},
-			{"text": "Open terminal with [ENTER]", "done": false, "target": "TerminalObject"},
+			{"text": "Find & open hologram with [ENTER]", "done": false, "target": "Hologram"},
+			{"text": "Find & open terminal with [ENTER]", "done": false, "target": "TerminalObject"},
 			{"text": "Pick up object [ENTER]", "done": false, "target": "TutorialObject"},
 			{"text": "Drop object [I]+[UP/DOWN]+[ENTER]", "done": false, "target": ""}
 		]
@@ -41,9 +45,9 @@ var mission_steps = [
 		"text": "Restore power supply",
 		"done": false,
 		"subtasks": [
-			{"text": "Open terminal", "done": false, "target": "TerminalObject"},
-			{"text": "Examine energy cores", "done": false, "target": "EnergyCore_Broken"},
-			{"text": "Find & insert matching energy core", "done": false, "target": "Generator_Dropzone"}
+			{"text": "Open terminal & examine error", "done": false, "target": "TerminalObject"},
+			{"text": "Examine energy core", "done": false, "target": "EnergyCore_Broken"},
+			{"text": "Find & insert matching energy core", "done": false, "target": ["EnergyCore_A", "EnergyCore_B", "EnergyCore_C"]}
 		]
 	},
 	{
@@ -60,9 +64,9 @@ var mission_steps = [
 		"done": false,
 		"subtasks": [
 			{"text": "Check security door", "done": false, "target": "CheckArea"},
-			{"text": "Check security terminal", "done": false, "target": "TerminalObject"},
-			{"text": "Insert appropriate access module", "done": false, "target": "Security_Console_Dropzone"},
-			{"text": "Request clearance", "done": false, "target": "TerminalObject"}
+			{"text": "Check terminal & examine problem", "done": false, "target": "TerminalObject"},
+			{"text": "Insert appropriate access module", "done": false, "target": ["AccessModule_A", "AccessModule_B", "AccessModule_C"]},
+			{"text": "Request clearance in terminal", "done": false, "target": "TerminalObject"}
 		]
 	},
 	{
@@ -79,7 +83,7 @@ var mission_steps = [
 		"text": "Repair the communication relay",
 		"done": false,
 		"subtasks": [
-			{"text": "Open terminal", "done": false, "target": "TerminalObject"},
+			{"text": "Open terminal & examine problem", "done": false, "target": "TerminalObject"},
 			{"text": "Select & send repair robot", "done": false, "target": "TerminalObject"},
 			{"text": "Escort repair robot", "done": false, "target": "RepairBot"}
 		]
@@ -125,10 +129,10 @@ var mission_steps = [
 		"text": "Reboot AI core system",
 		"done": false,
 		"subtasks": [
-			{"text": "Open terminal", "done": false, "target": "TerminalObject"},
-			{"text": "Activate core method", "done": false, "target": "TerminalObject"},
+			{"text": "Open terminal & find method", "done": false, "target": "TerminalObject"},
+			{"text": "Activate core method in terminal", "done": false, "target": "TerminalObject"},
 			{"text": "Wait for the robots", "done": false, "target": "aiCore"},
-			{"text": "Reboot space station", "done": false, "target": "aiCore"}
+			{"text": "Reboot space station at AI core", "done": false, "target": "aiCore"}
 		]
 	},
 	{
@@ -136,7 +140,7 @@ var mission_steps = [
 		"text": "Leave the station command center",
 		"done": false,
 		"subtasks": [
-			{"text": "Go to the exit in the robotics area", "done": false, "target": "LevelTransition"}
+			{"text": "Go to the exit in robotics area", "done": false, "target": "LevelTransition"}
 		]
 	}
 ]
@@ -190,24 +194,45 @@ func complete_mission(id: String):
 func complete_subtask(mission_id: String, subtask_id: String):
 	for i in range(mission_steps.size()):
 		var mission = mission_steps[i]
-		
+
 		if mission["id"] != mission_id:
 			continue
-			
+
 		for subtask in mission["subtasks"]:
 			if subtask["text"] == subtask_id:
+				if subtask["done"]:
+					return
+
 				subtask["done"] = true
 
 				if i != current_mission_index:
 					return
-					
+
+				if is_updating_mission:
+					pending_refresh = true
+					return
+
+				is_updating_mission = true
+
 				check_sound.play()
 				await show_next_subtask_typed()
 				update_minimap_target()
-				
+
 				if are_all_subtasks_done(mission):
-					await get_tree().create_timer(2.0).timeout
+					await get_tree().create_timer(1.0).timeout
 					await complete_mission(mission_id)
+
+				is_updating_mission = false
+
+				if pending_refresh:
+					pending_refresh = false
+					await update_mission_display()
+					update_minimap_target()
+					
+					if are_all_subtasks_done(mission):
+						await get_tree().create_timer(1.0).timeout
+						await complete_mission(mission_id)
+
 				return
 
 func update_mission_display():
@@ -265,6 +290,8 @@ func are_all_subtasks_done(mission) -> bool:
 	return true
 	
 func type_text(text: String):
+	is_typing = false
+	await get_tree().process_frame
 	is_typing = true
 	for i in text.length():
 		if !is_typing:
@@ -357,21 +384,37 @@ func update_minimap_target():
 		return
 		
 	if current_mission_index >= mission_steps.size():
-		minimap.set_target(null)
+		minimap.set_targets([])
 		return
 	
 	var mission = mission_steps[current_mission_index]
 	
 	for subtask in mission["subtasks"]:
 		if !subtask["done"]:
-			var target_name = subtask.get("target", "")
+			var target = subtask.get("target", null)
 			
-			if target_name == "":
-				minimap.set_target(null)
+			if target is Array:
+				var target_nodes := []
+				
+				for target_name in target:
+					var target_node = get_tree().current_scene.find_child(target_name, true, false)
+					if target_node != null:
+						target_nodes.append(target_node)
+				
+				minimap.set_targets(target_nodes)
 				return
 			
-			var target_node = get_tree().current_scene.find_child(target_name, true, false)
-			minimap.set_target(target_node)
+			if target == null or target == "":
+				minimap.set_targets([])
+				return
+			
+			var target_node = get_tree().current_scene.find_child(target, true, false)
+			
+			if target_node != null:
+				minimap.set_targets([target_node])
+			else:
+				minimap.set_targets([])
+			
 			return
 	
-	minimap.set_target(null)
+	minimap.set_targets([])

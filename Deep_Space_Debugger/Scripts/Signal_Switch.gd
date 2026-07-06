@@ -64,9 +64,9 @@ func send_signal_to_target():
 		await dialogbox.show_timed_dialog(
 			"Sender: " + signal_id + "\n\n" +
 			"send_signal_to_target()\n" +
-			"→ StationServer.receive_signal()\n\n" +
+			"-> StationServer.receive_signal()\n\n" +
 			"Message transmitted successfully.",
-			3.0
+			5.0
 		)
 	else:
 		if connection_line != null:

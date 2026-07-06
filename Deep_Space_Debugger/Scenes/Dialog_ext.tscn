@@ -19,9 +19,11 @@ border_width_bottom = 1
 border_color = Color(0.06666667, 0.45490196, 0.54509807, 0.87058824)
 
 [node name="Dialogbox" type="CanvasLayer" unique_id=1529403298]
+layer = 1000
 script = ExtResource("1_5ntqh")
 
 [node name="Panel" type="Panel" parent="." unique_id=842510572]
+z_index = 1000
 custom_minimum_size = Vector2(300, 0)
 offset_right = 400.0
 offset_bottom = 250.0

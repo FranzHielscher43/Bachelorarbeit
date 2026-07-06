@@ -1,0 +1,126 @@
+[gd_scene format=3 uid="uid://djprixp343pwm"]
+
+[ext_resource type="Script" uid="uid://bwpujwhugj6la" path="res://Scripts/Mobile/Mobile_Control.gd" id="1_sptis"]
+[ext_resource type="Script" uid="uid://c6e2kgw3vpcx6" path="res://Scripts/Mobile/Enter_Button.gd" id="1_w7mex"]
+[ext_resource type="FontFile" uid="uid://giyv3v5cj60r" path="res://Assets/fonts/ShareTechMono-Regular.ttf" id="2_oiort"]
+[ext_resource type="Script" uid="uid://b1xrbb5vbmc4h" path="res://Scripts/Mobile/Joystick.gd" id="4_7ioy5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sre07"]
+bg_color = Color(0.039215688, 0.07058824, 0.09019608, 0.6784314)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.0627451, 0.40392157, 0.4862745, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kylso"]
+bg_color = Color(0.039215688, 0.07058824, 0.09019608, 0.6784314)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.0627451, 0.40392157, 0.4862745, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cstno"]
+bg_color = Color(0.039215688, 0.07058824, 0.09019608, 0.6784314)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.0627451, 0.40392157, 0.4862745, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ioy5"]
+bg_color = Color(0.039215688, 0.07058824, 0.09019608, 0.6784314)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0627451, 0.40392157, 0.4862745, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ipvi8"]
+bg_color = Color(0.16078432, 0.7294118, 0.8666667, 1)
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[node name="MobileControl" type="CanvasLayer" unique_id=574819889]
+script = ExtResource("1_sptis")
+
+[node name="EnterButton" type="Button" parent="." unique_id=1578739328]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -162.0
+offset_top = -47.0
+offset_right = -100.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(2.5, 2.5)
+theme_override_colors/font_color = Color(0.16078432, 0.7294118, 0.8666667, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_oiort")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_sre07")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kylso")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cstno")
+text = "ENTER"
+script = ExtResource("1_w7mex")
+
+[node name="Joystick" type="Control" parent="." unique_id=325939660]
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 40.0
+offset_top = -87.0
+offset_right = 80.0
+offset_bottom = -47.0
+grow_vertical = 2
+scale = Vector2(4, 4)
+script = ExtResource("4_7ioy5")
+
+[node name="Base" type="Panel" parent="Joystick" unique_id=1535052217]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7ioy5")
+
+[node name="Knob" type="Panel" parent="Joystick" unique_id=248832701]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 30.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_ipvi8")

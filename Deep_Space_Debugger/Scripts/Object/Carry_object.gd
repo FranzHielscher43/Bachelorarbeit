@@ -90,7 +90,7 @@ func _on_body_entered(body):
 		
 		if !examined:
 			examined = true
-			MissionManager.complete_subtask("energy_core", "Examine energy cores")
+			MissionManager.complete_subtask("energy_core", "Examine energy core")
 
 func _on_body_exited(body):
 	if body.name == "Player":

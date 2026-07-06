@@ -132,7 +132,7 @@ func reboot_station():
 		"All systems operational.",
 		5.0
 	)
-	MissionManager.complete_subtask("ai_core", "Reboot space station")
+	MissionManager.complete_subtask("ai_core", "Reboot space station at AI core")
 	if door != null:
 		door.open_door()
 

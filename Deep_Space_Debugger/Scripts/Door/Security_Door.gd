@@ -16,7 +16,7 @@ func interact():
 			"security_access",
 			"Check security door"
 		)
-		dialog_box.show_dialog(denied_text)
+		dialog_box.show_dialog(denied_text, true, "SECURITY DOOR")
 		await get_tree().create_timer(7.0).timeout
 		dialog_box.hide_dialog()
 

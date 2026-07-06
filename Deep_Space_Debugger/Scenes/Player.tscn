@@ -67,7 +67,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5ixxa")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walk_down",
 "speed": 10.0
 }, {
@@ -84,7 +84,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_megsn")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walk_side",
 "speed": 10.0
 }, {
@@ -101,7 +101,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_miouo")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walk_up",
 "speed": 10.0
 }]
@@ -111,7 +111,7 @@ animations = [{
 [node name="Player" type="CharacterBody2D" unique_id=1729184082 groups=["Player"]]
 z_index = 1
 script = ExtResource("1_kyqiw")
-speed = 100
+speed = 125
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1730305811]
 scale = Vector2(0.8, 0.8)

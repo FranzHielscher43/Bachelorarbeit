@@ -1,6 +1,8 @@
 extends CanvasLayer
 
 @onready var terminal_root = $Control
+@onready var mobile_control = $"../MobileControl"
+@onready var dialogbox = $"../Dialogbox"
 @onready var in_game_menu = $"../InGameMenu"
 
 @onready var overview_button = $Control/OuterBackgroundPanel/InnerBackgroundPanel/MenuPanel/VBoxContainer/Overview
@@ -176,7 +178,7 @@ func _on_method_pressed():
 	
 	match current_method:
 		"request_access":
-			MissionManager.complete_subtask("security_access", "Request clearance")
+			MissionManager.complete_subtask("security_access", "Request clearance in terminal")
 			execute_request_access()
 		"send_repair_bot":
 			MissionManager.complete_subtask("repair", "Select & send repair robot")
@@ -188,7 +190,7 @@ func _on_method_pressed():
 			MissionManager.complete_subtask("transport", "Select & send transport robot")
 			execute_send_transport_bot()
 		"send_all_robots":
-			MissionManager.complete_subtask("ai_core", "Activate core method")
+			MissionManager.complete_subtask("ai_core", "Activate core method in terminal")
 			execute_send_all_robots()
 
 	close_terminal()
@@ -278,7 +280,7 @@ func show_overview():
 	data_label.clear()
 	
 	if terminal_level == 4:
-		info_label.append_text("""[font_size=24]COMMUNICATION CENTER[/font_size]\nThe station network has been restored.\nAll connected systems can now exchange messages.\nThe AI core is ready to receive a unified command.\nLearning goal:\nObject communication and polymorphism.""")
+		info_label.append_text("""[font_size=24]COMMUNICATION CENTER[/font_size]\n\nThe station network has been restored.\n\nAll connected systems can now exchange messages.\n\nThe AI core is ready to receive a unified command.\n\nLearning goal:\nObject communication and polymorphism.""")
 		data_label.append_text(
 			"> NETWORK.......[color=#15ba12]ONLINE[/color]\n\n" +
 			"> MESSAGE CALL..[color=#f7c948]receive_signal()[/color]\n\n" +
@@ -537,68 +539,44 @@ func show_ai_core():
 	transport_bot_button.visible = false
 	
 	if !is_ai_core_available():
-		info_label.append_text("""[font_size=24]KI-KERN[/font_size]
-
-Der KI-Kern ist noch nicht erreichbar.
-
-Stelle zuerst das Kommunikationsnetzwerk wieder her.""")
-
+		info_label.append_text("""[font_size=24]AI CORE[/font_size]\n\nThe AI Core is not accessible yet.\n\nRestore the communication network first.""")
 		data_label.append_text("> STATUS........[color=#ff4d4d]OFFLINE[/color]")
 		method_button.visible = false
 		return
-	info_label.append_text("""[font_size=24]KI-KERN[/font_size]
 
-Das Kommunikationsnetzwerk ist online.
-
-Alle Roboter können nun mit demselben Methodenaufruf entsendet werden.
-
-Lernziel:
-
-Polymorphie - gleicher Aufruf, unterschiedliches Verhalten.""")
-
+	info_label.append_text("""[font_size=24]AI CORE[/font_size]\n\nThe communication network is online.\n\nAll robots can now be dispatched using the same method call.\n\nLearning Objective:\nPolymorphism – same method call, different behavior.""")
 	data_label.append_text(
-		"> AUFRUF........[color=#f7c948]execute_task()[/color]\n\n" +
+		"> METHOD........[color=#f7c948]execute_task()[/color]\n\n" +
 		"> RepairBot.....[color=#15ba12]" + str(ai_core.repair_done) + "[/color]\n\n" +
 		"> SecurityBot...[color=#15ba12]" + str(ai_core.security_done) + "[/color]\n\n" +
 		"> TransportBot..[color=#15ba12]" + str(ai_core.transport_done) + "[/color]\n\n" +
-		"> KI-KERN.......[color=#f7c948]" + ("ONLINE" if ai_core.core_online else "WARTET") + "[/color]"
+		"> AI CORE.......[color=#f7c948]" + ("ONLINE" if ai_core.core_online else "WAITING") + "[/color]"
 	)
 	method_button.visible = false
-	
+
+
 func show_ai_task():
 	info_label.clear()
 	data_label.clear()
-	
+
 	if !is_ai_core_available():
-		info_label.append_text("""[font_size=24]EINSATZSTEUERUNG[/font_size]
-
-Kommunikationsnetzwerk offline.
-
-Die Roboter können den KI-Kern noch nicht erreichen.""")
-
-		data_label.append_text("> AUFGABE.......[color=#ff4d4d]Kommunikation herstellen[/color]")
+		info_label.append_text("""[font_size=24]MISSION CONTROL[/font_size]\n\nCommunication network offline.\n\nThe robots cannot reach the AI Core yet.""")
+		data_label.append_text("> OBJECTIVE.....[color=#ff4d4d]Restore communication[/color]")
 		method_button.visible = false
 		return
-	info_label.append_text("""[font_size=24]EINSATZSTEUERUNG[/font_size]
 
-Sende alle Robotereinheiten zum KI-Kern.
-
-Jeder Roboter erhält denselben Auftrag:
-
-execute_task()
-
-Das konkrete Verhalten hängt vom jeweiligen Robotertyp ab.""")
-
+	info_label.append_text("""[font_size=24]MISSION CONTROL[/font_size]\n\nDispatch all robot units to the AI Core.\n\nEach robot receives the same command:\n\nexecute_task()\n\nThe resulting behavior depends on the robot type.""")
 	data_label.append_text(
-		"> AUSGEWÄHLT....[color=#15ba12]" + get_selected_bot_name() + "[/color]\n\n" +
+		"> SELECTED......[color=#15ba12]" + get_selected_bot_name() + "[/color]\n\n" +
 		"> RepairBot.....repair()\n\n" +
 		"> SecurityBot...secure()\n\n" +
 		"> TransportBot..transport()"
 	)
+
 	repair_bot_button.visible = false
 	security_bot_button.visible = false
 	transport_bot_button.visible = false
-	
+
 	method_button.visible = true
 	method_button.disabled = false
 	method_button.text = "EXECUTE TASK()"
@@ -606,8 +584,12 @@ Das konkrete Verhalten hängt vom jeweiligen Robotertyp ab.""")
 	
 func open_terminal():
 	is_open = true
+	dialogbox.hide_dialog()
 	$Control.visible = true
 	player.stun = true
+	
+	if mobile_control != null:
+		mobile_control.visible = false
 	
 	configure_terminal_for_level()
 	
@@ -620,25 +602,28 @@ func open_terminal():
 			MissionManager.complete_subtask("tutorial", "Open terminal with ENTER")
 		1: 
 			show_title()
-			MissionManager.complete_subtask("energy_core", "Open terminal")
+			MissionManager.complete_subtask("energy_core", "Open terminal & examine error")
 		2:
 			title_label.clear()
 			title_label.append_text("""[font_size=40]SECURITY CONSOLE[/font_size]\n[font_size=24]STATION: ECLIPSE-9[/font_size]""")
-			MissionManager.complete_subtask("security_access", "Check security terminal")
+			MissionManager.complete_subtask("security_access", "Check terminal & examine problem")
 		3: 
 			title_label.clear()
 			title_label.append_text("""[font_size=40]TERMINAL_02[/font_size]\n[font_size=24]STATION: ECLIPSE-9[/font_size]""")
-			MissionManager.complete_subtask("repair", "Open terminal")
+			MissionManager.complete_subtask("repair", "Open terminal & examine problem")
 		4:
 			title_label.clear()
 			title_label.append_text("""[font_size=40]TERMINAL_04[/font_size]\n[font_size=24]STATION: ECLIPSE-9[/font_size]""")
-			MissionManager.complete_subtask("ai_core", "Open terminal")
+			MissionManager.complete_subtask("ai_core", "Open terminal & find method")
 	show_overview()
 		
 func close_terminal():
 	is_open = false
 	$Control.visible = false
 	player.stun = false
+	
+	if mobile_control != null:
+		mobile_control.visible = DisplayServer.is_touchscreen_available()
 	
 func configure_terminal_for_level():
 	energy_button.visible = terminal_level >= 1

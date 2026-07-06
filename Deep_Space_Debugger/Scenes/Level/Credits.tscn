@@ -88,4 +88,4 @@ vertical_alignment = 1
 
 [node name="CreditsAudio" type="AudioStreamPlayer2D" parent="." unique_id=1967520906]
 stream = ExtResource("1_fu1lk")
-volume_db = -10.0
+parameters/looping = true

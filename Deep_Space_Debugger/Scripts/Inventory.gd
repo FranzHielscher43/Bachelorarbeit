@@ -22,6 +22,12 @@ var was_dropped := false
 
 func _ready():
 	items_panel.modulate.a = 0.75
+	
+	for i in range(slots.size()):
+		var slot = slots[i]
+		slot.pressed.connect(_on_slot_pressed.bind(i))
+		slot.focus_entered.connect(_on_slot_focused.bind(i))
+		 
 	update_slots()
 	
 func add_item(item_data):
@@ -159,8 +165,68 @@ func _input(event):
 				get_viewport().set_input_as_handled()
 		if event.is_action_pressed("ui_accept"):
 			use_item()
-			inventory_open = false
-			player.stun = false
-			items_panel.modulate.a = 0.75
 			inventory_use_sound.play()
-			update_selection()
+			close_inventory()
+			get_viewport().set_input_as_handled()
+
+func _on_slot_pressed(index: int):
+	if index >= items.size():
+		return
+
+	if !inventory_open:
+		inventory_open = true
+		player.stun = true
+		items_panel.modulate.a = 1.0
+		inventory_sound.play()
+
+	selected_index = index
+	inventory_hover_sound.play()
+	update_selection()
+	show_selected_item_info()
+
+func _on_slot_focused(index: int):
+	if !inventory_open:
+		return
+	
+	if index >= items.size():
+		return
+		
+	selected_index = index
+	show_selected_item_info()
+	
+func open_inventory_mobile():
+	inventory_open = true
+	player.stun = true
+	selected_index = 0
+	items_panel.modulate.a = 1.0
+	inventory_sound.play()
+	update_selection()
+	show_selected_item_info()
+
+func toggle_inventory_mobile():
+	if inventory_open:
+		close_inventory()
+	else:
+		open_inventory_mobile()
+	
+func close_inventory():
+	inventory_open = false
+	player.stun = false
+	items_panel.modulate.a = 0.75
+	dialog_box.hide_dialog()
+	selected_index = -1
+	update_selection()
+
+func drop_selected_from_mobile():
+	if !inventory_open:
+		return
+		
+	if selected_index < 0:
+		return
+	
+	if selected_index >= items.size():
+		return
+	
+	use_item()
+	inventory_use_sound.play()
+	close_inventory()

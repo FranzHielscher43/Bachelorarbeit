@@ -15,6 +15,7 @@ var received_signals := {
 @export var expected_order := ["navigation", "life_support", "security_channel"]
 var current_signal := 0
 var is_complete := false
+var server_online := false
 
 @export var ai_core_path : NodePath
 @onready var ai_core = get_node_or_null(ai_core_path)
@@ -64,20 +65,25 @@ func check_all_signals():
 	is_complete = true
 	if ai_core != null and ai_core.has_method("activate_communication"):
 		ai_core.activate_communication()
-		
+	
+	await get_tree().create_timer(2.0).timeout
 	dialogbox.show_dialog("All signals connected.\n" + "Station server ready and opening biosphere.", true, "STATION SERVER")
 	MissionManager.complete_subtask("communication", "Activate communication system")
 	
 	if door != null:
 		door.open_door()
-		
+
+	server_online = true		
 	await get_tree().create_timer(7.0).timeout
 	dialogbox.hide_dialog()
 	
 func _on_body_entered(body):
 	if body.name == "Player":
-		dialogbox.show_dialog("The station server routes messages\nbetween connected systems.\n\nObjects exchange information by\nsending method calls instead of\ncommunicating directly.\n\nRestore all communication channels\nto reconnect the network.", true, "Station Server")
-	
+		if !server_online:
+			dialogbox.show_dialog("The station server routes messages\nbetween connected systems.\n\nObjects exchange information by\nsending method calls instead of\ncommunicating directly.\n\nRestore all communication channels\nto reconnect the network.", true, "Station Server")
+		else:
+			dialogbox.show_dialog("The station server routes messages\nbetween connected systems.\n\nObjects exchange information by\nsending method calls instead of\ncommunicating directly.\n\nAll communication channels are connected.", true, "Station Server")
+
 func _on_body_exited(body):
 	if body.name == "Player":
 		dialogbox.hide_dialog()

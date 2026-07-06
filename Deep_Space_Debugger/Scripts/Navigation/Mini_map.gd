@@ -9,6 +9,7 @@ var tilemap = null
 var discovered_cells := {}
 
 var target = null
+var targets: Array = []
 
 func _ready():
 	custom_minimum_size = Vector2(250, 250)
@@ -66,15 +67,27 @@ func _draw():
 	draw_circle(center, 7, Color(0.2, 0.8, 1.0, 0.4))
 	draw_rect(Rect2(Vector2.ZERO, size), Color("#10677c"), false, 3)
 
-	if target != null:
-		var direction  = target.global_position - player.global_position
+	for current_target in targets:
+		if current_target == null:
+			continue
+			
+		var direction = current_target.global_position - player.global_position
 		var target_pos = center + direction / cell_size * map_scale
 		var margin := 12.0
+		
 		target_pos.x = clamp(target_pos.x, margin, size.x - margin)
 		target_pos.y = clamp(target_pos.y, margin, size.y - margin)
 		
 		draw_circle(target_pos, 5, Color("#15ba12"))
 		draw_circle(target_pos, 9, Color(0.1, 1.0, 0.2, 0.35))
-		
+
 func set_target(new_target):
-	target = new_target
+	if new_target == null:
+		targets = []
+	else:
+		targets = [new_target]
+	queue_redraw()
+	
+func set_targets(new_targets: Array):
+	targets = new_targets
+	queue_redraw()
