@@ -2,6 +2,8 @@ extends Area2D
 
 # Dialogfeld - Inhalt
 @export var core_texture: AtlasTexture
+
+
 @export var object_name := ""
 @export var class_name_display := ""
 @export var attributes := {
