@@ -1,5 +1,7 @@
 # 🎮 Serious Game: Objektorientiertes Paradigma
 
+Link zum Spiel: https://www.imn.htwk-leipzig.de/~fhielsch/
+
 ## 📖 Überblick
 
 Dieses Projekt entsteht im Rahmen meiner Bachelorarbeit im Studiengang Medieninformatik.
